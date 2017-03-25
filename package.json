@@ -1,0 +1,24 @@
+{
+  "name": "super-journey",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node web-server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Talu58/super-journey.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Talu58/super-journey/issues"
+  },
+  "homepage": "https://github.com/Talu58/super-journey#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "node": "0.0.0"
+  }
+}
