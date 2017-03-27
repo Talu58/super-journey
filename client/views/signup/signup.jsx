@@ -7,17 +7,20 @@ export default class SignUp extends Component {
   render() {
     return (
       <div className="signup-container">
-        <h1>Don't have an account yet? Sign-up here:</h1>
+        <h1 className="signup-header">Don't have an account yet? Sign-up here:</h1>
         <div className="signup-inputfields-container">
           <InputField 
-            placeholder="Email"
+            placeholderText="Email"
             type="email"
           ></InputField>
           <InputField 
-            placeholder="Password"
+            placeholderText="Password"
             type="password"
           ></InputField>
-          <Button value="Sign-up"></Button>
+          <Button 
+            value="Sign-up"
+            styleClassName="button-signup"
+          ></Button>
         </div>
       </div>
     )
