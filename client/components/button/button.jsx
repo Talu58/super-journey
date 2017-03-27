@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './_button.sass';
 
 export default class Button extends Component { 
 
