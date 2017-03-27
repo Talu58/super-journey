@@ -6,11 +6,13 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case LOGIN_USER_START:
     return {
       ...state,
       loading: true
     };
+    default:
+      return state;
   }
 };
