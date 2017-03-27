@@ -33,7 +33,10 @@ export default class SignUp extends Component {
         signupFieldsIncomplete: true
       })
     } else {
-
+      //dispatch action to verify user not in DB
+      // if in db and didn't complete signup process => send to correct step in the process
+      // else if in db and completed signup process => log in
+      // else send to signup process
 
     }
   }
