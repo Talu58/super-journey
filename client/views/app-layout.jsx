@@ -8,17 +8,17 @@ export class AppLayout extends Component {
   }
 
   render() {
-    console.log('rendering AppLayout')
+    console.log('rendering AppLayout', this.props);
+    const { isAuth } = this.props;
     return (
       <div>
-        <NavBar></NavBar>
+        <NavBar auth={isAuth}></NavBar>
       </div>
     );
   }
 }
 
 const mapStateToProps = ({ auth }) => {
-  console.log(auth.isAuth);
   return {
     isAuth: auth.isAuth,
   }
