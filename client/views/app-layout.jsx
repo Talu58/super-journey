@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import NavBar from './navbar/navbar';
+import SignUp from './signup/signup';
+import Footer from './footer/footer';
 
 export class AppLayout extends Component {
   constructor(props) {
@@ -14,8 +16,11 @@ export class AppLayout extends Component {
     return (
       <div>
         <NavBar auth={isAuth}></NavBar>
-        <Route exact path='/' render={() => (<div>SIGNUP form</div>)}/>
-        <Route path="/login" render={() => (<div>LOGIN</div>)}/>
+        <main>
+          <Route exact path='/' component={SignUp}/>
+          <Route path="/login" render={() => (<div>LOGIN</div>)}/>
+        </main>
+        <Footer></Footer>
       </div>
     );
   }
