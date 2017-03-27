@@ -1,10 +1,16 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import AppLayout from './app-layout';
 
 
-export default (
-  <Route path="/home" component={AppLayout}>
-  
-  </Route>
-);
+export default class Router extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <Route path="/home" component={AppLayout}></Route>
+      </BrowserRouter>
+    );
+  }
+} 
+
+
