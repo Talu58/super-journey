@@ -1,26 +1,20 @@
-import { createStore, combineReducers, applyMiddleware, compose} from 'redux';
+import { createStore, applyMiddleware, compose} from 'redux';
 import reduxThunk from 'redux-thunk';
-import { reduxReactRouter, routerStateReducer } from 'redux-router';
-import createHistory from 'history/lib/createBrowserHistory';
-import * as reducers from './reducers';
+import rootReducer from '../reducers';
 
-const reducer = combineReducers({
-  router: routerStateReducer,
-  ...reducers,
-});
+function configureStore(initialState) {
+  const store = createStore(
+    rootReducer,
+    initialState,
+    compose(
+      applyMiddleware(
+        reduxThunk
+      ),
+      window.devToolsExtension? window.devToolsExtension() : f => f,
+    ),
+  );
 
-
-const composeStoreWithMiddleware = compose(
-  applyMiddleware(
-    reduxThunk
-  ),
-  reduxReactRouter({createHistory})
-)(createStore);
-
-
-export default function configureStore(initialState) {
-  return composeStoreWithMiddleware(reducer, initialState);
+  return store;
 }
 
-
-
+export default configureStore;
