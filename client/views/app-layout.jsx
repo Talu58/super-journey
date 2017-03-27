@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 import NavBar from './navbar/navbar';
 
 export class AppLayout extends Component {
@@ -13,6 +14,7 @@ export class AppLayout extends Component {
     return (
       <div>
         <NavBar auth={isAuth}></NavBar>
+        <Route path="/login" render={() => (<div>LOGIN</div>)}/>
       </div>
     );
   }
