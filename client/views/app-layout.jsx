@@ -14,6 +14,7 @@ export class AppLayout extends Component {
     return (
       <div>
         <NavBar auth={isAuth}></NavBar>
+        <Route exact path='/' render={() => (<div>SIGNUP form</div>)}/>
         <Route path="/login" render={() => (<div>LOGIN</div>)}/>
       </div>
     );

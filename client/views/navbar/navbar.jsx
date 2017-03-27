@@ -8,10 +8,18 @@ export default class NavBar extends Component {
     const { isAuth } = this.props;
     return (
       <header className="navbar-container">
+        <div className="logo-container"> 
+          <Link to="/">
+            <img src="https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjMv7TjlPfSAhVkyFQKHZmTD08QjRwIBw&url=http%3A%2F%2Fnews.carrierenterprise.com%2Fmotivation-for-a-monday%2F&bvm=bv.150729734,d.cGw&psig=AFQjCNHZbE-xH6DF9mkeS7Kim_bVtV0F8A&ust=1490720468903502"/>
+          </Link>
+        </div>
         <div className="navbar-actions-container">
           {isAuth ? 
             <Button value="Sign Out"></Button> 
-            : <Link to="/login"><Button value="Log-in"></Button></Link>
+            : <Link to="/login">
+                <Button value="Log-in">
+                </Button>
+              </Link>
           }
         </div>
       </header>

@@ -5,7 +5,9 @@ export default class Button extends Component {
 
   handleClick = e => {
     const { clickHandler } = this.props;
-    clickHandler(e);
+    if (clickHandler) {
+      clickHandler(e);
+    }
   }
 
   render() {
