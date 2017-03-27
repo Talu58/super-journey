@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './text-field.sass'
+import './_input-field.sass'
 
-export default class TextInput extends Component {
+export default class InputField extends Component {
   
   render() {
     const { placeholderText, containerStyleClassName, styleClassName, type, changeHandler, value } = this.props;
