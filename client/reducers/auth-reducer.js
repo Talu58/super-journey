@@ -1,6 +1,5 @@
 import { LOGIN_USER_START } from '../actions/auth/authActionTypes';
 
-
 const initialState = {
   isAuth: false,
   loading: false
