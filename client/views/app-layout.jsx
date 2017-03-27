@@ -11,7 +11,6 @@ export class AppLayout extends Component {
   }
 
   render() {
-    console.log('rendering AppLayout', this.props);
     const { isAuth } = this.props;
     return (
       <div className="app-layout-container">
