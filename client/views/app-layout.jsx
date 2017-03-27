@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import NavBar from './navbar/navbar';
 
 export class AppLayout extends Component {
   constructor(props) {
@@ -10,9 +11,9 @@ export class AppLayout extends Component {
     console.log('rendering AppLayout')
     return (
       <div>
-        <h1>Hello world</h1>
+        <NavBar></NavBar>
       </div>
-    )
+    );
   }
 }
 
