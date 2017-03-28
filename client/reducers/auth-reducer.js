@@ -12,8 +12,8 @@ export default (state = initialState, action) => {
       console.log('USER_SIGN_UP_REQUEST dispatched')
       return {
         ...state,
-        isAuth: action.data.isAuth,
-        completedProfile: action.data.completedProfile,
+        isAuth: true,
+        completedProfile: false,
         email: action.data.email
       };
     default:

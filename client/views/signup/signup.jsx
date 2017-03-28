@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './_signup.sass';
 import { userSignedUpRequest } from '../../actions/auth/authActions';
 import InputField from '../../components/input-field/input-field';
@@ -15,7 +15,7 @@ class SignUpForm extends Component {
       passwordInputFieldValue: '',
       signupFieldsIncomplete: false,
     };
-    
+
     this.inputFieldChangeHandler = this.inputFieldChangeHandler.bind(this);
     this.submitSignupHandler = this.submitSignupHandler.bind(this);
   }
@@ -47,19 +47,10 @@ class SignUpForm extends Component {
         password: this.state.passwordInputFieldValue
       };
       userSignedUpRequest(newUser)
-      .then(userInfo => {
-        console.log('userInfo', props);
-        
-        <Redirect to={{
-          pathname: '/home',
-          state: { from: props.location }
-        }}/>
-      });
       //dispatch action to verify user not in DB
       // if in db and didn't complete signup process => send to correct step in the process
       // else if in db and completed signup process => log in
       // else send to signup process
-
     }
   }
 
@@ -84,11 +75,13 @@ class SignUpForm extends Component {
             <p className="signup-error-message">Please fill up email and password fields</p>
             : null
           }
-          <Button 
-            value="Sign-up"
-            styleClassName="button-signup"
-            clickHandler={this.submitSignupHandler}
-          ></Button>
+          <Link to="/home">
+            <Button 
+              value="Sign-up"
+              styleClassName="button-signup"
+              clickHandler={this.submitSignupHandler}
+            />
+          </Link>  
         </div>
       </div>
     )

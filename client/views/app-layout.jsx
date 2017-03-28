@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import NavBar from './navbar/navbar';
 import SignUpForm from './signup/signup';
 import Footer from './footer/footer';
@@ -11,14 +11,22 @@ export class AppLayout extends Component {
   }
 
   render() {
-    const { isAuth, dispatch } = this.props;
+    const { isAuth, completedProfile, dispatch } = this.props;
     return (
       <div className="app-layout-container">
         <NavBar isAuth={isAuth}></NavBar>
         <main>
-          <Route exact path='/' component={SignUpForm}/>
-          <Route path="/home" render={() => (<div>HOME</div>)}/>
+          <Route exact path='/' render={() => (
+            isAuth ?  (completedProfile ? <Redirect to="/home" /> 
+            : <Redirect to="/signup" />)
+            : <SignUpForm/> 
+          )}/>
+          <Route path="/home" render={() => (
+            isAuth ? <div>HOME</div>
+            : <Redirect to="/" />
+          )}/>
           <Route path="/login" render={() => (<div>LOGIN</div>)}/>
+          <Route path="/signup" render={() => (<div>SIGNUP</div>)}/>
         </main>
         <Footer></Footer>
       </div>
@@ -27,8 +35,10 @@ export class AppLayout extends Component {
 }
 
 const mapStateToProps = ({ auth }) => {
+  console.log('mapStateToProps isAuth:', auth.isAuth);
   return {
     isAuth: auth.isAuth,
+    completedProfile: auth.completedProfile
   }
 };
 
