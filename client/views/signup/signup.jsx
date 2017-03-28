@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './_signup.sass';
-import { userSignedUp } from '../../actions/auth/authActions';
+import { userSignedUpRequest } from '../../actions/auth/authActions';
 import InputField from '../../components/input-field/input-field';
 import Button from '../../components/button/button';
 
-class SignUp extends Component {
+class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       emailInputFieldValue: '',
       passwordInputFieldValue: '',
-      signupFieldsIncomplete: false
+      signupFieldsIncomplete: false,
     };
+    
+    this.inputFieldChangeHandler = this.inputFieldChangeHandler.bind(this);
+    this.submitSignupHandler = this.submitSignupHandler.bind(this);
   }
 
   inputFieldChangeHandler = e => {
@@ -31,18 +34,27 @@ class SignUp extends Component {
     }
   }
 
-  submitSignupHandler = () => {
+  submitSignupHandler() {
+    const props = this.state;
     if (this.state.emailInputFieldValue === '' || this.state.passwordInputFieldValue === '') {
       this.setState({
         signupFieldsIncomplete: true
       })
     } else {
-      const { userSignedUp } = this.props;
+      const { userSignedUpRequest } = this.props;
       const newUser = {
         email: this.state.emailInputFieldValue,
-        password: this.state.signupFieldsIncomplete
+        password: this.state.passwordInputFieldValue
       };
-      userSignedUp(newUser);
+      userSignedUpRequest(newUser)
+      .then(userInfo => {
+        console.log('userInfo', props);
+        
+        <Redirect to={{
+          pathname: '/home',
+          state: { from: props.location }
+        }}/>
+      });
       //dispatch action to verify user not in DB
       // if in db and didn't complete signup process => send to correct step in the process
       // else if in db and completed signup process => log in
@@ -72,23 +84,21 @@ class SignUp extends Component {
             <p className="signup-error-message">Please fill up email and password fields</p>
             : null
           }
-          <Link to="/home"><Button 
+          <Button 
             value="Sign-up"
             styleClassName="button-signup"
             clickHandler={this.submitSignupHandler}
-          ></Button></Link>
+          ></Button>
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ auth }) => {
-  return {
-    isAuth: auth.isAuth,
-  }
-};
+SignUpForm.propTypes = {
+  userSignedUpRequest: React.PropTypes.func.isRequired
+}
 
-const matchDispatchToProps = dispatch => bindActionCreators({userSignedUp: userSignedUp}, dispatch)
+const matchDispatchToProps = dispatch => bindActionCreators({userSignedUpRequest: userSignedUpRequest}, dispatch)
 
-export default connect(mapStateToProps, matchDispatchToProps)(SignUp);
+export default connect(null, matchDispatchToProps)(SignUpForm);

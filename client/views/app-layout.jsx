@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import NavBar from './navbar/navbar';
-import SignUp from './signup/signup';
+import SignUpForm from './signup/signup';
 import Footer from './footer/footer';
 
 export class AppLayout extends Component {
@@ -16,7 +16,7 @@ export class AppLayout extends Component {
       <div className="app-layout-container">
         <NavBar isAuth={isAuth}></NavBar>
         <main>
-          <Route exact path='/' component={SignUp}/>
+          <Route exact path='/' component={SignUpForm}/>
           <Route path="/home" render={() => (<div>HOME</div>)}/>
           <Route path="/login" render={() => (<div>LOGIN</div>)}/>
         </main>

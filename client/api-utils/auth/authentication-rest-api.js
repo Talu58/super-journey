@@ -1,18 +1,9 @@
-export function signUp(user) {
+import axios from 'axios';
+
+export function signUpRequest(userData) {
   //send request to DB
     //if email exist & pwd correct
     //else if email exist and pwd incorrect
-    //else if email doesn't exist
-    const promise = new Promise(function(resolve, reject) {
-      window.setTimeout(
-        function() {
-          resolve({ 
-            isAuth: true,
-            completedProfile: false,
-            email: user.email
-          });
-        }, 300);
-    });
-    
-    return promise;
+    //else if email doesn't exist    
+    return axios.post('/user/signup', userData);
 }

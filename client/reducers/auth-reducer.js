@@ -1,4 +1,4 @@
-import { USER_SIGN_UP } from '../actions/auth/authActionTypes';
+import { USER_SIGN_UP_REQUEST } from '../actions/auth/authActionTypes';
 
 const initialState = {
   isAuth: false,
@@ -8,8 +8,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case USER_SIGN_UP:
-      console.log('USER_SIGN_UP dispatched')
+    case USER_SIGN_UP_REQUEST:
+      console.log('USER_SIGN_UP_REQUEST dispatched')
       return {
         ...state,
         isAuth: action.data.isAuth,

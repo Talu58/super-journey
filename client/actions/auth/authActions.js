@@ -1,14 +1,15 @@
-import { USER_SIGN_UP } from './authActionTypes';
+import { USER_SIGN_UP_REQUEST } from './authActionTypes';
 import * as authentication from '../../api-utils/auth/authentication-rest-api';
 
-export function userSignedUp(user) {
+export function userSignedUpRequest(user) {
   return dispatch => {
-    authentication.signUp(user)
+    return authentication.signUpRequest(user)
       .then( userInfo => {
         dispatch({
-          type: USER_SIGN_UP,
+          type: USER_SIGN_UP_REQUEST,
           data: userInfo
         })
+        return userInfo.data;
       });
   };
 }
