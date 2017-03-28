@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import './_signup.sass';
 import { userSignedUp } from '../../actions/auth/authActions';
 import InputField from '../../components/input-field/input-field';
@@ -71,11 +72,11 @@ class SignUp extends Component {
             <p className="signup-error-message">Please fill up email and password fields</p>
             : null
           }
-          <Button 
+          <Link to="/home"><Button 
             value="Sign-up"
             styleClassName="button-signup"
             clickHandler={this.submitSignupHandler}
-          ></Button>
+          ></Button></Link>
         </div>
       </div>
     )

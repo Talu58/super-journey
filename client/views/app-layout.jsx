@@ -17,6 +17,7 @@ export class AppLayout extends Component {
         <NavBar isAuth={isAuth}></NavBar>
         <main>
           <Route exact path='/' component={SignUp}/>
+          <Route path="/home" render={() => (<div>HOME</div>)}/>
           <Route path="/login" render={() => (<div>LOGIN</div>)}/>
         </main>
         <Footer></Footer>

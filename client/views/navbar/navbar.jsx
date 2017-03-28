@@ -6,7 +6,6 @@ import './_navbar.sass';
 export default class NavBar extends Component {
   render() {
     const { isAuth } = this.props;
-    console.log(isAuth);
     return (
       <header className="navbar-container">
         <div className="logo-container"> 
