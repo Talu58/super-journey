@@ -12,7 +12,7 @@ export default (state = initialState, action) => {
       console.log('USER_SIGN_UP dispatched')
       return {
         ...state,
-        isAuth: true,
+        isAuth: action.data.isAuth,
         completedProfile: action.data.completedProfile,
         email: action.data.email
       };

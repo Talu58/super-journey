@@ -7,6 +7,7 @@ export function signUp(user) {
       window.setTimeout(
         function() {
           resolve({ 
+            isAuth: true,
             completedProfile: false,
             email: user.email
           });
