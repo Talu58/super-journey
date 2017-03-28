@@ -11,7 +11,7 @@ export class AppLayout extends Component {
   }
 
   render() {
-    const { isAuth } = this.props;
+    const { isAuth, dispatch } = this.props;
     return (
       <div className="app-layout-container">
         <NavBar auth={isAuth}></NavBar>

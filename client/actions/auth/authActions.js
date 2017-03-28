@@ -1,8 +1,10 @@
-import { LOGIN_USER_START } from './authActionTypes';
+import { USER_SIGN_UP } from './authActionTypes';
 
-export const loginUserStart = user => ({
-  type: LOGIN_USER_START,
-  data: user
-});
-
+export function userSignedUp(user) {
+  console.log(user);
+  return {
+    type: USER_SIGN_UP,
+    data: user
+  };
+}
 

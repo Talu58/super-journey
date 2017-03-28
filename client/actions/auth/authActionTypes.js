@@ -1,1 +1,1 @@
-export const LOGIN_USER_START = 'LOGIN_USER_START';
+export const USER_SIGN_UP = 'USER_SIGN_UP';

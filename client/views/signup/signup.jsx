@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './_signup.sass';
+import { userSignedUp } from '../../actions/auth/authActions';
 import InputField from '../../components/input-field/input-field';
 import Button from '../../components/button/button';
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,6 +36,12 @@ export default class SignUp extends Component {
         signupFieldsIncomplete: true
       })
     } else {
+      const { userSignedUp } = this.props;
+      const newUser = {
+        email: this.state.emailInputFieldValue,
+        password: this.state.signupFieldsIncomplete
+      };
+      userSignedUp(newUser);
       //dispatch action to verify user not in DB
       // if in db and didn't complete signup process => send to correct step in the process
       // else if in db and completed signup process => log in
@@ -72,3 +81,13 @@ export default class SignUp extends Component {
     )
   }
 }
+
+const mapStateToProps = ({ auth }) => {
+  return {
+    isAuth: auth.isAuth,
+  }
+};
+
+const matchDispatchToProps = dispatch => bindActionCreators({userSignedUp: userSignedUp}, dispatch)
+
+export default connect(mapStateToProps, matchDispatchToProps)(SignUp);

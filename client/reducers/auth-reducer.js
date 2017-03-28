@@ -1,4 +1,4 @@
-import { LOGIN_USER_START } from '../actions/auth/authActionTypes';
+import { USER_SIGN_UP } from '../actions/auth/authActionTypes';
 
 const initialState = {
   isAuth: false,
@@ -7,7 +7,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_USER_START:
+    case USER_SIGN_UP:
     return {
       ...state,
       loading: true
