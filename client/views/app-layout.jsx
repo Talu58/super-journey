@@ -14,7 +14,7 @@ export class AppLayout extends Component {
     const { isAuth, dispatch } = this.props;
     return (
       <div className="app-layout-container">
-        <NavBar auth={isAuth}></NavBar>
+        <NavBar isAuth={isAuth}></NavBar>
         <main>
           <Route exact path='/' component={SignUp}/>
           <Route path="/login" render={() => (<div>LOGIN</div>)}/>

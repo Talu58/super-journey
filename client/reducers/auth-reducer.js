@@ -9,9 +9,11 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case USER_SIGN_UP:
-      console.log('got here');
       return {
         ...state,
+        isAuth: true,
+        completedProfile: action.data.completedProfile,
+        email: action.data.email
       };
     default:
       return state;

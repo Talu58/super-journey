@@ -6,9 +6,9 @@ export function signUp(user) {
     const promise = new Promise(function(resolve, reject) {
       window.setTimeout(
         function() {
-          // On tient la promesse !
           resolve({ 
-            completedProfile: false
+            completedProfile: false,
+            email: user.email
           });
         }, 800);
     });
