@@ -19,7 +19,7 @@ export class AppLayout extends Component {
         <main>
           <Route exact path='/' render={() => (
             isAuth ?  (completedProfile ? <Redirect to="/home" /> 
-            : <Redirect to="/signup" />)
+            : <Redirect to="/signup/step1" />)
             : <SignUpForm/> 
           )}/>
           <Route path="/home" render={() => (
