@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import './_signup.sass';
+import './_signupform.sass';
 import { userSignedUpRequest } from '../../actions/auth/authActions';
 import InputField from '../../components/input-field/input-field';
 import Button from '../../components/button/button';

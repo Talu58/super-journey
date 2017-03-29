@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import NavBar from './navbar/navbar';
-import SignUpForm from './signup/signup';
+import SignUpForm from './signupform/signupform';
 import Footer from './footer/footer';
+import SignUpSteps from './signup-steps/signup-steps';
 
 export class AppLayout extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export class AppLayout extends Component {
             : <Redirect to="/" />
           )}/>
           <Route path="/login" render={() => (<div>LOGIN</div>)}/>
-          <Route path="/signup" render={() => (<div>SIGNUP</div>)}/>
+          <Route path="/signup" component={SignUpSteps}/>
         </main>
         <Footer></Footer>
       </div>
