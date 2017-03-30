@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './_signup-steps.sass';
 import Button from '../../components/button/button';
-import { Link } from 'react-router-dom';
+import SignUpStep from '../signup-step/signup-step';
+import { Route, Link } from 'react-router-dom';
 
 export default class SignUpSteps extends Component {
   constructor(props) {
@@ -30,15 +31,11 @@ export default class SignUpSteps extends Component {
 
   render() {
     const { match } = this.props;
-    console.log('match', match);
+    console.log('match', match)
     return  (
       <div className="signup-steps-container">
         <h1>SignUpSteps</h1>
-        <section>
-          <h2>Who are you?</h2>
-          <Button value="Donor"/>
-          <Button value="Non-Profit Organisation"/>
-        </section>
+        <Route path={`${match.url}/:stepId`} render={() =><SignUpStep match={match} />}/>
         <section className="signup-steps-button-container">
           <Link to={`${match.url}/step${this.state.step}`}><Button clickHandler={this.clickPrevHandler} value="Prev"/></Link>
           <Link to={`${match.url}/step${this.state.step}`}><Button clickHandler={this.clickNextHandler} value="Next"/></Link>

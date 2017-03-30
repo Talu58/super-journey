@@ -17,16 +17,11 @@ export class AppLayout extends Component {
       <div className="app-layout-container">
         <NavBar isAuth={isAuth}></NavBar>
         <main>
-          <Route exact path='/' render={() => (
-            isAuth ?  (completedProfile ? <Redirect to="/home" /> 
-            : <Redirect to="/signup/step1" />)
-            : <SignUpForm/> 
-          )}/>
+          <Route exact path='/' component={SignUpForm}/>
           <Route path="/home" render={() => (
-            isAuth ? <div>HOME</div>
-            : <Redirect to="/" />
+            <div>HOME</div>
           )}/>
-          <Route path="/login" render={() => (<div>LOGIN</div>)}/>
+          {/*<Route path="/login" render={() => (<div>LOGIN</div>)}/>*/}
           <Route path="/signup" component={SignUpSteps}/>
         </main>
         <Footer></Footer>
@@ -36,7 +31,6 @@ export class AppLayout extends Component {
 }
 
 const mapStateToProps = ({ auth }) => {
-  console.log('mapStateToProps isAuth:', auth.isAuth);
   return {
     isAuth: auth.isAuth,
     completedProfile: auth.completedProfile
