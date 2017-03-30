@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
 import './_signup-steps.sass';
 import { userCompletedSignUpRequest } from '../../actions/auth/authActions';
 import Button from '../../components/button/button';
@@ -103,6 +104,7 @@ class SignUpSteps extends Component {
   }
 
   render() {
+    const { completedProfile } = this.props;
     let display = '';
     switch (this.state.step) {
       case 1:
@@ -142,41 +144,48 @@ class SignUpSteps extends Component {
         );
     }
     return  (
-      <div className="signup-steps-container">
-        <h1>SignUpSteps</h1>
-        <div className="signup-step-contianer">
-        {display}
+      <div>
+      { completedProfile ?
+        <Redirect to="/home" />
+        :
+        (<div className="signup-steps-container">
+          <h1>SignUpSteps</h1>
+          <div className="signup-step-contianer">
+            {display}
+          </div>
+          <div className="signup-navigation-button-container">
+            {this.state.step === 1 ? 
+              <Button
+                disabled={true}
+                styleClassName="button-primary"
+                value="Prev"
+              />
+              : 
+              <Button
+                clickHandler={this.clickPrevHandler}
+                value="Prev"
+                styleClassName="button-primary"
+              />
+            }
+            {(this.state.step === 2 && this.state.role.Donor) || this.state.step === 3 ? 
+              <Button 
+                disabled={!this.state.hasCompletedStep}
+                clickHandler={this.clickSaveHandler}
+                value="Save"
+                styleClassName="button-primary"
+              />
+              : 
+              <Button
+                disabled={!this.state.hasCompletedStep}
+                clickHandler={this.clickNextHandler}
+                styleClassName="button-primary"
+                value="Next"
+              />
+            }
+          </div>
         </div>
-        <div className="signup-navigation-button-container">
-          {this.state.step === 1 ? 
-            <Button
-              disabled={true}
-              styleClassName="button-primary"
-              value="Prev"
-            />
-            : 
-            <Button
-              clickHandler={this.clickPrevHandler}
-              value="Prev"
-              styleClassName="button-primary"
-            />
-          }
-          {(this.state.step === 2 && this.state.role.Donor) || this.state.step === 3 ? 
-            <Button 
-              disabled={!this.state.hasCompletedStep}
-              clickHandler={this.clickSaveHandler}
-              value="Save"
-              styleClassName="button-primary"
-            />
-            : 
-            <Button
-              disabled={!this.state.hasCompletedStep}
-              clickHandler={this.clickNextHandler}
-              styleClassName="button-primary"
-              value="Next"
-            />
-          }
-        </div>
+        )
+      }
       </div>
     );
   }
@@ -186,6 +195,12 @@ SignUpSteps.propTypes = {
   userCompletedSignUpRequest: React.PropTypes.func.isRequired
 }
 
+const mapStateToProps = ({ auth }) => {
+  return {
+    completedProfile: auth.completedProfile
+  }
+};
+
 const matchDispatchToProps = dispatch => bindActionCreators({userCompletedSignUpRequest: userCompletedSignUpRequest}, dispatch)
 
-export default connect(null, matchDispatchToProps)(SignUpSteps);
+export default connect(mapStateToProps, matchDispatchToProps)(SignUpSteps);

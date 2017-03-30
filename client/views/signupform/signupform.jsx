@@ -63,10 +63,12 @@ class SignUpForm extends Component {
   }
 
   render() {
-    const { isAuth } = this.props;
+    const { isAuth, completedProfile } = this.props;
     return (
       <div>
-      {isAuth ? 
+      {isAuth && completedProfile ? 
+        <Redirect to="/home"/> 
+        : ( isAuth ?
         <Redirect to="/signup"/>
         : <div className="signup-container">
           <h1 className="signup-header">Don't have an account yet? Sign-up here:</h1>
@@ -98,7 +100,7 @@ class SignUpForm extends Component {
             />
           </div>
         </div>
-        }
+        )}
         </div>
     )
   }

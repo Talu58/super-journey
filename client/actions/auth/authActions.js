@@ -7,9 +7,8 @@ export function userSignUpRequest(user) {
       .then( userInfo => {
         dispatch({
           type: USER_SIGN_UP_REQUEST,
-          data: userInfo
+          data: userInfo.data
         })
-        return userInfo.data;
       });
   };
 }
