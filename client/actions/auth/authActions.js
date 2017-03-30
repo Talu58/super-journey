@@ -1,5 +1,5 @@
 import { USER_SIGN_UP_REQUEST, USER_COMPLETED_SIGN_UP_REQUEST } from './authActionTypes';
-import * as authentication from '../../api-utils/auth/authentication-rest-api';
+import * as authentication from '../../utils-api/auth/authentication-rest-api';
 
 export function userSignUpRequest(user) {
   return dispatch => {

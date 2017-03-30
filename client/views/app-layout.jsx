@@ -6,6 +6,8 @@ import SignUpForm from './signupform/signupform';
 import Footer from './footer/footer';
 import SignUpSteps from './signup-steps/signup-steps';
 import Home from './home/home';
+import Profile from './profile/profile';
+import PrivateRoute from '../utils-router/private-route';
 
 export class AppLayout extends Component {
   constructor(props) {
@@ -20,8 +22,8 @@ export class AppLayout extends Component {
         <main>
           <Route exact path='/' component={SignUpForm} />
           <Route path="/signup" component={SignUpSteps} />
-          <Route path="/home" component={Home} />
-          <Route path="/profile" component={Profile} />
+          <PrivateRoute path="/home" component={Home} isAuth={isAuth} />
+          <PrivateRoute path="/profile" component={Profile} isAuth={isAuth} />
         </main>
         <Footer />
       </div>
