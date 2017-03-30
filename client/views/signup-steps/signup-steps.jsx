@@ -10,7 +10,8 @@ export default class SignUpSteps extends Component {
     this.state = {
       step: 1,
       role: { Donor: false, 'Non-Profit Organisation': false },
-      industry: {Healthcare: false, Tech: false, Climat: false, Inclusion: false, 'Global Change': false}
+      industry: {Healthcare: false, Tech: false, Climat: false, Inclusion: false, 'Global Change': false},
+      hasRole: false
     }
     this.clickOptionHandler = this.clickOptionHandler.bind(this);
     this.clickPrevHandler = this.clickPrevHandler.bind(this);
@@ -19,7 +20,17 @@ export default class SignUpSteps extends Component {
 
   clickOptionHandler(e) {
     console.log('clickOptionHandler');
-    if (this.state.step === 1) {
+    if (this.state.hasRole && this.state.step === 1 && this.state.role[e.target.name]) {
+      const { role } = this.state;
+      const newState = {
+        ...role,
+        [e.target.name]: !this.state.role[e.target.name],
+      };
+      this.setState({
+        role: newState,
+        hasRole: false
+      });
+    } else if (this.state.step === 1) {
       console.log('clickOptionHandler step1');
       const { role } = this.state;
       const newState = {
@@ -28,6 +39,7 @@ export default class SignUpSteps extends Component {
       };
       this.setState({
         role: newState,
+        hasRole: true
       });
     } else {
       console.log('clickOptionHandler step2');
@@ -38,6 +50,7 @@ export default class SignUpSteps extends Component {
       };
       this.setState({
         industry: newState,
+        hasRole: true
       });
     }
   }
@@ -62,7 +75,7 @@ export default class SignUpSteps extends Component {
       case 1:
         display = (
           <div>
-            <SignUpStep buttons={this.state.role} clickHandler={this.clickOptionHandler}/>
+            <SignUpStep disabled={this.state.hasRole} buttons={this.state.role} clickHandler={this.clickOptionHandler}/>
           </div>
         );
         break;

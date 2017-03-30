@@ -9,7 +9,7 @@ export default class SignupStep extends Component {
     }
   }
   render() {
-    const { buttons, clickHandler } = this.props;
+    const { buttons, clickHandler, disabled } = this.props;
     console.log('buttons', buttons);
     return (
       <div className="signup-step-buttons-container">
@@ -17,6 +17,7 @@ export default class SignupStep extends Component {
             <Button 
               key={button}
               value={button}
+              disabled={disabled && !buttons[button]}
               clickHandler={clickHandler}
               name={button}
               active={buttons[button]}
