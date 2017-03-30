@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './_signup-steps.sass';
 import Button from '../../components/button/button';
 import SignUpStep from '../signup-step/signup-step';
+import ProjectForm from '../project-form/project-form';
 import { Route, Link } from 'react-router-dom';
 
 export default class SignUpSteps extends Component {
@@ -11,16 +12,17 @@ export default class SignUpSteps extends Component {
       step: 1,
       role: { Donor: false, 'Non-Profit Organisation': false },
       industry: {Healthcare: false, Tech: false, Climat: false, Inclusion: false, 'Global Change': false},
+      project: {title: '', description: ''},
       hasRole: false,
-      hasChoosenOption: false
+      hasCompletedStep: false
     }
     this.clickOptionHandler = this.clickOptionHandler.bind(this);
+    this.fieldChangeHandler = this.fieldChangeHandler.bind(this);
     this.clickPrevHandler = this.clickPrevHandler.bind(this);
     this.clickNextHandler = this.clickNextHandler.bind(this);
   }
 
   clickOptionHandler(e) {
-    console.log('clickOptionHandler');
     if (this.state.hasRole && this.state.step === 1 && this.state.role[e.target.name]) {
       const { role } = this.state;
       const newState = {
@@ -30,10 +32,9 @@ export default class SignUpSteps extends Component {
       this.setState({
         role: newState,
         hasRole: false,
-        hasChoosenOption: false
+        hasCompletedStep: false
       });
     } else if (this.state.step === 1) {
-      console.log('clickOptionHandler step1');
       const { role } = this.state;
       const newState = {
         ...role,
@@ -42,10 +43,9 @@ export default class SignUpSteps extends Component {
       this.setState({
         role: newState,
         hasRole: true,
-        hasChoosenOption: true
+        hasCompletedStep: true
       });
     } else {
-      console.log('clickOptionHandler step2');
       const { industry } = this.state;
       const newState = {
         ...industry,
@@ -54,8 +54,27 @@ export default class SignUpSteps extends Component {
       this.setState({
         industry: newState,
         hasRole: true,
-        hasChoosenOption: true
+        hasCompletedStep: true
       });
+    }
+  }
+
+  fieldChangeHandler(e) {
+    const { project } = this.state;
+    const newState = {
+      ...project,
+      [e.target.name]: e.target.value
+    }
+    if (newState.title !== '' && newState.description !== '') {
+      this.setState({
+        project: newState,
+        hasCompletedStep: true
+      })
+    } else {
+      this.setState({
+        project: newState,
+        hasCompletedStep: false
+      })
     }
   }
 
@@ -70,7 +89,7 @@ export default class SignUpSteps extends Component {
     const { step } = this.state;
     this.setState({
       step: step+1,
-      hasChoosenOption: false
+      hasCompletedStep: false
     });
   }
 
@@ -101,7 +120,10 @@ export default class SignUpSteps extends Component {
       case 3:
         display = (
           <div>
-            Enter title and description
+            <ProjectForm 
+              changeHandler={this.fieldChangeHandler}
+              values={this.state.project}
+            />
           </div>
         );
         break;
@@ -132,14 +154,14 @@ export default class SignUpSteps extends Component {
           }
           {(this.state.step === 2 && this.state.role.Donor) || this.state.step === 3 ? 
             <Button 
-              disabled={!this.state.hasChoosenOption}
+              disabled={!this.state.hasCompletedStep}
               clickHandler={this.clickSaveHandler}
               value="Save"
               styleClassName="button-primary"
             />
             : 
             <Button
-              disabled={!this.state.hasChoosenOption}
+              disabled={!this.state.hasCompletedStep}
               clickHandler={this.clickNextHandler}
               styleClassName="button-primary"
               value="Next"

@@ -10,7 +10,6 @@ export default class SignupStep extends Component {
   }
   render() {
     const { buttons, clickHandler, disabled } = this.props;
-    console.log('buttons', buttons);
     return (
       <div className="signup-step-buttons-container">
         {Object.keys(buttons).map(button => (
