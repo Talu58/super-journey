@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './_signup-step.sass';
 import Button from '../../components/button/button';
 
 export default class SignupStep extends Component {
@@ -11,8 +12,7 @@ export default class SignupStep extends Component {
     const { buttons, clickHandler } = this.props;
     console.log('buttons', buttons);
     return (
-      <div>
-        SignupStep 
+      <div className="signup-step-buttons-container">
         {Object.keys(buttons).map(button => (
             <Button 
               key={button}

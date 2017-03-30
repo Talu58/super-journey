@@ -81,8 +81,10 @@ export default class SignUpSteps extends Component {
     return  (
       <div className="signup-steps-container">
         <h1>SignUpSteps</h1>
+        <div className="signup-step-contianer">
         {display}
-        <div className="signup-steps-button-container">
+        </div>
+        <div className="signup-navigation-button-container">
           {this.state.step === 1 ? <Button disabled={true} styleClassName="button-primary" value="Prev"/>
             : <Button clickHandler={this.clickPrevHandler} value="Prev" styleClassName="button-primary"/>
           }
