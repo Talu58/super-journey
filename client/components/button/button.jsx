@@ -11,13 +11,16 @@ export default class Button extends Component {
   }
 
   render() {
-    const { value, styleClassName, containerStyleClassName, disabled, name } = this.props;
+    const { value, styleClassName, containerStyleClassName, disabled, name, active } = this.props;
     let isDisabled = disabled === true;
     let buttonContainerClass = 'button-container ' + containerStyleClassName;
     let buttonClass = 'button ' + styleClassName;
 
     if (isDisabled) {
       buttonClass += ' button-disabled';
+    }
+    if (active) {
+      buttonClass += ` ${styleClassName}-active`;
     }
     
     return (

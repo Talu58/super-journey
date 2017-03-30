@@ -9,11 +9,19 @@ export default class SignupStep extends Component {
   }
   render() {
     const { buttons, clickHandler } = this.props;
+    console.log('buttons', buttons);
     return (
       <div>
         SignupStep 
-        {buttons.map(button => (
-            <Button key={button} value={button} clickHandler={clickHandler} name={button}/>
+        {Object.keys(buttons).map(button => (
+            <Button 
+              key={button}
+              value={button}
+              clickHandler={clickHandler}
+              name={button}
+              active={buttons[button]}
+              styleClassName="button-signup-step-option"
+              />
           )
         )}
       </div>

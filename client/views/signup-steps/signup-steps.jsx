@@ -18,18 +18,27 @@ export default class SignUpSteps extends Component {
   }
 
   clickOptionHandler(e) {
+    console.log('clickOptionHandler');
     if (this.state.step === 1) {
+      console.log('clickOptionHandler step1');
       const { role } = this.state;
       const newState = {
         ...role,
         [e.target.name]: !this.state.role[e.target.name],
       };
+      this.setState({
+        role: newState,
+      });
     } else {
+      console.log('clickOptionHandler step2');
       const { industry } = this.state;
       const newState = {
         ...industry,
         [e.target.name]: !this.state.industry[e.target.name],
       };
+      this.setState({
+        industry: newState,
+      });
     }
   }
 
@@ -53,14 +62,14 @@ export default class SignUpSteps extends Component {
       case 1:
         display = (
           <div>
-            <SignUpStep buttons={Object.keys(this.state.role)} clickHandler={this.clickOptionHandler}/>
+            <SignUpStep buttons={this.state.role} clickHandler={this.clickOptionHandler}/>
           </div>
         );
         break;
       case 2:
         display = (
           <div>
-            <SignUpStep buttons={Object.keys(this.state.industry)} clickHandler={this.clickOptionHandler}/>
+            <SignUpStep buttons={this.state.industry} clickHandler={this.clickOptionHandler}/>
           </div>
         );
         break;
