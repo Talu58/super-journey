@@ -14,7 +14,6 @@ export function userSignUpRequest(user) {
 }
 
 export function userCompletedSignUpRequest(user) {
-  console.log('usercompletedSignUpRequest');
   return dispatch => {
     return authentication.completedSignUpRequest(user)
       .then( userInfo => {

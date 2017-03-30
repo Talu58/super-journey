@@ -15,11 +15,8 @@ export default class NavBar extends Component {
         </div>
         <div className="navbar-actions-container">
           {isAuth ? 
-            <Button value="Sign Out"></Button> 
-            : <Link to="/login">
-                <Button value="Log-in">
-                </Button>
-              </Link>
+            <Button value="Sign Out" />
+            : <Button value="Log-in" />
           }
         </div>
       </header>

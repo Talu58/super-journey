@@ -78,7 +78,7 @@ class SignUpForm extends Component {
               type="email"
               changeHandler={this.inputFieldChangeHandler}
               value={this.state.emailInputFieldValue}
-            ></InputField>
+            />
             {this.state.emailFieldIncomplete ?
               <span className="signup-error-message">Email field required</span>
               : null
@@ -88,7 +88,7 @@ class SignUpForm extends Component {
               type="password"
               changeHandler={this.inputFieldChangeHandler}
               value={this.state.passwordInputFieldValue}
-            ></InputField>
+            />
             {this.state.passwordFieldIncomplete ?
               <span className="signup-error-message">Password field required</span>
               : null
