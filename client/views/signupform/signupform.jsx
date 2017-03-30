@@ -64,7 +64,6 @@ class SignUpForm extends Component {
 
   render() {
     const { isAuth } = this.props;
-    console.log('isAuth', isAuth)
     return (
       <div>
       {isAuth ? 
@@ -94,7 +93,7 @@ class SignUpForm extends Component {
             }
             <Button 
               value="Sign-up"
-              styleClassName="button-signup"
+              styleClassName="button-primary"
               clickHandler={this.submitSignupHandler}
             />
           </div>

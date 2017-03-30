@@ -11,13 +11,18 @@ export default class Button extends Component {
   }
 
   render() {
-    const { value, styleClassName, containerStyleClassName } = this.props;
+    const { value, styleClassName, containerStyleClassName, disabled, name } = this.props;
+    let isDisabled = disabled === true;
     let buttonContainerClass = 'button-container ' + containerStyleClassName;
     let buttonClass = 'button ' + styleClassName;
+
+    if (isDisabled) {
+      buttonClass += ' button-disabled';
+    }
     
     return (
       <div className={buttonContainerClass}>
-          <button className={buttonClass} onClick={this.handleClick}>{value}</button>
+          <button name={name} className={buttonClass} onClick={this.handleClick} disabled={isDisabled}>{value}</button>
       </div>
     );
   }

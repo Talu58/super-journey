@@ -21,7 +21,6 @@ export class AppLayout extends Component {
           <Route path="/home" render={() => (
             <div>HOME</div>
           )}/>
-          {/*<Route path="/login" render={() => (<div>LOGIN</div>)}/>*/}
           <Route path="/signup" component={SignUpSteps}/>
         </main>
         <Footer></Footer>
