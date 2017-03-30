@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 import './_signupform.sass';
-import { userSignedUpRequest } from '../../actions/auth/authActions';
+import { userSignUpRequest } from '../../actions/auth/authActions';
 import InputField from '../../components/input-field/input-field';
 import Button from '../../components/button/button';
 
@@ -53,12 +53,12 @@ class SignUpForm extends Component {
         passwordFieldIncomplete: true
       });
     } else {
-      const { userSignedUpRequest } = this.props;
+      const { userSignUpRequest } = this.props;
       const newUser = {
         email: this.state.emailInputFieldValue,
         password: this.state.passwordInputFieldValue
       };
-      userSignedUpRequest(newUser)
+      userSignUpRequest(newUser)
     }
   }
 
@@ -105,7 +105,7 @@ class SignUpForm extends Component {
 }
 
 SignUpForm.propTypes = {
-  userSignedUpRequest: React.PropTypes.func.isRequired
+  userSignUpRequest: React.PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ auth }) => {
@@ -115,6 +115,6 @@ const mapStateToProps = ({ auth }) => {
   }
 };
 
-const matchDispatchToProps = dispatch => bindActionCreators({userSignedUpRequest: userSignedUpRequest}, dispatch)
+const matchDispatchToProps = dispatch => bindActionCreators({userSignUpRequest: userSignUpRequest}, dispatch)
 
 export default connect(mapStateToProps, matchDispatchToProps)(SignUpForm);

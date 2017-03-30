@@ -7,3 +7,7 @@ export function signUpRequest(userData) {
     //else if email doesn't exist    
     return axios.post('/user/signup', userData);
 }
+
+export function completedSignUpRequest(userData) {
+    return axios.post('/user/signup/completed', userData);
+}

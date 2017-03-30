@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAuth: true,
-        completedProfile: false,
+        completedProfile: action.data.completedProfile,
         email: action.data.email
       };
     default:

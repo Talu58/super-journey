@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './_signup-steps.sass';
+import { userCompletedSignUpRequest } from '../../actions/auth/authActions';
 import Button from '../../components/button/button';
 import SignUpStep from '../signup-step/signup-step';
 import ProjectForm from '../project-form/project-form';
 import { Route, Link } from 'react-router-dom';
 
-export default class SignUpSteps extends Component {
+class SignUpSteps extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +23,7 @@ export default class SignUpSteps extends Component {
     this.fieldChangeHandler = this.fieldChangeHandler.bind(this);
     this.clickPrevHandler = this.clickPrevHandler.bind(this);
     this.clickNextHandler = this.clickNextHandler.bind(this);
+    this.clickSaveHandler = this.clickSaveHandler.bind(this);
   }
 
   clickOptionHandler(e) {
@@ -91,6 +95,11 @@ export default class SignUpSteps extends Component {
       step: step+1,
       hasCompletedStep: false
     });
+  }
+
+  clickSaveHandler() {
+    const { userCompletedSignUpRequest } = this.props;
+    userCompletedSignUpRequest(this.state);
   }
 
   render() {
@@ -173,6 +182,10 @@ export default class SignUpSteps extends Component {
   }
 }
 
+SignUpSteps.propTypes = {
+  userCompletedSignUpRequest: React.PropTypes.func.isRequired
+}
 
+const matchDispatchToProps = dispatch => bindActionCreators({userCompletedSignUpRequest: userCompletedSignUpRequest}, dispatch)
 
-
+export default connect(null, matchDispatchToProps)(SignUpSteps);
