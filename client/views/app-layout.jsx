@@ -16,7 +16,7 @@ export class AppLayout extends Component {
     const { isAuth, completedProfile, dispatch } = this.props;
     return (
       <div className="app-layout-container">
-        <NavBar isAuth={isAuth} />
+        <NavBar isAuth={isAuth} completedProfile={completedProfile} />
         <main>
           <Route exact path='/' component={SignUpForm} />
           <Route path="/home" component={Home} />

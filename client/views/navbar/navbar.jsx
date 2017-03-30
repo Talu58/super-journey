@@ -5,7 +5,7 @@ import './_navbar.sass';
 
 export default class NavBar extends Component {
   render() {
-    const { isAuth } = this.props;
+    const { isAuth, completedProfile } = this.props;
     return (
       <header className="navbar-container">
         <div className="logo-container"> 
@@ -14,6 +14,10 @@ export default class NavBar extends Component {
           </Link>
         </div>
         <div className="navbar-actions-container">
+          {isAuth && completedProfile ? 
+            <Button value="Profile" />
+            : null
+          }
           {isAuth ? 
             <Button value="Sign Out" />
             : <Button value="Log-in" />
