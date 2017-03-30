@@ -5,6 +5,7 @@ import NavBar from './navbar/navbar';
 import SignUpForm from './signupform/signupform';
 import Footer from './footer/footer';
 import SignUpSteps from './signup-steps/signup-steps';
+import Home from './home/home';
 
 export class AppLayout extends Component {
   constructor(props) {
@@ -15,15 +16,13 @@ export class AppLayout extends Component {
     const { isAuth, completedProfile, dispatch } = this.props;
     return (
       <div className="app-layout-container">
-        <NavBar isAuth={isAuth}></NavBar>
+        <NavBar isAuth={isAuth} />
         <main>
-          <Route exact path='/' component={SignUpForm}/>
-          <Route path="/home" render={() => (
-            <div>HOME</div>
-          )}/>
-          <Route path="/signup" component={SignUpSteps}/>
+          <Route exact path='/' component={SignUpForm} />
+          <Route path="/home" component={Home} />
+          <Route path="/signup" component={SignUpSteps} />
         </main>
-        <Footer></Footer>
+        <Footer />
       </div>
     );
   }
