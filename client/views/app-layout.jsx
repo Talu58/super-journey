@@ -21,7 +21,7 @@ export class AppLayout extends Component {
         <NavBar isAuth={isAuth} completedProfile={completedProfile} />
         <main>
           <Route exact path='/' component={SignUpForm} />
-          <Route path="/signup" component={SignUpSteps} />
+          <PrivateRoute path="/signup" component={SignUpSteps} isAuth={isAuth} />
           <PrivateRoute path="/home" component={Home} isAuth={isAuth} />
           <PrivateRoute path="/profile" component={Profile} isAuth={isAuth} />
         </main>

@@ -6,7 +6,7 @@ const PrivateRoute = ({component, isAuth, ...rest}) => (
       isAuth ? (
         React.createElement(component, props)
       ) : (
-      <Redirect to="/signup"/>
+      <Redirect to="/"/>
       )
     )} 
     />
