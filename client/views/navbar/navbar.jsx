@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '../../components/button/button';
+import LoginForm from '../login-form/login-form';
 import { Link } from 'react-router-dom';
 import './_navbar.sass';
 
@@ -22,7 +23,7 @@ export default class NavBar extends Component {
           }
           {isAuth ? 
             <Button value="Sign Out" />
-            : <Button value="Log-in" />
+            : <LoginForm/>
           }
         </div>
       </header>
