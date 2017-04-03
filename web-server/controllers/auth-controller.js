@@ -25,6 +25,7 @@ module.exports.signUpRequest = (req, res) => {
 module.exports.signUpCompletedRequest = (req, res) => {
   const { email, role, industry } = req.body;
   User.findOne({ 'email': email }, (err, user) => {
+    console.log('user', user);
     if (err) {
       throw err;
     } else {
@@ -35,16 +36,15 @@ module.exports.signUpCompletedRequest = (req, res) => {
       user.role = newRole;
       user.industry = newIndustry;
 
-      return user;
+      return user.save((err, updatedUser) => {
+        console.log('updatedUser', updatedUser);
+        if (err) throw err;
+          return res.send({
+            email: email,
+            completedProfile: true
+          });
+      }) 
     }
-  }).then(user => {
-    return user.save((err, updatedUser) => {
-      if (err) throw err;
-      return res.send({
-        email: email,
-        completedProfile: true
-      });
-    })        
   }).catch(err => {
     throw err;
   });
@@ -55,11 +55,13 @@ module.exports.loginRequest = (req, res) => {
   User.findOne({ 'email': email }, (err, user) => {
     if (err) {
       throw err;
-    } else {
+    } else if (user) {
       return res.send({
         email: email,
         completedProfile: user.completedProfile
       });
+    } else {
+      return res.send('User not found');
     }
   }).catch(err => {
     throw err;

@@ -34,9 +34,10 @@ export function userLoginRequest(user) {
   return dispatch => {
     return authentication.loginRequest(user)
       .then( userInfo => {
+        console.log('userInfo', userInfo);
         dispatch({
           type: USER_LOGIN_REQUEST,
-          data: userInfo
+          data: userInfo.data
         })
       });
   };

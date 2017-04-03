@@ -61,39 +61,47 @@ class LoginForm extends Component {
   }
 
   render() {
+    const { isAuth, completedProfile } = this.props;
     return (
-      <div className="login-form-container">
-        <div className="login-form-field-container">
-          <InputField
-            placeholderText="Email address"
-            type="email"
-            changeHandler={this.inputFieldChangeHandler}
-            value={this.state.emailInputFieldValue}
-            containerStyleClassName="login-form-input-field"
-          />
-          {this.state.emailFieldIncomplete ?
-            <span className="login-error-message">* Email field required</span>
-            : null
-          }
-        </div>
-        <div className="login-form-field-container">
-          <InputField
-            placeholderText="Password"
-            type="password"
-            changeHandler={this.inputFieldChangeHandler}
-            value={this.state.passwordInputFieldValue}
-            containerStyleClassName="login-form-input-field"
-          />
-          {this.state.passwordFieldIncomplete ?
-            <span className="login-error-message">* Password field required</span>
-            : null
-          }
-        </div>
-        <Button
-          value="Login"
-          styleClassName="button-primary"
-          clickHandler={this.submitLoginHandler}
-        />
+      <div>
+      {isAuth && completedProfile ? 
+        <Redirect to="/home"/> 
+        : ( isAuth ?
+        <Redirect to="/signup"/>
+        : <div className="login-form-container">
+            <div className="login-form-field-container">
+              <InputField
+                placeholderText="Email address"
+                type="email"
+                changeHandler={this.inputFieldChangeHandler}
+                value={this.state.emailInputFieldValue}
+                containerStyleClassName="login-form-input-field"
+              />
+              {this.state.emailFieldIncomplete ?
+                <span className="login-error-message">* Email field required</span>
+                : null
+              }
+            </div>
+            <div className="login-form-field-container">
+              <InputField
+                placeholderText="Password"
+                type="password"
+                changeHandler={this.inputFieldChangeHandler}
+                value={this.state.passwordInputFieldValue}
+                containerStyleClassName="login-form-input-field"
+              />
+              {this.state.passwordFieldIncomplete ?
+                <span className="login-error-message">* Password field required</span>
+                : null
+              }
+            </div>
+            <Button
+              value="Login"
+              styleClassName="button-primary"
+              clickHandler={this.submitLoginHandler}
+            />
+          </div>
+        )}
       </div>
     )
   }
@@ -103,8 +111,15 @@ LoginForm.propTypes = {
   userLoginRequest: React.PropTypes.func.isRequired
 }
 
+const mapStateToProps = ({ auth }) => {
+  return {
+    isAuth: auth.isAuth,
+    completedProfile: auth.completedProfile
+  }
+};
+
 const matchDispatchToProps = dispatch => bindActionCreators({userLoginRequest: userLoginRequest}, dispatch)
 
-export default connect(null, matchDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, matchDispatchToProps)(LoginForm);
 
 

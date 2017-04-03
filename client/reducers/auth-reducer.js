@@ -29,7 +29,10 @@ export default (state = initialState, action) => {
     case USER_LOGIN_REQUEST:
       console.log('USER_LOGIN_REQUEST dispatched')
       return {
-        ...state
+        ...state,
+        isAuth: true,
+        completedProfile: action.data.completedProfile,
+        email: action.data.email
       }
     default:
       return state;
