@@ -13,7 +13,7 @@ module.exports.signUpRequest = (req, res) => {
       throw err;
     } else {
       return res.send({
-        email: req.body.email,
+        email: email,
         completedProfile: user.completedProfile
       });
     }
@@ -41,7 +41,7 @@ module.exports.signUpCompletedRequest = (req, res) => {
     return user.save((err, updatedUser) => {
       if (err) throw err;
       return res.send({
-        email: req.body.email,
+        email: email,
         completedProfile: true
       });
     })        
