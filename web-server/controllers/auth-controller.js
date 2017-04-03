@@ -25,7 +25,6 @@ module.exports.signUpRequest = (req, res) => {
 module.exports.signUpCompletedRequest = (req, res) => {
   const { email, role, industry } = req.body;
   User.findOne({ 'email': email }, (err, user) => {
-    console.log('user', user);
     if (err) {
       throw err;
     } else {
@@ -37,7 +36,6 @@ module.exports.signUpCompletedRequest = (req, res) => {
       user.industry = newIndustry;
 
       return user.save((err, updatedUser) => {
-        console.log('updatedUser', updatedUser);
         if (err) throw err;
           return res.send({
             email: email,
