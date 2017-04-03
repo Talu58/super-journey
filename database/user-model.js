@@ -25,5 +25,11 @@ const userSchema = mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
+const Role = mongoose.model('Role', roleSchema);
+const Industry = mongoose.model('Industry', industrySchema);
 
-module.exports = User;
+module.exports = {
+  User,
+  Role,
+  Industry
+};

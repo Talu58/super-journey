@@ -99,8 +99,15 @@ class SignUpSteps extends Component {
   }
 
   clickSaveHandler() {
-    const { userCompletedSignUpRequest } = this.props;
-    userCompletedSignUpRequest(this.state);
+    const { userCompletedSignUpRequest, email } = this.props;
+    const { role, industry, project } = this.state;
+    const newUser = {
+      role,
+      industry,
+      project,
+      email
+    }
+    userCompletedSignUpRequest(newUser);
   }
 
   render() {
@@ -197,7 +204,8 @@ SignUpSteps.propTypes = {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    completedProfile: auth.completedProfile
+    completedProfile: auth.completedProfile,
+    email: auth.email
   }
 };
 
