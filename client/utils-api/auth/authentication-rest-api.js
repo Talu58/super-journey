@@ -9,6 +9,5 @@ export function completedSignUpRequest(userData) {
 }
 
 export function loginRequest(userData) {
-    console.log('loginRequest invoked');
-    return userData;
+    return axios.post('/user/login', userData);
 }

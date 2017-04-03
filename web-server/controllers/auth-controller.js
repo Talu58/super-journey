@@ -50,3 +50,18 @@ module.exports.signUpCompletedRequest = (req, res) => {
   });
 };
 
+module.exports.loginRequest = (req, res) => {
+  const { email, password} = req.body;
+  User.findOne({ 'email': email }, (err, user) => {
+    if (err) {
+      throw err;
+    } else {
+      return res.send({
+        email: email,
+        completedProfile: user.completedProfile
+      });
+    }
+  }).catch(err => {
+    throw err;
+  });
+};
