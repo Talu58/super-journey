@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import InputField from '../../components/input-field/input-field';
 import Button from '../../components/button/button';
+import { userLoginRequest } from '../../actions/auth/authActions';
 import './_login-form.sass';
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,13 +51,12 @@ export default class LoginForm extends Component {
         passwordFieldIncomplete: true
       });
     } else {
-      // const { userSignUpRequest } = this.props;
+      const { userLoginRequest } = this.props;
       const user = {
         email: this.state.emailInputFieldValue,
         password: this.state.passwordInputFieldValue
       };
-      console.log(user);
-      // userSignUpRequest(newUser)
+      userLoginRequest(user)
     }
   }
 
@@ -96,3 +98,13 @@ export default class LoginForm extends Component {
     )
   }
 }
+
+LoginForm.propTypes = {
+  userLoginRequest: React.PropTypes.func.isRequired
+}
+
+const matchDispatchToProps = dispatch => bindActionCreators({userLoginRequest: userLoginRequest}, dispatch)
+
+export default connect(null, matchDispatchToProps)(LoginForm);
+
+

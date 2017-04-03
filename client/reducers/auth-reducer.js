@@ -1,4 +1,8 @@
-import { USER_SIGN_UP_REQUEST, USER_COMPLETED_SIGN_UP_REQUEST } from '../actions/auth/authActionTypes';
+import {
+  USER_SIGN_UP_REQUEST,
+  USER_COMPLETED_SIGN_UP_REQUEST,
+  USER_LOGIN_REQUEST
+} from '../actions/auth/authActionTypes';
 
 const initialState = {
   isAuth: false,
@@ -22,6 +26,11 @@ export default (state = initialState, action) => {
         ...state,
         completedProfile: true,
       };
+    case USER_LOGIN_REQUEST:
+      console.log('USER_LOGIN_REQUEST dispatched')
+      return {
+        ...state
+      }
     default:
       return state;
   }

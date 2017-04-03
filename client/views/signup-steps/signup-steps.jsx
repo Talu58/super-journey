@@ -7,7 +7,6 @@ import { userCompletedSignUpRequest } from '../../actions/auth/authActions';
 import Button from '../../components/button/button';
 import SignUpStep from '../signup-step/signup-step';
 import ProjectForm from '../project-form/project-form';
-import { Route, Link } from 'react-router-dom';
 
 class SignUpSteps extends Component {
   constructor(props) {
