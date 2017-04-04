@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './_home.sass';
+import Donor from './donor/donor';
+import NonProfit from './non-profit/non-profit';
 
-export default class Home extends Component {
+class Home extends Component {
   render() {
+    const { role } = this.props;
     return (
       <div>
-        HOME
+        { role.Donor ? 
+          <Donor/>
+          : <NonProfit/>
+        }
       </div>
     )
   }
 }
 
-const mapStateToProps = 
+const mapStateToProps = ({ auth }) => {
+  return {
+    role: auth.role
+  };
+}
+
+export default connect(mapStateToProps)(Home);
+

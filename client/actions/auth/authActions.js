@@ -25,9 +25,8 @@ export function userCompletedSignUpRequest(user) {
       .then( userInfo => {
         dispatch({
           type: USER_COMPLETED_SIGN_UP_REQUEST,
-          data: userInfo
+          data: user
         })
-        return userInfo.data;
       }).catch(err => {
         console.log('userCompletedSignUpRequest err', err);
       });

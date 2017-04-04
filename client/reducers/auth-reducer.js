@@ -7,13 +7,13 @@ import {
 const initialState = {
   isAuth: false,
   completedProfile: false,
-  email: ''
+  email: '',
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case USER_SIGN_UP_REQUEST:
-      console.log('USER_SIGN_UP_REQUEST dispatched')
+      console.log('USER_SIGN_UP_REQUEST dispatched');
       return {
         ...state,
         isAuth: true,
@@ -21,13 +21,18 @@ export default (state = initialState, action) => {
         email: action.data.email
       };
     case USER_COMPLETED_SIGN_UP_REQUEST:
-      console.log('USER_COMPLETED_SIGN_UP_REQUEST dispatched')
-      return {
+      console.log('USER_COMPLETED_SIGN_UP_REQUEST dispatched', action.data);
+      const { role, industry, project} = action.data;
+      const newState = {
         ...state,
         completedProfile: true,
+        role,
+        industry,
+        project
       };
+      return newState;
     case USER_LOGIN_REQUEST:
-      console.log('USER_LOGIN_REQUEST dispatched')
+      console.log('USER_LOGIN_REQUEST dispatched');
       return {
         ...state,
         isAuth: true,
