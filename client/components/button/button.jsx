@@ -25,7 +25,12 @@ export default class Button extends Component {
     
     return (
       <div className={buttonContainerClass}>
-          <button name={name} className={buttonClass} onClick={this.handleClick} disabled={isDisabled}>{value}</button>
+          <button
+            name={name}
+            className={buttonClass}
+            onClick={this.handleClick}
+            disabled={isDisabled}
+          >{value}</button>
       </div>
     );
   }

@@ -33,12 +33,16 @@ export default (state = initialState, action) => {
       return newState;
     case USER_LOGIN_REQUEST:
       console.log('USER_LOGIN_REQUEST dispatched');
-      return {
+      const newLoginState = {
         ...state,
         isAuth: true,
         completedProfile: action.data.completedProfile,
-        email: action.data.email
-      }
+        email: action.data.email,
+        role: action.data.role,
+        industry: action.data.industry,
+        project: action.data.project
+      };
+      return newLoginState;
     default:
       return state;
   }

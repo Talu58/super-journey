@@ -82,10 +82,17 @@ module.exports.loginRequest = (req, res) => {
     } else if (user) {
       compareHashedPassword(password, user.password).then(isValid => {
         if (isValid) {
-          return res.send({
-            email: email,
-            completedProfile: user.completedProfile,
-          });
+          const { role, industry, project } = user;
+            let userData = {
+              email: email,
+              completedProfile: user.completedProfile,
+              role: role[0],
+              industry: industry[0],
+            };
+            if (project.length) {
+              userData.project = project;
+            }
+            return res.send(userData);
         } else {
           return res.status(401).send('Password Incorrect');
         }
