@@ -13,6 +13,8 @@ module.exports.generateHashedPassword = password => {
 module.exports.compareHashedPassword = (password, hash) => {
   return bcrypt.compare(password, hash).then(isValid => {
     return isValid;
-  })
+  }).catch(err => {
+    console.log('compareHashedPassword', err);
+  });
 };
 
