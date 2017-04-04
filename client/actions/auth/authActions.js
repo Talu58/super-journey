@@ -13,6 +13,8 @@ export function userSignUpRequest(user) {
           type: USER_SIGN_UP_REQUEST,
           data: userInfo.data
         })
+      }).catch(err => {
+        console.log('userSignUpRequest err', err);
       });
   };
 }
@@ -26,6 +28,8 @@ export function userCompletedSignUpRequest(user) {
           data: userInfo
         })
         return userInfo.data;
+      }).catch(err => {
+        console.log('userCompletedSignUpRequest err', err);
       });
   };
 }
@@ -34,10 +38,13 @@ export function userLoginRequest(user) {
   return dispatch => {
     return authentication.loginRequest(user)
       .then( userInfo => {
+        console.log(userInfo);
         dispatch({
           type: USER_LOGIN_REQUEST,
           data: userInfo.data
         })
+      }).catch(err => {
+        console.log('userLoginRequest err', err);
       });
   };
 }
