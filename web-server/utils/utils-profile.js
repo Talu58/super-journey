@@ -1,4 +1,4 @@
-const { User, Role, Industry } = require('../database/user-model');
+const { User, Role, Industry } = require('../../database/user-model');
 
 
 module.exports.createRole = role => {
