@@ -8,6 +8,9 @@ import SignUpSteps from './signup-steps/signup-steps';
 import Home from './home/home';
 import Profile from './profile/profile';
 import PrivateRoute from '../utils-router/private-route';
+import { logout } from '../actions/auth/authActions';
+import { bindActionCreators } from 'redux';
+
 
 export class AppLayout extends Component {
   constructor(props) {
@@ -15,10 +18,10 @@ export class AppLayout extends Component {
   }
 
   render() {
-    const { isAuth, completedProfile, dispatch } = this.props;
+    const { isAuth, completedProfile, dispatch, logout } = this.props;
     return (
       <div className="app-layout-container">
-        <NavBar isAuth={isAuth} completedProfile={completedProfile} />
+        <NavBar isAuth={isAuth} completedProfile={completedProfile} logout={logout}/>
         <main>
           <Route exact path='/' component={SignUpForm} />
           <PrivateRoute path="/signup" component={SignUpSteps} isAuth={isAuth} />
@@ -38,4 +41,6 @@ const mapStateToProps = ({ auth }) => {
   }
 };
 
-export default connect(mapStateToProps)(AppLayout);
+const matchDispatchToProps = dispatch => bindActionCreators({logout: logout}, dispatch)
+
+export default connect(mapStateToProps, matchDispatchToProps)(AppLayout);

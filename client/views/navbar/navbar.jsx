@@ -5,6 +5,16 @@ import { Link } from 'react-router-dom';
 import './_navbar.sass';
 
 export default class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    const { logout } = this.props;
+    logout();
+  }
+
   render() {
     const { isAuth, completedProfile } = this.props;
     return (
@@ -22,7 +32,7 @@ export default class NavBar extends Component {
             : null
           }
           {isAuth ? 
-            <Button value="Sign Out" />
+            <Button value="Logout" clickHandler={this.logout}/>
             : <LoginForm/>
           }
         </div>

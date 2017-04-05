@@ -5,12 +5,13 @@ import configureStore from './store/configure-store';
 import Router from './views/app-router-connector';
 import setAuthorizationToken from './utils-api/auth/authentication-set-token';
 import { authenticateUser } from './actions/auth/authActions';
+import jwt from 'jsonwebtoken';
 
 const store = configureStore({});
 
 if (localStorage.jwtToken) {
   setAuthorizationToken(localStorage.jwtToken);
-  store.dispatch(authenticateUser());
+  store.dispatch(authenticateUser(jwt.decode(localStorage.jwtToken)));
 }
 
 class App extends Component {

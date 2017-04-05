@@ -84,7 +84,6 @@ module.exports.loginRequest = (req, res) => {
     } else if (user) {
       compareHashedPassword(password, user.password).then(isValid => {
         if (isValid) {
-          console.log('config', config);
           const token = jwt.sign({
             email: email,
             completedProfile: user.completedProfile,

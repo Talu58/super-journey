@@ -2,7 +2,8 @@ import {
   USER_SIGN_UP_REQUEST,
   USER_COMPLETED_SIGN_UP_REQUEST,
   USER_LOGIN_REQUEST,
-  USER_AUTHENTICATED
+  USER_AUTHENTICATED,
+  USER_LOGOUT
 } from '../actions/auth/authActionTypes';
 
 const initialState = {
@@ -46,9 +47,18 @@ export default (state = initialState, action) => {
       return newLoginState;
     case USER_AUTHENTICATED:
       console.log('USER_AUTHENTICATED dispatched');
+      console.log('action.data', action.data);
       return {
         ...state,
-        isAuth: true
+        isAuth: true,
+        completedProfile: action.data
+      }
+    case USER_LOGOUT:
+      console.log('USER_LOGOUT dispatched');
+      return {
+        ...state,
+        isAuth: false,
+        completedProfile: false
       }
     default:
       return state;
