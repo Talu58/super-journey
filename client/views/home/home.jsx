@@ -7,11 +7,11 @@ import NonProfit from './non-profit/non-profit';
 
 class Home extends Component {
   render() {
-    const { role } = this.props;
+    const { role, industries } = this.props;
     return (
       <div>
         { role.Donor ? 
-          <Donor/>
+          <Donor industries={industries} />
           : <NonProfit/>
         }
       </div>
@@ -21,7 +21,8 @@ class Home extends Component {
 
 const mapStateToProps = ({ auth }) => {
   return {
-    role: auth.role
+    role: auth.role,
+    industries: auth.industriesList
   };
 }
 

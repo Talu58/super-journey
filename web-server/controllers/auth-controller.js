@@ -3,6 +3,8 @@ mongoose.Promise = require('bluebird');
 const { User } = require('../../database/user-model');
 const { createRole, createIndustry, createProject } = require('../utils/utils-profile');
 const { generateHashedPassword, compareHashedPassword } = require('../utils/utils-auth');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 module.exports.signUpRequest = (req, res) => {
   const { email, password } = req.body;
@@ -82,12 +84,18 @@ module.exports.loginRequest = (req, res) => {
     } else if (user) {
       compareHashedPassword(password, user.password).then(isValid => {
         if (isValid) {
+          console.log('config', config);
+          const token = jwt.sign({
+            email: email,
+            completedProfile: user.completedProfile,
+          }, config.jwtSecret);
           const { role, industry, project } = user;
             let userData = {
               email: email,
               completedProfile: user.completedProfile,
               role: role[0],
               industry: industry[0],
+              token
             };
             if (project.length) {
               userData.project = project;

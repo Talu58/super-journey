@@ -1,13 +1,15 @@
 import {
   USER_SIGN_UP_REQUEST,
   USER_COMPLETED_SIGN_UP_REQUEST,
-  USER_LOGIN_REQUEST
+  USER_LOGIN_REQUEST,
+  USER_AUTHENTICATED
 } from '../actions/auth/authActionTypes';
 
 const initialState = {
   isAuth: false,
   completedProfile: false,
   email: '',
+  industriesList: ['Healthcare', 'Tech', 'Climat', 'Inclusion', 'Global Change']
 };
 
 export default (state = initialState, action) => {
@@ -35,7 +37,6 @@ export default (state = initialState, action) => {
       console.log('USER_LOGIN_REQUEST dispatched');
       const newLoginState = {
         ...state,
-        isAuth: true,
         completedProfile: action.data.completedProfile,
         email: action.data.email,
         role: action.data.role,
@@ -43,6 +44,12 @@ export default (state = initialState, action) => {
         project: action.data.project
       };
       return newLoginState;
+    case USER_AUTHENTICATED:
+      console.log('USER_AUTHENTICATED dispatched');
+      return {
+        ...state,
+        isAuth: true
+      }
     default:
       return state;
   }
