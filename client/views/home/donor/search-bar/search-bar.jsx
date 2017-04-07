@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import './_search-bar.sass';
+import CheckBox from '../../../../components/checkbox/checkbox';
 
 class SearchBar extends Component {
   render() {
@@ -6,7 +8,7 @@ class SearchBar extends Component {
     return (
       <div>
         {industries.map(industry => {
-          return <p>{industry}</p>
+          return <CheckBox key={industry} label={industry} />
         })}
       </div>
     );
