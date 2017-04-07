@@ -47,7 +47,6 @@ export default (state = initialState, action) => {
       return newLoginState;
     case USER_AUTHENTICATED:
       console.log('USER_AUTHENTICATED dispatched');
-      console.log('action.data', action.data);
       return {
         ...state,
         isAuth: true,
