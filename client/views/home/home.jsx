@@ -22,7 +22,7 @@ class Home extends Component {
 const mapStateToProps = ({ auth, search }) => {
   return {
     role: auth.role,
-    industries: auth.industriesList,
+    industries: search.industriesList,
     matchesResult: search.matches
   };
 }

@@ -10,7 +10,6 @@ const initialState = {
   isAuth: false,
   completedProfile: false,
   email: '',
-  industriesList: ['Healthcare', 'Tech', 'Climat', 'Inclusion', 'Global Change']
 };
 
 export default (state = initialState, action) => {

@@ -6,6 +6,15 @@ import Button from '../../../../components/button/button';
 
 
 class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+    this.checkboxClick = this.checkboxClick.bind(this);
+  }
+
+  checkboxClick(e) {
+    console.log(e.target.id);
+  }
+
   render() {
     const { industries } = this.props;
     return (
@@ -18,9 +27,15 @@ class SearchBar extends Component {
           />
         </div>
         <div className="checkboxes-container">
-          {industries.map(industry => {
-            return <CheckBox key={industry} label={industry} />
-          })}
+          {industries.map(({ value, checked }) => (
+            <CheckBox
+              id={value}
+              key={value}
+              label={value}
+              checked={checked}
+              changeHandler={this.checkboxClick}
+            />
+          ))}
         </div>
       </div>
     );

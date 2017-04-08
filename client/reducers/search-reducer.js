@@ -4,6 +4,18 @@ import {
 } from '../actions/search/searchActionTypes';
 
 const initialState = {
+  industriesList: [
+    {value: 'Healthcare',
+      checked: true},
+    {value: 'Tech',
+      checked: false},
+    {value: 'Climat',
+      checked: false},
+    {value: 'Inclusion',
+      checked: false},
+    {value: 'Global Change',
+      checked: false}
+  ],
   matches: []
 }
 
