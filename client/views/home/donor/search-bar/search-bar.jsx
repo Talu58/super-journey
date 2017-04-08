@@ -12,7 +12,10 @@ class SearchBar extends Component {
       <div className="search-bar-container">
         <div className="search-container">
           <InputField placeholderText="Search"/>
-          <Button value="Search"/>
+          <Button
+            value="Search"
+            styleClassName="button-primary"
+          />
         </div>
         <div className="checkboxes-container">
           {industries.map(industry => {
