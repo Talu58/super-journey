@@ -3,6 +3,8 @@ import {
   FIND_INDUSTRY_MATCHES
 } from './searchActionTypes';
 import * as search from '../../utils-api/search/search-rest-api';
+// import _map from 'lodash/map';
+
 
 export function getUserMatches(user) {
   return dispatch => {
@@ -16,11 +18,16 @@ export function getUserMatches(user) {
 export function getIndustryMatches(industryName) {
   return dispatch => {
     return search.getIndustryMatchesRequest(industryName)
-      .then(matches => {
-        console.log('matches', matches);
+      .then(({ data: { matches } }) => {
+        const matchingProject = matches.map(({ project: { title, description } }) => {
+          return {
+            title ,
+            description
+          };
+        });
         dispatch({
           type: FIND_INDUSTRY_MATCHES,
-          data: matches
+          data: matchingProject
         });
       }).catch( err => {
         console.log('getIndustryMatches err', err);
