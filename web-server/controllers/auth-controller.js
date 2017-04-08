@@ -92,13 +92,14 @@ module.exports.loginRequest = (req, res) => {
             let userData = {
               email: email,
               completedProfile: user.completedProfile,
-              role: role[0],
-              industry: industry[0],
+              role: role,
+              industry: industry,
               token
             };
-            if (project.length) {
+            if (project && project.title !== '') {
               userData.project = project;
             }
+            console.log('userData', userData);
             return res.send(userData);
         } else {
           return res.status(401).send('Password Incorrect');

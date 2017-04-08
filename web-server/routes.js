@@ -12,5 +12,5 @@ module.exports = function(app, express) {
   app.post('/user/signup', signUpRequest);
   app.post('/user/signup/completed', signUpCompletedRequest);
   app.post('/user/login', loginRequest);
-  app.get('/matches/:industry', getIndustryMatchesRequest);
+  app.get('/matches/:industryName', getIndustryMatchesRequest);
 }

@@ -23,9 +23,9 @@ const userSchema = mongoose.Schema({
   email: {type: String, required: true},
   password: {type: String, required: true},
   completedProfile:   {type: Boolean, default: false},
-  role: [roleSchema],
-  industry: [industrySchema],
-  project: [projectSchema],
+  role: roleSchema,
+  industry: industrySchema,
+  project: projectSchema,
   created_at: Date,
   updated_at: Date
 });
