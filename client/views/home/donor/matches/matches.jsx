@@ -8,11 +8,15 @@ export default class Matches extends Component {
     return (
       <div>
         <h2>Matches:</h2>
-        <section className="matches-container">
-          {matchesResult.map(({ title, description }) => {
-            return <Match key={title} title={title} description={description} />
-          })}
-        </section>
+        { matchesResult.length === 0 ?
+          <p>We don't have any match for your profile at the moment. Use our side bar to find other projects</p>
+          : 
+          <section className="matches-container">
+            {matchesResult.map(({ title, description }) => {
+              return <Match key={title} title={title} description={description} />
+            })}
+          </section>
+        }
       </div>
     );
   }
