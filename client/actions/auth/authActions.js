@@ -51,8 +51,6 @@ export function userLoginRequest(user) {
           data: userInfo.data
         })
         dispatch(authenticateUser(jwt.decode(token)));
-        console.log('getUserMatches', userInfo);
-
         dispatch(getUserMatches(userInfo.data));
       }).catch(err => {
         console.log('userLoginRequest err', err);

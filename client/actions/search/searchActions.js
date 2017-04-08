@@ -8,14 +8,12 @@ export function getUserMatches(user) {
   return dispatch => {
     for (let industryName in user.industry)
       if (user.industry[industryName] && industryName !== '_id') {
-        console.log('getUserMatches industry true', industryName);
         dispatch(getIndustryMatches(industryName))
       }
   };
 };
 
 export function getIndustryMatches(industryName) {
-  console.log('getIndustryMatches invoked');
   return dispatch => {
     return search.getIndustryMatchesRequest(industryName)
       .then(matches => {
