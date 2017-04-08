@@ -1,4 +1,7 @@
-import { FIND_USER_MATCHES } from '../actions/search/searchActionTypes';
+import { 
+  FIND_USER_MATCHES,
+  FIND_INDUSTRY_MATCHES
+} from '../actions/search/searchActionTypes';
 
 const initialState = {
   matches: [
@@ -14,6 +17,13 @@ export default (state = initialState, action) => {
     case FIND_USER_MATCHES:
       console.log('FIND_USER_MATCHES dispatched');
       console.log('FIND_USER_MATCHES data', action.data);
+      return {
+        ...state
+      };
+      break;
+    case FIND_INDUSTRY_MATCHES:
+      console.log('FIND_INDUSTRY_MATCHES dispatched');
+      console.log('FIND_INDUSTRY_MATCHES data', action.data);
       return {
         ...state
       };
