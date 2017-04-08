@@ -3,7 +3,6 @@ mongoose.Promise = require('bluebird');
 const { User } = require('../../database/user-model');
 
 module.exports.getIndustryMatchesRequest = (req, res) => {
-  console.log('req.params.industry', req.params.industryName);
   const { industryName } = req.params;
   let industryParams = `industry.${industryName}`;
   let roleParams= "role.Donor";
@@ -11,8 +10,9 @@ module.exports.getIndustryMatchesRequest = (req, res) => {
   User.find({})
     .where(roleParams).equals(false)
     .where(industryParams).equals(true)
-    .select('project')
+    .select('project created_at')
     .exec((err, projects) => {
+      console.log('projects: ', projects);
       return res.send({
             matches: projects
       });

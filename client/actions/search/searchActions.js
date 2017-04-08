@@ -19,10 +19,12 @@ export function getIndustryMatches(industryName) {
   return dispatch => {
     return search.getIndustryMatchesRequest(industryName)
       .then(({ data: { matches } }) => {
-        const matchingProject = matches.map(({ project: { title, description } }) => {
+        const matchingProject = matches.map(match => {
+          const { project: { title, description }, created_at } = match;
           return {
             title ,
-            description
+            description,
+            created_at
           };
         });
         dispatch({

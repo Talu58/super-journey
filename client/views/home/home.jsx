@@ -7,11 +7,11 @@ import NonProfit from './non-profit/non-profit';
 
 class Home extends Component {
   render() {
-    const { role, industries } = this.props;
+    const { role, industries, matchesResult } = this.props;
     return (
       <div>
         { role.Donor ? 
-          <Donor industries={industries} />
+          <Donor industries={industries} matchesResult={matchesResult} />
           : <NonProfit/>
         }
       </div>
@@ -19,10 +19,11 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, search }) => {
   return {
     role: auth.role,
-    industries: auth.industriesList
+    industries: auth.industriesList,
+    matchesResult: search.matches
   };
 }
 

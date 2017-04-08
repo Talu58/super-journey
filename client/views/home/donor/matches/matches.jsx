@@ -1,17 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 
-class Matches extends Component {
+export default class Matches extends Component {
   render() {
+    const { matchesResult } = this.props;
     return (
       <div>
-        Matches
+        Matches:
+        {matchesResult.map(({ title, description }) => {
+          return <div key={title}>
+                      <h3>{title}</h3>
+                      <p>{description}</p>
+                    </div>
+        })}
       </div>
     );
   }
 }
-
-Matches.propTypes = {
-
-};
-
-export default Matches;
