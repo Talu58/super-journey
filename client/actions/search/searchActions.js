@@ -1,7 +1,9 @@
 import { 
   FIND_USER_MATCHES,
   FIND_INDUSTRY_MATCHES,
-  CHECKBOX_CLICKED
+  CHECKBOX_CLICKED,
+  FIND_INDUSTRY_SEARCH,
+  REMOVE_INDUSTRY_SEARCH
 } from './searchActionTypes';
 import * as search from '../../utils-api/search/search-rest-api';
 
@@ -39,8 +41,10 @@ export function getIndustryMatches(industryName) {
 
 export function searchCheckboxClicked(checkboxID, currentCheckboxesStatus) {
   return dispatch => {
+    let addNewSearch = false;
     for (let i = 0; i < currentCheckboxesStatus.length; i++) {
       if (currentCheckboxesStatus[i].value === checkboxID) {
+        addNewSearch = !currentCheckboxesStatus[i].checked;
         currentCheckboxesStatus[i].checked = !currentCheckboxesStatus[i].checked;
       }
     }
@@ -48,10 +52,44 @@ export function searchCheckboxClicked(checkboxID, currentCheckboxesStatus) {
       type: CHECKBOX_CLICKED,
       data: currentCheckboxesStatus
     });
-    // for (let i = 0; i < currentCheckboxesStatus.length; i++) {
-    //   if (user.industry[industryName]) {
-    //       dispatch(getIndustryMatches(industryName))
-    //   }
-    // }
+    if (addNewSearch) {
+      dispatch(getIndustrySearch(checkboxID));
+    } else {
+      dispatch(removeIndustrySearch(checkboxID));
+    }
   }
 }
+
+export function getIndustrySearch(industryName) {
+  return dispatch => {
+    return search.getIndustryMatchesRequest(industryName)
+      .then(({ data: { matches } }) => {
+        const matchingProjects = matches.map(match => {
+          const { project: { title, description }, created_at } = match;
+          let newIndustryName = {};
+          newIndustryName[industryName] = true;
+          return {
+            title ,
+            description,
+            created_at,
+            industryNames: newIndustryName
+          };
+        });
+        dispatch({
+          type: FIND_INDUSTRY_SEARCH,
+          data: matchingProjects
+        });
+      }).catch( err => {
+        console.log('getIndustryMatches err', err);
+      })
+  };
+}
+
+export function removeIndustrySearch(industryName) {
+  return {
+    type: REMOVE_INDUSTRY_SEARCH,
+    data: industryName
+  }
+}
+
+
