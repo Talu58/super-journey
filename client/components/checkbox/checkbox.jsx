@@ -3,9 +3,17 @@ import React, { Component } from 'react';
 export default class CheckBox extends Component {
   render() {
     const { containerStyleClassName, styleClassName, label, checked, changeHandler, id } = this.props;
-    let checkboxContainerClass = 'checkbox-container ' + containerStyleClassName;
-    let checkboxClass = 'checkbox ' + styleClassName;
+    let checkboxContainerClass = 'checkbox-container';
+    let checkboxClass = 'checkbox';
     let isChecked = true;
+    if (containerStyleClassName) {
+      checkboxContainerClass += ' ' + checkboxContainerClass;
+    }
+
+    if(styleClassName) {
+      checkboxClass += ' ' + styleClassName;
+    }
+
     if  (!checked) {
       isChecked = false;
     }

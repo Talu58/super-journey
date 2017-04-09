@@ -1,9 +1,9 @@
 import { 
   FIND_USER_MATCHES,
-  FIND_INDUSTRY_MATCHES
+  FIND_INDUSTRY_MATCHES,
+  CHECKBOX_CLICKED
 } from './searchActionTypes';
 import * as search from '../../utils-api/search/search-rest-api';
-// import _map from 'lodash/map';
 
 
 export function getUserMatches(user) {
@@ -36,3 +36,22 @@ export function getIndustryMatches(industryName) {
       })
   };
 };
+
+export function searchCheckboxClicked(checkboxID, currentCheckboxesStatus) {
+  return dispatch => {
+    for (let i = 0; i < currentCheckboxesStatus.length; i++) {
+      if (currentCheckboxesStatus[i].value === checkboxID) {
+        currentCheckboxesStatus[i].checked = !currentCheckboxesStatus[i].checked;
+      }
+    }
+    dispatch({
+      type: CHECKBOX_CLICKED,
+      data: currentCheckboxesStatus
+    });
+    // for (let i = 0; i < currentCheckboxesStatus.length; i++) {
+    //   if (user.industry[industryName]) {
+    //       dispatch(getIndustryMatches(industryName))
+    //   }
+    // }
+  }
+}

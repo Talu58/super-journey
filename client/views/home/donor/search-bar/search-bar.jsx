@@ -5,14 +5,15 @@ import InputField from '../../../../components/input-field/input-field';
 import Button from '../../../../components/button/button';
 
 
-class SearchBar extends Component {
+export default class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.checkboxClick = this.checkboxClick.bind(this);
   }
 
   checkboxClick(e) {
-    console.log(e.target.id);
+    const { searchCheckboxClicked, industries } = this.props;
+    searchCheckboxClicked(e.target.id, industries);
   }
 
   render() {
@@ -42,4 +43,3 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;

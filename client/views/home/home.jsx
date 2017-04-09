@@ -4,14 +4,15 @@ import { bindActionCreators } from 'redux';
 import './_home.sass';
 import Donor from './donor/donor';
 import NonProfit from './non-profit/non-profit';
+import { searchCheckboxClicked } from '../../actions/search/searchActions';
 
 class Home extends Component {
   render() {
-    const { role, industries, matchesResult } = this.props;
+    const { role, industries, matchesResult, searchCheckboxClicked } = this.props;
     return (
       <div>
         { role.Donor ? 
-          <Donor industries={industries} matchesResult={matchesResult} />
+          <Donor industries={industries} matchesResult={matchesResult} searchCheckboxClicked={searchCheckboxClicked} />
           : <NonProfit/>
         }
       </div>
@@ -27,5 +28,7 @@ const mapStateToProps = ({ auth, search }) => {
   };
 }
 
-export default connect(mapStateToProps)(Home);
+const matchDispatchToProps = dispatch => bindActionCreators({searchCheckboxClicked: searchCheckboxClicked}, dispatch)
+
+export default connect(mapStateToProps, matchDispatchToProps)(Home);
 

@@ -1,6 +1,7 @@
 import { 
   FIND_USER_MATCHES,
-  FIND_INDUSTRY_MATCHES
+  FIND_INDUSTRY_MATCHES,
+  CHECKBOX_CLICKED
 } from '../actions/search/searchActionTypes';
 
 const initialState = {
@@ -44,6 +45,13 @@ export default (state = initialState, action) => {
         matches: finalMatches
       };
       break;
+    case CHECKBOX_CLICKED:
+      console.log('CHECKBOX_CLICKED dispatched');
+      const newIndustryList = action.data.slice();
+      return {
+        ...state,
+        industriesList: newIndustryList
+      }
     default: 
       return state;
 
