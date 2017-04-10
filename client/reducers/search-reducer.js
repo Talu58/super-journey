@@ -28,7 +28,8 @@ const initialState = {
   allMatchResults: [],
   allFilterResults: [],
   allDisplayedResults: [],
-  isFiltering: false
+  isFiltering: false,
+  filters: []
 }
 
 export default (state = initialState, action) => {
@@ -69,6 +70,7 @@ export default (state = initialState, action) => {
       let { isFiltering } = state;
       let newResultPull;
       let finalDisplayedResults = [];
+      let newFilters = state.filters.concat(action.data);
       if (state.userMatchesDisplayed) {
         newResultPull = state.allMatchResults;
       } else {
@@ -96,40 +98,74 @@ export default (state = initialState, action) => {
         ...state,
         allFilterResults: finalDisplayedResults,
         allDisplayedResults: finalDisplayedResults,
-        isFiltering
+        isFiltering,
+        filters: newFilters
       };
     case REMOVE_INDUSTRY_FILTER:
       console.log('REMOVE_INDUSTRY_FILTER dispatched');
-      let newFilterResults = state.allFilterResults.slice();
-      let finalFilterResults = [];
-      let isDoneSearching = false;
-      let allDisplayedResults;
-      for (let i = 0; i < newFilterResults.length; i++) {
-        if (newFilterResults[i].industryNames[action.data]) {
-          delete newFilterResults[i].industryNames[action.data];
-        }
-        if  (Object.keys(newFilterResults[i].industryNames).length !== 0) {
-            finalFilterResults.push(newFilterResults[i]);
-        }
-      }
-      if (finalFilterResults.length === 0) {
-        isDoneSearching = true;
-        allDisplayedResults = state.allMatchResults;
+      const filterIndex = state.filters.indexOf(action.data);
+      let newFilter = state.filters.slice(0, filterIndex).concat(state.filters.slice(filterIndex + 1));
+      let newFiltersResults = [];
+      let newPull;
+      let isDoneFiltering = false;
+
+      if (state.userMatchesDisplayed) {
+        newPull = state.allMatchResults;
       } else {
-        allDisplayedResults = finalFilterResults;
+        newPull = state.allProjectsResults;
       }
+
+      if (newFilter.length === 0) {
+        newFiltersResults = newPull;
+        isDoneFiltering = true;
+      } else {
+        let tempFiltersResults = [];
+        state.filters.forEach(filterName => {
+          tempFiltersResults = tempFiltersResults.concat(newPull.filter(project => {
+            return project.industryNames[filterName];
+          }));
+        });
+        tempFiltersResults.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
+        for (let i = 0; i < tempFiltersResults.length; i++) {
+          if (newFiltersResults.length === 0) {
+            newFiltersResults.push(tempFiltersResults[i]);
+          } else if (newFiltersResults[newFiltersResults.length-1].created_at !== tempFiltersResults[i].created_at) {
+            newFiltersResults.push(tempFiltersResults[i]);
+          }
+        }
+      }
+      // let newFilterResults = state.allFilterResults.slice();
+      // let finalFilterResults = [];
+      // let isDoneFiltering = false;
+      // let allDisplayedResults;
+      // for (let i = 0; i < newFilterResults.length; i++) {
+      //   console.log('newFilterResults[i].industryNames[action.data]', newFilterResults[i].industryNames[action.data]);
+      //   if (newFilterResults[i].industryNames[action.data]) {
+      //     delete newFilterResults[i].industryNames[action.data];
+      //   }
+      //   console.log('newFilterResults[i].industryNames', newFilterResults[i].industryNames);
+      //   if  (Object.keys(newFilterResults[i].industryNames).length !== 0) {
+      //       finalFilterResults.push(newFilterResults[i]);
+      //   }
+      // }
+      // if (finalFilterResults.length === 0) {
+      //   isDoneFiltering = true;
+      //   allDisplayedResults = state.allMatchResults;
+      // } else {
+      //   allDisplayedResults = finalFilterResults;
+      // }
       return {
         ...state,
-        allFilterResults: finalFilterResults,
-        allDisplayedResults,
-        isFiltering: !isDoneSearching
+        allFilterResults: newFiltersResults,
+        allDisplayedResults: newFiltersResults,
+        isFiltering: !isDoneFiltering
       };
     case SEARCH_REQUEST: 
       console.log('SEARCH_REQUEST dispatched');
       let newSearchBarResults = []; 
       let searchPull;
       let searchWord = action.data.toLowerCase();
-      if (state.allFilterResults.length === 0) {
+      if (!state.isFiltering) {
         if (state.userMatchesDisplayed) {
           searchPull = state.allMatchResults;
         } else {
