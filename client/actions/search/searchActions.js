@@ -3,7 +3,8 @@ import {
   FIND_INDUSTRY_MATCHES,
   CHECKBOX_CLICKED,
   FIND_INDUSTRY_SEARCH,
-  REMOVE_INDUSTRY_SEARCH
+  REMOVE_INDUSTRY_SEARCH,
+  SEARCH_REQUEST
 } from './searchActionTypes';
 import * as search from '../../utils-api/search/search-rest-api';
 
@@ -12,7 +13,7 @@ export function getUserMatches(user) {
   return dispatch => {
     for (let industryName in user.industry)
       if (user.industry[industryName] && industryName !== '_id') {
-        dispatch(getIndustryMatches(industryName))
+        dispatch(getIndustryMatches(industryName));
       }
   };
 };
@@ -58,7 +59,7 @@ export function searchCheckboxClicked(checkboxID, currentCheckboxesStatus) {
       dispatch(removeIndustrySearch(checkboxID));
     }
   }
-}
+};
 
 export function getIndustrySearch(industryName) {
   return dispatch => {
@@ -83,13 +84,19 @@ export function getIndustrySearch(industryName) {
         console.log('getIndustryMatches err', err);
       })
   };
-}
+};
 
 export function removeIndustrySearch(industryName) {
   return {
     type: REMOVE_INDUSTRY_SEARCH,
     data: industryName
   }
+};
+
+
+export function searchRequest(searchWord) {
+  return {
+    type: SEARCH_REQUEST,
+    data: searchWord
+  }
 }
-
-

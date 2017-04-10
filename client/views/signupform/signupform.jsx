@@ -117,6 +117,6 @@ const mapStateToProps = ({ auth }) => {
   }
 };
 
-const matchDispatchToProps = dispatch => bindActionCreators({userSignUpRequest: userSignUpRequest}, dispatch)
+const matchDispatchToProps = dispatch => bindActionCreators({userSignUpRequest}, dispatch)
 
 export default connect(mapStateToProps, matchDispatchToProps)(SignUpForm);

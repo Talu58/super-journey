@@ -24,7 +24,7 @@ export function userSignUpRequest(user) {
         console.log('userSignUpRequest err', err);
       });
   };
-}
+};
 
 export function userCompletedSignUpRequest(user) {
   return dispatch => {
@@ -38,7 +38,7 @@ export function userCompletedSignUpRequest(user) {
         console.log('userCompletedSignUpRequest err', err);
       });
   };
-}
+};
 
 export function userLoginRequest(user) {
   return dispatch => {
@@ -64,7 +64,7 @@ export function authenticateUser({ completedProfile }) {
         type: USER_AUTHENTICATED,
         data: completedProfile
   };
-}
+};
 
 export function logout() {
   return dispatch => {
@@ -74,7 +74,7 @@ export function logout() {
       type: USER_LOGOUT
     });
   }
-}
+};
 
 export function getUserInformation(userEmail) {
   return dispatch => {
@@ -94,5 +94,4 @@ export function getUserInformation(userEmail) {
         dispatch(getUserMatches(userInfo.data));
       })
   }
-}
-
+};

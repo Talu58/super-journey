@@ -9,6 +9,12 @@ export default class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.checkboxClick = this.checkboxClick.bind(this);
+    this.searchButtonClicked = this.searchButtonClicked.bind(this);
+  }
+
+  searchButtonClicked() {
+    const { searchRequest } = this.props;
+    searchRequest('hello');
   }
 
   checkboxClick(e) {
@@ -25,6 +31,7 @@ export default class SearchBar extends Component {
           <Button
             value="Search"
             styleClassName="button-primary"
+            clickHandler={this.searchButtonClicked}
           />
         </div>
         <div className="checkboxes-container">

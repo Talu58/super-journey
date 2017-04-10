@@ -208,6 +208,6 @@ const mapStateToProps = ({ auth }) => {
   }
 };
 
-const matchDispatchToProps = dispatch => bindActionCreators({userCompletedSignUpRequest: userCompletedSignUpRequest}, dispatch)
+const matchDispatchToProps = dispatch => bindActionCreators({userCompletedSignUpRequest}, dispatch)
 
 export default connect(mapStateToProps, matchDispatchToProps)(SignUpSteps);

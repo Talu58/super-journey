@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import './_home.sass';
 import Donor from './donor/donor';
 import NonProfit from './non-profit/non-profit';
-import { searchCheckboxClicked } from '../../actions/search/searchActions';
+import { searchCheckboxClicked, searchRequest } from '../../actions/search/searchActions';
 import { getUserInformation } from '../../actions/auth/authActions';
 import jwt from 'jsonwebtoken';
 
@@ -18,7 +18,7 @@ class Home extends Component {
   }
 
   render() {
-    const { role, industries, matchesResult, searchCheckboxClicked, isSearching, searchResult, homeIsLoading } = this.props;
+    const { role, industries, matchesResult, searchCheckboxClicked, isSearching, searchResult, homeIsLoading, searchRequest } = this.props;
     
     return (
       <div>
@@ -29,6 +29,7 @@ class Home extends Component {
               matchesResult={isSearching ? searchResult : matchesResult}
               searchCheckboxClicked={searchCheckboxClicked}
               isSearching={isSearching}
+              searchRequest={searchRequest}
             />
             : <NonProfit/>
         }
@@ -51,7 +52,8 @@ const mapStateToProps = ({ auth, search }) => {
 const matchDispatchToProps = dispatch => bindActionCreators(
   {
     searchCheckboxClicked,
-    getUserInformation
+    getUserInformation,
+    searchRequest
   }, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(Home);

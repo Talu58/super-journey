@@ -41,6 +41,6 @@ const mapStateToProps = ({ auth }) => {
   }
 };
 
-const matchDispatchToProps = dispatch => bindActionCreators({logout: logout}, dispatch)
+const matchDispatchToProps = dispatch => bindActionCreators({logout}, dispatch)
 
 export default connect(mapStateToProps, matchDispatchToProps)(AppLayout);

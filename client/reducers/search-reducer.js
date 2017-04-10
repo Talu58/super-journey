@@ -3,7 +3,8 @@ import {
   FIND_INDUSTRY_MATCHES,
   CHECKBOX_CLICKED,
   FIND_INDUSTRY_SEARCH,
-  REMOVE_INDUSTRY_SEARCH
+  REMOVE_INDUSTRY_SEARCH,
+  SEARCH_REQUEST
 } from '../actions/search/searchActionTypes';
 
 const initialState = {
@@ -100,6 +101,11 @@ export default (state = initialState, action) => {
         searchResult: finalSearchResults,
         isSearching: !isDoneSearching
       };
+    case SEARCH_REQUEST: 
+      console.log('SEARCH_REQUEST dispatched', action.data);
+    return {
+      ...state
+    }
     default: 
       return state;
 
