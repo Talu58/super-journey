@@ -4,7 +4,8 @@ import {
   CHECKBOX_CLICKED,
   FIND_INDUSTRY_SEARCH,
   REMOVE_INDUSTRY_SEARCH,
-  SEARCH_REQUEST
+  SEARCH_REQUEST,
+  REINITIALIZE_SEARCH_STATE
 } from './searchActionTypes';
 import * as search from '../../utils-api/search/search-rest-api';
 
@@ -98,5 +99,11 @@ export function searchRequest(searchWord) {
   return {
     type: SEARCH_REQUEST,
     data: searchWord
+  }
+}
+
+export function reinitializeSearchState() {
+  return {
+    type: REINITIALIZE_SEARCH_STATE
   }
 }

@@ -9,7 +9,7 @@ import {
 import * as authentication from '../../utils-api/auth/authentication-rest-api';
 import setAuthorizationToken from '../../utils-api/auth/authentication-set-token';
 import jwt from 'jsonwebtoken';
-import { getUserMatches } from '../search/searchActions';
+import { getUserMatches, reinitializeSearchState } from '../search/searchActions';
 
 
 export function userSignUpRequest(user) {
@@ -73,6 +73,7 @@ export function logout() {
     dispatch({
       type: USER_LOGOUT
     });
+    dispatch(reinitializeSearchState());
   }
 };
 

@@ -4,7 +4,8 @@ import {
   CHECKBOX_CLICKED,
   FIND_INDUSTRY_SEARCH,
   REMOVE_INDUSTRY_SEARCH,
-  SEARCH_REQUEST
+  SEARCH_REQUEST,
+  REINITIALIZE_SEARCH_STATE
 } from '../actions/search/searchActionTypes';
 
 const initialState = {
@@ -129,6 +130,14 @@ export default (state = initialState, action) => {
       allDisplayedResults: newSearchBarResults,
       isSearching: true
     }
+    case REINITIALIZE_SEARCH_STATE:
+      console.log('REINITIALIZE_SEARCH_STATE dispatched');
+      let reinitializedIndustryList = initialState.industriesList;
+      reinitializedIndustryList.forEach(industry => industry.checked = false);
+      return {
+        ...initialState,
+        newIndustryList: reinitializedIndustryList
+      }
     default: 
       return state;
 
