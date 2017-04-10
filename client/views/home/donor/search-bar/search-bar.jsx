@@ -21,8 +21,8 @@ export default class SearchBar extends Component {
   }
 
   seeAllButtonClicked() {
-    const { fetchAllProjects } = this.props;
-    fetchAllProjects();
+    const { fetchAllProjects, allProjectsResults } = this.props;
+    fetchAllProjects(allProjectsResults);
   }
 
   seeMyMatchesButtonClicked() {

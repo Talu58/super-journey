@@ -7,7 +7,8 @@ import {
   SEARCH_REQUEST,
   REINITIALIZE_SEARCH_STATE,
   GET_ALL_PROJECTS,
-  FETCH_USER_MATCHES
+  FETCH_USER_MATCHES,
+  FETCH_ALL_PROJECTS
 } from './searchActionTypes';
 import * as search from '../../utils-api/search/search-rest-api';
 
@@ -95,30 +96,39 @@ export function reinitializeSearchState() {
   };
 };
 
-export function fetchAllProjects() {
+export function fetchAllProjects(allProjectsList) {
   return dispatch => {
-    return search.getAllProjects()
-      .then(({ data: { projects } }) => {
-        const allProjects = projects.map(project => {
-          const { project: { title, description }, created_at, industry } = project;
-          let newIndustryName = {};
-          for (let key in industry) {
-            if (industry[key]) {
-              newIndustryName[key] = true;
+    if (allProjectsList.length === 0) {
+      return search.getAllProjects()
+        .then(({ data: { projects } }) => {
+          const allProjects = projects.map(project => {
+            const { project: { title, description }, created_at, industry } = project;
+            let newIndustryName = {};
+            for (let key in industry) {
+              if (industry[key]) {
+                newIndustryName[key] = true;
+              }
             }
-          }
-          return {
-            title ,
-            description,
-            created_at,
-            industryNames: newIndustryName
-          };
+            return {
+              title ,
+              description,
+              created_at,
+              industryNames: newIndustryName
+            };
+          });
+          dispatch({
+            type: GET_ALL_PROJECTS,
+            data: allProjects
+          });
+          dispatch({
+            type: FETCH_ALL_PROJECTS,
+          });
         });
-        dispatch({
-          type: GET_ALL_PROJECTS,
-          data: allProjects
-        });
-      });
+    }
+    dispatch({
+      type: FETCH_ALL_PROJECTS,
+    });
+
   };
 };
 

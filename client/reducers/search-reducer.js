@@ -7,7 +7,8 @@ import {
   SEARCH_REQUEST,
   REINITIALIZE_SEARCH_STATE,
   GET_ALL_PROJECTS,
-  FETCH_USER_MATCHES
+  FETCH_USER_MATCHES,
+  FETCH_ALL_PROJECTS
 } from '../actions/search/searchActionTypes';
 import * as helpers from '.././utils-helpers/search-helpers';
 
@@ -25,6 +26,7 @@ const initialState = {
       checked: false}
   ],
   userMatchesDisplayed: true,
+  currentPull: [],
   allProjectsResults: [],
   allMatchResults: [],
   allFilterResults: [],
@@ -48,7 +50,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allMatchResults: finalMatches,
-        allDisplayedResults: finalMatches
+        allDisplayedResults: finalMatches,
+        currentPull: finalMatches
       };
       break;
     case CHECKBOX_CLICKED:
@@ -90,16 +93,10 @@ export default (state = initialState, action) => {
     case REMOVE_INDUSTRY_FILTER:
       console.log('REMOVE_INDUSTRY_FILTER dispatched');
       const filterIndex = state.filters.indexOf(action.data);
-      let newFilter = state.filters.slice(0, filterIndex).concat(state.filters.slice(filterIndex + 1));
+      let newFilter = state.industriesList.filter(industry => industry.checked);
       let newFiltersResults = [];
-      let newPull;
+      let newPull = state.currentPull;
       let isDoneFiltering = false;
-
-      if (state.userMatchesDisplayed) {
-        newPull = state.allMatchResults;
-      } else {
-        newPull = state.allProjectsResults;
-      }
 
       if (newFilter.length === 0) {
         newFiltersResults = newPull;
@@ -112,14 +109,6 @@ export default (state = initialState, action) => {
           }));
         });
         newFiltersResult = helpers.removeDuplicates(tempFiltersResults);
-        // tempFiltersResults.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
-        // for (let i = 0; i < tempFiltersResults.length; i++) {
-        //   if (newFiltersResults.length === 0) {
-        //     newFiltersResults.push(tempFiltersResults[i]);
-        //   } else if (newFiltersResults[newFiltersResults.length-1].created_at !== tempFiltersResults[i].created_at) {
-        //     newFiltersResults.push(tempFiltersResults[i]);
-        //   }
-        // }
       }
       return {
         ...state,
@@ -133,11 +122,7 @@ export default (state = initialState, action) => {
       let searchPull;
       let searchWord = action.data.toLowerCase();
       if (!state.isFiltering) {
-        if (state.userMatchesDisplayed) {
-          searchPull = state.allMatchResults;
-        } else {
-          searchPull = state.allProjectsResults;
-        }
+        searchPull = state.currentPull;
       } else {
         searchPull = state.allFilterResults;
       }
@@ -172,8 +157,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allDisplayedResults: state.allMatchResults,
+        currentPull: state.allMatchResults,
         userMatchesDisplayed: true
       }
+    case FETCH_ALL_PROJECTS:
+      console.log('FETCH_ALL_PROJECTS dispatched');
+      return {
+        ...state,
+        allDisplayedResults: state.allProjectsResults,
+        currentPull: state.allProjectsResults,
+        userMatchesDisplayed: false
+      }  
+
     default: 
       return state;
   };
