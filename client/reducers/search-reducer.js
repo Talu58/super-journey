@@ -61,6 +61,7 @@ export default (state = initialState, action) => {
         ...state,
         industriesList: newIndustryList,
       };
+      break;
     case ADD_INDUSTRY_FILTER:
       console.log('ADD_INDUSTRY_FILTER dispatched');
       let { isFiltering } = state;
@@ -90,6 +91,7 @@ export default (state = initialState, action) => {
         isFiltering,
         filters: newFilters
       };
+      break;
     case REMOVE_INDUSTRY_FILTER:
       console.log('REMOVE_INDUSTRY_FILTER dispatched');
       const filterIndex = state.filters.indexOf(action.data);
@@ -116,26 +118,17 @@ export default (state = initialState, action) => {
         allDisplayedResults: newFiltersResults,
         isFiltering: !isDoneFiltering
       };
+      break;
     case SEARCH_REQUEST: 
       console.log('SEARCH_REQUEST dispatched');
-      let newSearchBarResults = []; 
-      let searchPull;
-      let searchWord = action.data.toLowerCase();
-      if (!state.isFiltering) {
-        searchPull = state.currentPull;
-      } else {
-        searchPull = state.allFilterResults;
-      }
-      for (let i = 0; i < searchPull.length; i++) {
-        if (searchPull[i].title.toLowerCase().indexOf(searchWord) !== -1 || searchPull[i].description.toLowerCase().indexOf(searchWord) !== -1) {
-          newSearchBarResults.push(searchPull[i]);
-        }
-      }
-    return {
-      ...state,
-      allDisplayedResults: newSearchBarResults,
-      isFiltering: true
-    };
+      let searchPull = state.isFiltering ? state.allFilterResults : state.currentPull;
+      let newSearchBarResults = helpers.searchProjects(searchPull, action.data); 
+      return {
+        ...state,
+        allDisplayedResults: newSearchBarResults,
+        isFiltering: true
+      };
+      break;
     case REINITIALIZE_SEARCH_STATE:
       console.log('REINITIALIZE_SEARCH_STATE dispatched');
       let reinitializedIndustryList = initialState.industriesList;
@@ -144,6 +137,7 @@ export default (state = initialState, action) => {
         ...initialState,
         newIndustryList: reinitializedIndustryList
       };
+      break;
     case GET_ALL_PROJECTS:
       console.log('GET_ALL_PROJECTS dispatched');
       return {
@@ -152,6 +146,7 @@ export default (state = initialState, action) => {
         allProjectsResults: action.data,
         userMatchesDisplayed: false
       };
+      break;
       case FETCH_USER_MATCHES:
       console.log('FETCH_USER_MATCHES dispatched');
       return {
@@ -159,7 +154,8 @@ export default (state = initialState, action) => {
         allDisplayedResults: state.allMatchResults,
         currentPull: state.allMatchResults,
         userMatchesDisplayed: true
-      }
+      };
+      break;
     case FETCH_ALL_PROJECTS:
       console.log('FETCH_ALL_PROJECTS dispatched');
       return {
@@ -167,8 +163,8 @@ export default (state = initialState, action) => {
         allDisplayedResults: state.allProjectsResults,
         currentPull: state.allProjectsResults,
         userMatchesDisplayed: false
-      }  
-
+      };
+      break;
     default: 
       return state;
   };

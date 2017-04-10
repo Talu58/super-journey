@@ -9,4 +9,15 @@ export function removeDuplicates(list) {
     }
   }
   return result;
+};
+
+export function searchProjects(searchPull, word) {
+  let result = [];
+  const lowerCaseWord = word.toLowerCase();
+  for (let i = 0; i < searchPull.length; i++) {
+    if (searchPull[i].title.toLowerCase().indexOf(lowerCaseWord) !== -1 || searchPull[i].description.toLowerCase().indexOf(lowerCaseWord) !== -1) {
+      result.push(searchPull[i]);
+    }
+  }
+  return result;
 }
