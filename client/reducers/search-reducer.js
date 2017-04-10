@@ -9,6 +9,7 @@ import {
   GET_ALL_PROJECTS,
   FETCH_USER_MATCHES
 } from '../actions/search/searchActionTypes';
+import * as helpers from '.././utils-helpers/search-helpers';
 
 const initialState = {
   industriesList: [
@@ -42,16 +43,8 @@ export default (state = initialState, action) => {
       break;
     case FIND_INDUSTRY_MATCHES:
       console.log('FIND_INDUSTRY_MATCHES dispatched');
-      let finalMatches = [];
       let tempMatches = state.allMatchResults.concat(action.data);
-      tempMatches.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
-      for (let i = 0; i < tempMatches.length; i++) {
-        if (finalMatches.length === 0) {
-          finalMatches.push(tempMatches[i]);
-        } else if (finalMatches[finalMatches.length-1].created_at !== tempMatches[i].created_at) {
-          finalMatches.push(tempMatches[i]);
-        }
-      }
+      let finalMatches = helpers.removeDuplicates(tempMatches);
       return {
         ...state,
         allMatchResults: finalMatches,
@@ -80,14 +73,7 @@ export default (state = initialState, action) => {
         let tempDisplayedResults = state.allDisplayedResults.concat(newResultPull.filter(project => {
           return project.industryNames[action.data];
         }));
-        tempDisplayedResults.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
-        for (let i = 0; i < tempDisplayedResults.length; i++) {
-          if (finalDisplayedResults.length === 0) {
-            finalDisplayedResults.push(tempDisplayedResults[i]);
-          } else if (finalDisplayedResults[finalDisplayedResults.length-1].created_at !== tempDisplayedResults[i].created_at) {
-            finalDisplayedResults.push(tempDisplayedResults[i]);
-          }
-        }
+        finalDisplayedResults = helpers.removeDuplicates(tempDisplayedResults);
       } else {
         isFiltering = true;
         finalDisplayedResults = newResultPull.filter(project => {
@@ -125,35 +111,16 @@ export default (state = initialState, action) => {
             return project.industryNames[filterName];
           }));
         });
-        tempFiltersResults.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
-        for (let i = 0; i < tempFiltersResults.length; i++) {
-          if (newFiltersResults.length === 0) {
-            newFiltersResults.push(tempFiltersResults[i]);
-          } else if (newFiltersResults[newFiltersResults.length-1].created_at !== tempFiltersResults[i].created_at) {
-            newFiltersResults.push(tempFiltersResults[i]);
-          }
-        }
+        newFiltersResult = helpers.removeDuplicates(tempFiltersResults);
+        // tempFiltersResults.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
+        // for (let i = 0; i < tempFiltersResults.length; i++) {
+        //   if (newFiltersResults.length === 0) {
+        //     newFiltersResults.push(tempFiltersResults[i]);
+        //   } else if (newFiltersResults[newFiltersResults.length-1].created_at !== tempFiltersResults[i].created_at) {
+        //     newFiltersResults.push(tempFiltersResults[i]);
+        //   }
+        // }
       }
-      // let newFilterResults = state.allFilterResults.slice();
-      // let finalFilterResults = [];
-      // let isDoneFiltering = false;
-      // let allDisplayedResults;
-      // for (let i = 0; i < newFilterResults.length; i++) {
-      //   console.log('newFilterResults[i].industryNames[action.data]', newFilterResults[i].industryNames[action.data]);
-      //   if (newFilterResults[i].industryNames[action.data]) {
-      //     delete newFilterResults[i].industryNames[action.data];
-      //   }
-      //   console.log('newFilterResults[i].industryNames', newFilterResults[i].industryNames);
-      //   if  (Object.keys(newFilterResults[i].industryNames).length !== 0) {
-      //       finalFilterResults.push(newFilterResults[i]);
-      //   }
-      // }
-      // if (finalFilterResults.length === 0) {
-      //   isDoneFiltering = true;
-      //   allDisplayedResults = state.allMatchResults;
-      // } else {
-      //   allDisplayedResults = finalFilterResults;
-      // }
       return {
         ...state,
         allFilterResults: newFiltersResults,
@@ -209,6 +176,6 @@ export default (state = initialState, action) => {
       }
     default: 
       return state;
+  };
+};
 
-  }
-}
