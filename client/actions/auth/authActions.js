@@ -74,7 +74,7 @@ export function logout() {
       type: USER_LOGOUT
     });
     dispatch(reinitializeSearchState());
-  }
+  };
 };
 
 export function getUserInformation(userEmail) {
@@ -93,6 +93,7 @@ export function getUserInformation(userEmail) {
           data: newUser
         });
         dispatch(getUserMatches(userInfo.data));
-      })
-  }
+      });
+  };
 };
+

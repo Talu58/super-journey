@@ -5,7 +5,8 @@ import {
   FIND_INDUSTRY_SEARCH,
   REMOVE_INDUSTRY_SEARCH,
   SEARCH_REQUEST,
-  REINITIALIZE_SEARCH_STATE
+  REINITIALIZE_SEARCH_STATE,
+  GET_ALL_PROJECTS
 } from '../actions/search/searchActionTypes';
 
 const initialState = {
@@ -59,7 +60,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         industriesList: newIndustryList,
-      }
+      };
       case FIND_INDUSTRY_SEARCH:
         console.log('FIND_INDUSTRY_SEARCH dispatched');
       let finalFilterResult = [];
@@ -83,7 +84,7 @@ export default (state = initialState, action) => {
           allFilterResults: finalFilterResult,
           allDisplayedResults: finalFilterResult,
           isSearching
-        }
+        };
     case REMOVE_INDUSTRY_SEARCH:
       console.log('REMOVE_INDUSTRY_SEARCH dispatched');
       let newFilterResults = state.allFilterResults.slice();
@@ -129,7 +130,7 @@ export default (state = initialState, action) => {
       ...state,
       allDisplayedResults: newSearchBarResults,
       isSearching: true
-    }
+    };
     case REINITIALIZE_SEARCH_STATE:
       console.log('REINITIALIZE_SEARCH_STATE dispatched');
       let reinitializedIndustryList = initialState.industriesList;
@@ -137,7 +138,12 @@ export default (state = initialState, action) => {
       return {
         ...initialState,
         newIndustryList: reinitializedIndustryList
-      }
+      };
+    case GET_ALL_PROJECTS:
+      console.log('GET_ALL_PROJECTS dispatched', action.data);
+      return {
+        ...state
+      }  
     default: 
       return state;
 

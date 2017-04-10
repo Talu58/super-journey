@@ -5,7 +5,8 @@ import {
   FIND_INDUSTRY_SEARCH,
   REMOVE_INDUSTRY_SEARCH,
   SEARCH_REQUEST,
-  REINITIALIZE_SEARCH_STATE
+  REINITIALIZE_SEARCH_STATE,
+  GET_ALL_PROJECTS
 } from './searchActionTypes';
 import * as search from '../../utils-api/search/search-rest-api';
 
@@ -37,7 +38,7 @@ export function getIndustryMatches(industryName) {
         });
       }).catch( err => {
         console.log('getIndustryMatches err', err);
-      })
+      });
   };
 };
 
@@ -59,7 +60,7 @@ export function searchCheckboxClicked(checkboxID, currentCheckboxesStatus) {
     } else {
       dispatch(removeIndustrySearch(checkboxID));
     }
-  }
+  };
 };
 
 export function getIndustrySearch(industryName) {
@@ -83,7 +84,7 @@ export function getIndustrySearch(industryName) {
         });
       }).catch( err => {
         console.log('getIndustryMatches err', err);
-      })
+      });
   };
 };
 
@@ -91,7 +92,7 @@ export function removeIndustrySearch(industryName) {
   return {
     type: REMOVE_INDUSTRY_SEARCH,
     data: industryName
-  }
+  };
 };
 
 
@@ -99,11 +100,24 @@ export function searchRequest(searchWord) {
   return {
     type: SEARCH_REQUEST,
     data: searchWord
-  }
-}
+  };
+};
 
 export function reinitializeSearchState() {
   return {
     type: REINITIALIZE_SEARCH_STATE
-  }
-}
+  };
+};
+
+export function fetchAllProjects() {
+  return dispatch => {
+    return search.getAllProjects()
+      .then(projects => {
+        console.log(projects);
+        dispatch({
+          type: GET_ALL_PROJECTS,
+          data: projects.data
+        })
+      })
+  };
+};

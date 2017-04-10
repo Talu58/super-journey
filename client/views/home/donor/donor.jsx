@@ -5,7 +5,7 @@ import Matches from './matches/matches';
 
 class Donor extends Component {
   render() {
-    const { industries, matchesResult, searchCheckboxClicked, isSearching, searchRequest } = this.props;
+    const { industries, matchesResult, searchCheckboxClicked, isSearching, searchRequest, fetchAllProjects } = this.props;
     return (
       <div className="donor-view-container">
         <div className="matches-view-container">
@@ -13,6 +13,7 @@ class Donor extends Component {
         </div>
         <div className="search-bar-view-container">
           <SearchBar
+            fetchAllProjects={fetchAllProjects}
             industries={industries}
             searchCheckboxClicked={searchCheckboxClicked}
             searchRequest={searchRequest}

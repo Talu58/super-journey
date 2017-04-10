@@ -18,5 +18,25 @@ module.exports.getIndustryMatchesRequest = (req, res) => {
   })
   .catch(err => {
     console.log('getIndustryMatchesRequest err', err);
-  })
+  });
+};
+
+
+module.exports.getAllProjectsRequest = (req, res) => {
+  let roleParams= "role.Donor";
+  
+  User.find({})
+    .where(roleParams).equals(false)
+    .exec((err, projects) => {
+      return res.send({
+            projects
+      });
+    })
+    .catch(err => {
+    console.log('getAllProjectsRequest err', err);
+    });
 }
+
+
+
+

@@ -8,15 +8,20 @@ import Button from '../../../../components/button/button';
 export default class SearchBar extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       searchbarValue: '',
       searchIsEmpty: false
     }
-
-    this.checkboxClick = this.checkboxClick.bind(this);
+    this.seeAllButtonClicked = this.seeAllButtonClicked.bind(this);
     this.searchButtonClicked = this.searchButtonClicked.bind(this);
     this.searchbarChange = this.searchbarChange.bind(this);
+    this.checkboxClick = this.checkboxClick.bind(this);
+  }
+
+  seeAllButtonClicked() {
+    const { fetchAllProjects } = this.props;
+    fetchAllProjects();
   }
 
   searchButtonClicked() {
@@ -48,6 +53,18 @@ export default class SearchBar extends Component {
     const { industries } = this.props;
     return (
       <div className="search-bar-container">
+         <div className="filter-main-actions-container">
+          <Button
+            value="See my matches"
+            styleClassName="button-primary"
+            clickHandler={this.searchButtonClicked}
+          />
+          <Button
+            value="See All"
+            styleClassName="button-primary"
+            clickHandler={this.seeAllButtonClicked}
+          />
+        </div>
         <div className="search-container">
           <InputField
             placeholderText="Search"
