@@ -103,8 +103,23 @@ export default (state = initialState, action) => {
       };
     case SEARCH_REQUEST: 
       console.log('SEARCH_REQUEST dispatched', action.data);
+      let newSearchBarResults = []; 
+      let searchPull;
+      let searchWord = action.data.toLowerCase();
+      if (state.searchResult.length === 0) {
+        searchPull = state.matches;
+      } else {
+        searchPull = state.searchResult;
+      }
+      for (let i = 0; i < searchPull.length; i++) {
+        if (searchPull[i].title.toLowerCase().indexOf(searchWord) !== -1 || searchPull[i].description.toLowerCase().indexOf(searchWord) !== -1) {
+          newSearchBarResults.push(searchPull[i]);
+        }
+      }
     return {
-      ...state
+      ...state,
+      searchResult: newSearchBarResults,
+      isSearching: true
     }
     default: 
       return state;

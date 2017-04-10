@@ -8,10 +8,12 @@ import Button from '../../../../components/button/button';
 export default class SearchBar extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       searchbarValue: '',
       searchIsEmpty: false
     }
+
     this.checkboxClick = this.checkboxClick.bind(this);
     this.searchButtonClicked = this.searchButtonClicked.bind(this);
     this.searchbarChange = this.searchbarChange.bind(this);
