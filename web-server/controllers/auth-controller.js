@@ -92,14 +92,13 @@ module.exports.loginRequest = (req, res) => {
             let userData = {
               email: email,
               completedProfile: user.completedProfile,
-              role: role,
-              industry: industry,
+              role,
+              industry,
               token
             };
             if (project && project.title !== '') {
               userData.project = project;
             }
-            console.log('userData', userData);
             return res.send(userData);
         } else {
           return res.status(401).send('Password Incorrect');
@@ -107,6 +106,20 @@ module.exports.loginRequest = (req, res) => {
       });
     } else {
       return res.status(401).send('User not found');
+    }
+  }).catch(err => {
+    throw err;
+  });
+};
+
+module.exports.getUserInformationRequest = (req, res) => {
+  console.log('getUserInformationRequest invoked',  req.params);
+  User.findOne({email: req.params.userEmail}, (err, user) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log('user', user);
+      return res.send(user);
     }
   }).catch(err => {
     throw err;

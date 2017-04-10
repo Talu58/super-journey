@@ -12,7 +12,6 @@ module.exports.getIndustryMatchesRequest = (req, res) => {
     .where(industryParams).equals(true)
     .select('project created_at')
     .exec((err, projects) => {
-      console.log('projects: ', projects);
       return res.send({
             matches: projects
       });

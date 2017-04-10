@@ -3,13 +3,15 @@ import {
   USER_COMPLETED_SIGN_UP_REQUEST,
   USER_LOGIN_REQUEST,
   USER_AUTHENTICATED,
-  USER_LOGOUT
+  USER_LOGOUT,
+  USER_GET_INFO_REQUEST
 } from '../actions/auth/authActionTypes';
 
 const initialState = {
   isAuth: false,
   completedProfile: false,
   email: '',
+  homeIsLoading: true
 };
 
 export default (state = initialState, action) => {
@@ -57,6 +59,16 @@ export default (state = initialState, action) => {
         ...state,
         isAuth: false,
         completedProfile: false
+      }
+    case USER_GET_INFO_REQUEST:
+      console.log('USER_GET_INFO_REQUEST dispatched', action.data);
+      return {
+        ...state,
+        homeIsLoading: false,
+        email: action.data.email,
+        role: action.data.role,
+        industry: action.data.industry,
+        project: action.data.project
       }
     default:
       return state;

@@ -26,9 +26,14 @@ export default class NavBar extends Component {
         </div>
         <div className="navbar-actions-container">
           {isAuth && completedProfile ? 
-            <Link to="/profile">
-              <Button value="Profile" />
-            </Link>
+            <div className="navbar-actions-nav-container" >
+              <Link to="/home">
+                <Button value="Home" />
+              </Link>
+              <Link to="/profile">
+                <Button value="Profile" />
+              </Link>
+            </div>
             : null
           }
           {isAuth ? 

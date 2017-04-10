@@ -11,3 +11,7 @@ export function completedSignUpRequest(userData) {
 export function loginRequest(userData) {
     return axios.post('/user/login', userData);
 }
+
+export function getUserInfo(userEmail) {
+    return axios.get('/user/information/' + userEmail);
+}

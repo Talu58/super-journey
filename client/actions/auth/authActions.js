@@ -3,7 +3,8 @@ import {
   USER_COMPLETED_SIGN_UP_REQUEST,
   USER_LOGIN_REQUEST,
   USER_AUTHENTICATED,
-  USER_LOGOUT
+  USER_LOGOUT,
+  USER_GET_INFO_REQUEST
 } from './authActionTypes';
 import * as authentication from '../../utils-api/auth/authentication-rest-api';
 import setAuthorizationToken from '../../utils-api/auth/authentication-set-token';
@@ -41,6 +42,7 @@ export function userCompletedSignUpRequest(user) {
 
 export function userLoginRequest(user) {
   return dispatch => {
+    console.log('user', user);
     return authentication.loginRequest(user)
       .then( userInfo => {
         const token = userInfo.data.token
@@ -51,7 +53,6 @@ export function userLoginRequest(user) {
           data: userInfo.data
         })
         dispatch(authenticateUser(jwt.decode(token)));
-        dispatch(getUserMatches(userInfo.data));
       }).catch(err => {
         console.log('userLoginRequest err', err);
       });
@@ -74,3 +75,24 @@ export function logout() {
     });
   }
 }
+
+export function getUserInformation(userEmail) {
+  return dispatch => {
+    return authentication.getUserInfo(userEmail)
+      .then(userInfo => {
+        const { email, role, industry, project} = userInfo.data;
+        let newUser = {
+          email,
+          role,
+          industry,
+          project
+        };
+        dispatch({
+          type: USER_GET_INFO_REQUEST,
+          data: newUser
+        });
+        dispatch(getUserMatches(userInfo.data));
+      })
+  }
+}
+
