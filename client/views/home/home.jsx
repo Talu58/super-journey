@@ -8,11 +8,16 @@ import { searchCheckboxClicked } from '../../actions/search/searchActions';
 
 class Home extends Component {
   render() {
-    const { role, industries, matchesResult, searchCheckboxClicked } = this.props;
+    const { role, industries, matchesResult, searchCheckboxClicked, isSearching, searchResult} = this.props;
     return (
       <div>
         { role.Donor ? 
-          <Donor industries={industries} matchesResult={matchesResult} searchCheckboxClicked={searchCheckboxClicked} />
+          <Donor
+            industries={industries}
+            matchesResult={isSearching ? searchResult : matchesResult}
+            searchCheckboxClicked={searchCheckboxClicked}
+            isSearching={isSearching}
+          />
           : <NonProfit/>
         }
       </div>
@@ -24,7 +29,9 @@ const mapStateToProps = ({ auth, search }) => {
   return {
     role: auth.role,
     industries: search.industriesList,
-    matchesResult: search.matches
+    matchesResult: search.matches, 
+    searchResult: search.searchResult,
+    isSearching: search.isSearching
   };
 }
 
