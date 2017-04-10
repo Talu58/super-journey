@@ -8,13 +8,33 @@ import Button from '../../../../components/button/button';
 export default class SearchBar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      searchbarValue: '',
+      searchIsEmpty: false
+    }
     this.checkboxClick = this.checkboxClick.bind(this);
     this.searchButtonClicked = this.searchButtonClicked.bind(this);
+    this.searchbarChange = this.searchbarChange.bind(this);
   }
 
   searchButtonClicked() {
     const { searchRequest } = this.props;
-    searchRequest('hello');
+    if (this.state.searchbarValue === '') {
+      this.setState({
+        searchIsEmpty: true
+      });
+    } else {
+      searchRequest(this.state.searchbarValue);
+      this.setState({
+        searchIsEmpty: false
+      });
+    }
+  }
+
+  searchbarChange(e) {
+    this.setState({
+      searchbarValue: e.target.value
+    });
   }
 
   checkboxClick(e) {
@@ -27,7 +47,15 @@ export default class SearchBar extends Component {
     return (
       <div className="search-bar-container">
         <div className="search-container">
-          <InputField placeholderText="Search"/>
+          <InputField
+            placeholderText="Search"
+            changeHandler={this.searchbarChange}
+            value={this.state.searchbarValue}
+          />
+          { this.state.searchIsEmpty ? 
+            <span className="search-error-message">* Search field required</span>
+            : null
+          }
           <Button
             value="Search"
             styleClassName="button-primary"
