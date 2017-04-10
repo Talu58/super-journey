@@ -56,22 +56,27 @@ export default class SearchBar extends Component {
   }
 
   render() {
-    const { industries } = this.props;
+    const { industries, userMatchesDisplayed } = this.props;
     return (
       <div className="search-bar-container">
          <div className="filter-main-actions-container">
           <Button
             value="My matches"
-            styleClassName="button-primary"
+            containerStyleClassName="button-searchbar-action-container"
+            styleClassName="button-searchbar-action"
             clickHandler={this.seeMyMatchesButtonClicked}
+            active={userMatchesDisplayed}
           />
           <Button
             value="See All"
-            styleClassName="button-primary"
+            containerStyleClassName="button-searchbar-action-container"
+            styleClassName="button-searchbar-action"
             clickHandler={this.seeAllButtonClicked}
+            active={!userMatchesDisplayed}
           />
         </div>
         <div className="search-container">
+          <p className="searchbar-header" >Search:</p>
           <InputField
             placeholderText="Search"
             changeHandler={this.searchbarChange}
@@ -87,16 +92,19 @@ export default class SearchBar extends Component {
             clickHandler={this.searchButtonClicked}
           />
         </div>
-        <div className="checkboxes-container">
-          {industries.map(({ value, checked }) => (
-            <CheckBox
-              id={value}
-              key={value}
-              label={value}
-              checked={checked}
-              changeHandler={this.checkboxClick}
-            />
-          ))}
+        <div className="filter-container">
+          <p className="searchbar-header" >Filters:</p>
+          <div className="checkboxes-container">
+            {industries.map(({ value, checked }) => (
+              <CheckBox
+                id={value}
+                key={value}
+                label={value}
+                checked={checked}
+                changeHandler={this.checkboxClick}
+              />
+            ))}
+          </div>
         </div>
       </div>
     );

@@ -18,8 +18,7 @@ class Home extends Component {
   }
 
   render() {
-    const { role, industries, displayedResults, searchCheckboxClicked, isFiltering, homeIsLoading, searchRequest, fetchAllProjects, fetchUserMatches, allProjectsResults } = this.props;
-    
+    const { role, industries, displayedResults, searchCheckboxClicked, isFiltering, homeIsLoading, searchRequest, fetchAllProjects, fetchUserMatches, allProjectsResults, userMatchesDisplayed } = this.props;
     return (
       <div>
         { homeIsLoading ? <div>Loading</div> :
@@ -33,6 +32,7 @@ class Home extends Component {
               isFiltering={isFiltering}
               searchRequest={searchRequest}
               allProjectsResults={allProjectsResults}
+              userMatchesDisplayed={userMatchesDisplayed}
             />
             : <NonProfit/>
         }
@@ -48,7 +48,8 @@ const mapStateToProps = ({ auth, search }) => {
     industries: search.industriesList,
     displayedResults: search.allDisplayedResults,
     isFiltering: search.isFiltering,
-    allProjectsResults: search.allProjectsResults
+    allProjectsResults: search.allProjectsResults,
+    userMatchesDisplayed: search.userMatchesDisplayed
   };
 }
 
