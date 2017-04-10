@@ -2,7 +2,7 @@ import {
   FIND_USER_MATCHES,
   FIND_INDUSTRY_MATCHES,
   CHECKBOX_CLICKED,
-  FIND_INDUSTRY_FILTER,
+  ADD_INDUSTRY_FILTER,
   REMOVE_INDUSTRY_FILTER,
   SEARCH_REQUEST,
   REINITIALIZE_SEARCH_STATE,
@@ -28,7 +28,7 @@ const initialState = {
   allMatchResults: [],
   allFilterResults: [],
   allDisplayedResults: [],
-  isSearching: false
+  isFiltering: false
 }
 
 export default (state = initialState, action) => {
@@ -64,30 +64,40 @@ export default (state = initialState, action) => {
         ...state,
         industriesList: newIndustryList,
       };
-      case FIND_INDUSTRY_FILTER:
-        console.log('FIND_INDUSTRY_FILTER dispatched');
-      let finalFilterResult = [];
-      let isSearching = true;
-      if (state.allFilterResults.length === 0) {
-        finalFilterResult = action.data;
+    case ADD_INDUSTRY_FILTER:
+      console.log('ADD_INDUSTRY_FILTER dispatched');
+      let { isFiltering } = state;
+      let newResultPull;
+      let finalDisplayedResults = [];
+      if (state.userMatchesDisplayed) {
+        newResultPull = state.allMatchResults;
       } else {
-        let tempFilterResult = state.allFilterResults.concat(action.data);
-        tempFilterResult.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
-        for (let i = 0; i < tempFilterResult.length; i++) {
-          if (finalFilterResult.length === 0 || finalFilterResult[finalFilterResult.length-1].created_at !== tempFilterResult[i].created_at) {
-            finalFilterResult.push(tempFilterResult[i]);
-          } else {
-            const newIndustryName = Object.keys(tempFilterResult[i].industryNames)[0];
-            finalFilterResult[finalFilterResult.length-1].industryNames[newIndustryName] = true;
+        newResultPull = state.allProjectsResults;
+      }
+      if (isFiltering) {
+        let tempDisplayedResults = state.allDisplayedResults.concat(newResultPull.filter(project => {
+          return project.industryNames[action.data];
+        }));
+        tempDisplayedResults.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
+        for (let i = 0; i < tempDisplayedResults.length; i++) {
+          if (finalDisplayedResults.length === 0) {
+            finalDisplayedResults.push(tempDisplayedResults[i]);
+          } else if (finalDisplayedResults[finalDisplayedResults.length-1].created_at !== tempDisplayedResults[i].created_at) {
+            finalDisplayedResults.push(tempDisplayedResults[i]);
           }
         }
+      } else {
+        isFiltering = true;
+        finalDisplayedResults = newResultPull.filter(project => {
+          return project.industryNames[action.data];
+        });
       }
-        return {
-          ...state,
-          allFilterResults: finalFilterResult,
-          allDisplayedResults: finalFilterResult,
-          isSearching
-        };
+      return {
+        ...state,
+        allFilterResults: finalDisplayedResults,
+        allDisplayedResults: finalDisplayedResults,
+        isFiltering
+      };
     case REMOVE_INDUSTRY_FILTER:
       console.log('REMOVE_INDUSTRY_FILTER dispatched');
       let newFilterResults = state.allFilterResults.slice();
@@ -112,7 +122,7 @@ export default (state = initialState, action) => {
         ...state,
         allFilterResults: finalFilterResults,
         allDisplayedResults,
-        isSearching: !isDoneSearching
+        isFiltering: !isDoneSearching
       };
     case SEARCH_REQUEST: 
       console.log('SEARCH_REQUEST dispatched');
@@ -136,7 +146,7 @@ export default (state = initialState, action) => {
     return {
       ...state,
       allDisplayedResults: newSearchBarResults,
-      isSearching: true
+      isFiltering: true
     };
     case REINITIALIZE_SEARCH_STATE:
       console.log('REINITIALIZE_SEARCH_STATE dispatched');

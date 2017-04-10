@@ -5,11 +5,11 @@ import Matches from './matches/matches';
 
 class Donor extends Component {
   render() {
-    const { industries, matchesResult, searchCheckboxClicked, isSearching, searchRequest, fetchAllProjects, fetchUserMatches } = this.props;
+    const { industries, matchesResult, searchCheckboxClicked, isFiltering, searchRequest, fetchAllProjects, fetchUserMatches } = this.props;
     return (
       <div className="donor-view-container">
         <div className="matches-view-container">
-          <Matches matchesResult={matchesResult} isSearching={isSearching} />
+          <Matches matchesResult={matchesResult} isFiltering={isFiltering} />
         </div>
         <div className="search-bar-view-container">
           <SearchBar

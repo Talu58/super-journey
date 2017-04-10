@@ -4,9 +4,9 @@ import Match from '../match/match';
 
 export default class Matches extends Component {
   render() {
-    const { matchesResult, isSearching } = this.props;
+    const { matchesResult, isFiltering } = this.props;
     let searchMessage = '';
-    if (isSearching) {
+    if (isFiltering) {
       searchMessage = 'Here is the result of your search:';
     } else {
       searchMessage = 'We have matched these projects with your preferences:'; 

@@ -2,7 +2,7 @@ import {
   FIND_USER_MATCHES,
   FIND_INDUSTRY_MATCHES,
   CHECKBOX_CLICKED,
-  FIND_INDUSTRY_FILTER,
+  ADD_INDUSTRY_FILTER,
   REMOVE_INDUSTRY_FILTER,
   SEARCH_REQUEST,
   REINITIALIZE_SEARCH_STATE,
@@ -27,10 +27,13 @@ export function getIndustryMatches(industryName) {
       .then(({ data: { matches } }) => {
         const matchingProject = matches.map(match => {
           const { project: { title, description }, created_at } = match;
+          let newIndustryName = {};
+          newIndustryName[industryName] = true;
           return {
             title ,
             description,
-            created_at
+            created_at,
+            industryNames: newIndustryName
           };
         });
         dispatch({
@@ -65,28 +68,10 @@ export function searchCheckboxClicked(checkboxID, currentCheckboxesStatus) {
 };
 
 export function getIndustrySearch(industryName) {
-  return dispatch => {
-    return search.getIndustryMatchesRequest(industryName)
-      .then(({ data: { matches } }) => {
-        const matchingProjects = matches.map(match => {
-          const { project: { title, description }, created_at } = match;
-          let newIndustryName = {};
-          newIndustryName[industryName] = true;
-          return {
-            title ,
-            description,
-            created_at,
-            industryNames: newIndustryName
-          };
-        });
-        dispatch({
-          type: FIND_INDUSTRY_FILTER,
-          data: matchingProjects
-        });
-      }).catch( err => {
-        console.log('getIndustryMatches err', err);
-      });
-  };
+      return {
+          type: ADD_INDUSTRY_FILTER,
+          data: industryName
+        }
 };
 
 export function removeIndustrySearch(industryName) {
