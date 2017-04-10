@@ -20,8 +20,9 @@ const initialState = {
     {value: 'Global Change',
       checked: false}
   ],
-  matches: [],
-  searchResult: [],
+  allMatchResults: [],
+  allFilterResults: [],
+  allDisplayedResults: [],
   isSearching: false
 }
 
@@ -36,7 +37,7 @@ export default (state = initialState, action) => {
     case FIND_INDUSTRY_MATCHES:
       console.log('FIND_INDUSTRY_MATCHES dispatched');
       let finalMatches = [];
-      let tempMatches = state.matches.concat(action.data);
+      let tempMatches = state.allMatchResults.concat(action.data);
       tempMatches.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
       for (let i = 0; i < tempMatches.length; i++) {
         if (finalMatches.length === 0) {
@@ -47,7 +48,8 @@ export default (state = initialState, action) => {
       }
       return {
         ...state,
-        matches: finalMatches
+        allMatchResults: finalMatches,
+        allDisplayedResults: finalMatches
       };
       break;
     case CHECKBOX_CLICKED:
@@ -58,58 +60,64 @@ export default (state = initialState, action) => {
         industriesList: newIndustryList,
       }
       case FIND_INDUSTRY_SEARCH:
-        console.log('FIND_INDUSTRY_SEARCH dispatched', action.data);
-      let finalSearchResult = [];
+        console.log('FIND_INDUSTRY_SEARCH dispatched');
+      let finalFilterResult = [];
       let isSearching = true;
-      if (state.searchResult.length === 0) {
-        finalSearchResult = state.searchResult.concat(action.data);
+      if (state.allFilterResults.length === 0) {
+        finalFilterResult = action.data;
       } else {
-        let tempSearchResult = state.searchResult.concat(action.data);
-        tempSearchResult.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
-        for (let i = 0; i < tempSearchResult.length; i++) {
-          if (finalSearchResult.length === 0 || finalSearchResult[finalSearchResult.length-1].created_at !== tempSearchResult[i].created_at) {
-            finalSearchResult.push(tempSearchResult[i]);
+        let tempFilterResult = state.allFilterResults.concat(action.data);
+        tempFilterResult.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
+        for (let i = 0; i < tempFilterResult.length; i++) {
+          if (finalFilterResult.length === 0 || finalFilterResult[finalFilterResult.length-1].created_at !== tempFilterResult[i].created_at) {
+            finalFilterResult.push(tempFilterResult[i]);
           } else {
-            const newIndustryName = Object.keys(tempSearchResult[i].industryNames)[0];
-            finalSearchResult[finalSearchResult.length-1].industryNames[newIndustryName] = true;
+            const newIndustryName = Object.keys(tempFilterResult[i].industryNames)[0];
+            finalFilterResult[finalFilterResult.length-1].industryNames[newIndustryName] = true;
           }
         }
       }
         return {
           ...state,
-          searchResult: finalSearchResult,
+          allFilterResults: finalFilterResult,
+          allDisplayedResults: finalFilterResult,
           isSearching
         }
     case REMOVE_INDUSTRY_SEARCH:
       console.log('REMOVE_INDUSTRY_SEARCH dispatched');
-      let newSearchResults = state.searchResult.slice();
-      let finalSearchResults = [];
+      let newFilterResults = state.allFilterResults.slice();
+      let finalFilterResults = [];
       let isDoneSearching = false;
-      for (let i = 0; i < newSearchResults.length; i++) {
-        if (newSearchResults[i].industryNames[action.data]) {
-          delete newSearchResults[i].industryNames[action.data];
+      let allDisplayedResults;
+      for (let i = 0; i < newFilterResults.length; i++) {
+        if (newFilterResults[i].industryNames[action.data]) {
+          delete newFilterResults[i].industryNames[action.data];
         }
-        if  (Object.keys(newSearchResults[i].industryNames).length !== 0) {
-            finalSearchResults.push(newSearchResults[i]);
+        if  (Object.keys(newFilterResults[i].industryNames).length !== 0) {
+            finalFilterResults.push(newFilterResults[i]);
         }
       }
-      if (finalSearchResults.length === 0) {
+      if (finalFilterResults.length === 0) {
         isDoneSearching = true;
+        allDisplayedResults = state.allMatchResults;
+      } else {
+        allDisplayedResults = finalFilterResults;
       }
       return {
         ...state,
-        searchResult: finalSearchResults,
+        allFilterResults: finalFilterResults,
+        allDisplayedResults,
         isSearching: !isDoneSearching
       };
     case SEARCH_REQUEST: 
-      console.log('SEARCH_REQUEST dispatched', action.data);
+      console.log('SEARCH_REQUEST dispatched');
       let newSearchBarResults = []; 
       let searchPull;
       let searchWord = action.data.toLowerCase();
-      if (state.searchResult.length === 0) {
-        searchPull = state.matches;
+      if (state.allFilterResults.length === 0) {
+        searchPull = state.allMatchResults;
       } else {
-        searchPull = state.searchResult;
+        searchPull = state.allFilterResults;
       }
       for (let i = 0; i < searchPull.length; i++) {
         if (searchPull[i].title.toLowerCase().indexOf(searchWord) !== -1 || searchPull[i].description.toLowerCase().indexOf(searchWord) !== -1) {
@@ -118,7 +126,7 @@ export default (state = initialState, action) => {
       }
     return {
       ...state,
-      searchResult: newSearchBarResults,
+      allDisplayedResults: newSearchBarResults,
       isSearching: true
     }
     default: 

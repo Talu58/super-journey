@@ -18,7 +18,7 @@ class Home extends Component {
   }
 
   render() {
-    const { role, industries, matchesResult, searchCheckboxClicked, isSearching, searchResult, homeIsLoading, searchRequest } = this.props;
+    const { role, industries, displayedResults, searchCheckboxClicked, isSearching, homeIsLoading, searchRequest } = this.props;
     
     return (
       <div>
@@ -26,7 +26,7 @@ class Home extends Component {
            role.Donor ? 
             <Donor
               industries={industries}
-              matchesResult={isSearching ? searchResult : matchesResult}
+              matchesResult={displayedResults}
               searchCheckboxClicked={searchCheckboxClicked}
               isSearching={isSearching}
               searchRequest={searchRequest}
@@ -43,8 +43,7 @@ const mapStateToProps = ({ auth, search }) => {
     role: auth.role,
     homeIsLoading: auth.homeIsLoading,
     industries: search.industriesList,
-    matchesResult: search.matches, 
-    searchResult: search.searchResult,
+    displayedResults: search.allDisplayedResults,
     isSearching: search.isSearching
   };
 }
