@@ -113,7 +113,6 @@ module.exports.loginRequest = (req, res) => {
 };
 
 module.exports.getUserInformationRequest = (req, res) => {
-  console.log('getUserInformationRequest invoked',  req.params);
   User.findOne({email: req.params.userEmail}, (err, user) => {
     if (err) {
       throw err;
