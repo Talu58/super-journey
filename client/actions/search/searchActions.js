@@ -2,11 +2,12 @@ import {
   FIND_USER_MATCHES,
   FIND_INDUSTRY_MATCHES,
   CHECKBOX_CLICKED,
-  FIND_INDUSTRY_SEARCH,
-  REMOVE_INDUSTRY_SEARCH,
+  FIND_INDUSTRY_FILTER,
+  REMOVE_INDUSTRY_FILTER,
   SEARCH_REQUEST,
   REINITIALIZE_SEARCH_STATE,
-  GET_ALL_PROJECTS
+  GET_ALL_PROJECTS,
+  FETCH_USER_MATCHES
 } from './searchActionTypes';
 import * as search from '../../utils-api/search/search-rest-api';
 
@@ -79,7 +80,7 @@ export function getIndustrySearch(industryName) {
           };
         });
         dispatch({
-          type: FIND_INDUSTRY_SEARCH,
+          type: FIND_INDUSTRY_FILTER,
           data: matchingProjects
         });
       }).catch( err => {
@@ -90,7 +91,7 @@ export function getIndustrySearch(industryName) {
 
 export function removeIndustrySearch(industryName) {
   return {
-    type: REMOVE_INDUSTRY_SEARCH,
+    type: REMOVE_INDUSTRY_FILTER,
     data: industryName
   };
 };
@@ -131,7 +132,13 @@ export function fetchAllProjects() {
         dispatch({
           type: GET_ALL_PROJECTS,
           data: allProjects
-        })
-      })
+        });
+      });
   };
 };
+
+export function fetchUserMatches() {
+  return {
+    type: FETCH_USER_MATCHES
+  }
+}

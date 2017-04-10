@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import './_home.sass';
 import Donor from './donor/donor';
 import NonProfit from './non-profit/non-profit';
-import { searchCheckboxClicked, searchRequest, fetchAllProjects } from '../../actions/search/searchActions';
+import { searchCheckboxClicked, searchRequest, fetchAllProjects, fetchUserMatches } from '../../actions/search/searchActions';
 import { getUserInformation } from '../../actions/auth/authActions';
 import jwt from 'jsonwebtoken';
 
@@ -18,7 +18,7 @@ class Home extends Component {
   }
 
   render() {
-    const { role, industries, displayedResults, searchCheckboxClicked, isSearching, homeIsLoading, searchRequest, fetchAllProjects } = this.props;
+    const { role, industries, displayedResults, searchCheckboxClicked, isSearching, homeIsLoading, searchRequest, fetchAllProjects, fetchUserMatches } = this.props;
     
     return (
       <div>
@@ -26,6 +26,7 @@ class Home extends Component {
            role.Donor ? 
             <Donor
               fetchAllProjects={fetchAllProjects}
+              fetchUserMatches={fetchUserMatches}
               industries={industries}
               matchesResult={displayedResults}
               searchCheckboxClicked={searchCheckboxClicked}
@@ -54,7 +55,8 @@ const matchDispatchToProps = dispatch => bindActionCreators(
     searchCheckboxClicked,
     getUserInformation,
     searchRequest,
-    fetchAllProjects
+    fetchAllProjects,
+    fetchUserMatches
   }, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(Home);

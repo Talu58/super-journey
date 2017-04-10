@@ -2,11 +2,12 @@ import {
   FIND_USER_MATCHES,
   FIND_INDUSTRY_MATCHES,
   CHECKBOX_CLICKED,
-  FIND_INDUSTRY_SEARCH,
-  REMOVE_INDUSTRY_SEARCH,
+  FIND_INDUSTRY_FILTER,
+  REMOVE_INDUSTRY_FILTER,
   SEARCH_REQUEST,
   REINITIALIZE_SEARCH_STATE,
-  GET_ALL_PROJECTS
+  GET_ALL_PROJECTS,
+  FETCH_USER_MATCHES
 } from '../actions/search/searchActionTypes';
 
 const initialState = {
@@ -22,6 +23,8 @@ const initialState = {
     {value: 'Global Change',
       checked: false}
   ],
+  userMatchesDisplayed: true,
+  allProjectsResults: [],
   allMatchResults: [],
   allFilterResults: [],
   allDisplayedResults: [],
@@ -61,8 +64,8 @@ export default (state = initialState, action) => {
         ...state,
         industriesList: newIndustryList,
       };
-      case FIND_INDUSTRY_SEARCH:
-        console.log('FIND_INDUSTRY_SEARCH dispatched');
+      case FIND_INDUSTRY_FILTER:
+        console.log('FIND_INDUSTRY_FILTER dispatched');
       let finalFilterResult = [];
       let isSearching = true;
       if (state.allFilterResults.length === 0) {
@@ -85,8 +88,8 @@ export default (state = initialState, action) => {
           allDisplayedResults: finalFilterResult,
           isSearching
         };
-    case REMOVE_INDUSTRY_SEARCH:
-      console.log('REMOVE_INDUSTRY_SEARCH dispatched');
+    case REMOVE_INDUSTRY_FILTER:
+      console.log('REMOVE_INDUSTRY_FILTER dispatched');
       let newFilterResults = state.allFilterResults.slice();
       let finalFilterResults = [];
       let isDoneSearching = false;
@@ -117,7 +120,11 @@ export default (state = initialState, action) => {
       let searchPull;
       let searchWord = action.data.toLowerCase();
       if (state.allFilterResults.length === 0) {
-        searchPull = state.allMatchResults;
+        if (state.userMatchesDisplayed) {
+          searchPull = state.allMatchResults;
+        } else {
+          searchPull = state.allProjectsResults;
+        }
       } else {
         searchPull = state.allFilterResults;
       }
@@ -143,8 +150,17 @@ export default (state = initialState, action) => {
       console.log('GET_ALL_PROJECTS dispatched');
       return {
         ...state,
-        allDisplayedResults: action.data
+        allDisplayedResults: action.data,
+        allProjectsResults: action.data,
+        userMatchesDisplayed: false
       };
+      case FETCH_USER_MATCHES:
+      console.log('FETCH_USER_MATCHES dispatched');
+      return {
+        ...state,
+        allDisplayedResults: state.allMatchResults,
+        userMatchesDisplayed: true
+      }
     default: 
       return state;
 

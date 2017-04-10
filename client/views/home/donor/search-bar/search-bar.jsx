@@ -14,6 +14,7 @@ export default class SearchBar extends Component {
       searchIsEmpty: false
     }
     this.seeAllButtonClicked = this.seeAllButtonClicked.bind(this);
+    this.seeMyMatchesButtonClicked = this.seeMyMatchesButtonClicked.bind(this);
     this.searchButtonClicked = this.searchButtonClicked.bind(this);
     this.searchbarChange = this.searchbarChange.bind(this);
     this.checkboxClick = this.checkboxClick.bind(this);
@@ -22,6 +23,11 @@ export default class SearchBar extends Component {
   seeAllButtonClicked() {
     const { fetchAllProjects } = this.props;
     fetchAllProjects();
+  }
+
+  seeMyMatchesButtonClicked() {
+    const { fetchUserMatches } = this.props;
+    fetchUserMatches();
   }
 
   searchButtonClicked() {
@@ -55,9 +61,9 @@ export default class SearchBar extends Component {
       <div className="search-bar-container">
          <div className="filter-main-actions-container">
           <Button
-            value="See my matches"
+            value="My matches"
             styleClassName="button-primary"
-            clickHandler={this.searchButtonClicked}
+            clickHandler={this.seeMyMatchesButtonClicked}
           />
           <Button
             value="See All"
