@@ -7,12 +7,33 @@ import './_navbar.sass';
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      nav: {
+        home: true,
+        profile: false
+      }
+    }
     this.logout = this.logout.bind(this);
+    this.navButtonClicked = this.navButtonClicked.bind(this);
   }
 
   logout() {
     const { logout } = this.props;
     logout();
+  }
+
+  navButtonClicked(e) {
+    let newNavState = {};
+    for (let key in this.state.nav) {
+      if (key === e.target.name) {
+        newNavState[key] = true
+      } else {
+        newNavState[key] = false
+      }
+    }
+    this.setState({
+      nav: newNavState
+    });
   }
 
   render() {
@@ -27,17 +48,38 @@ export default class NavBar extends Component {
         <div className="navbar-actions-container">
           {isAuth && completedProfile ? 
             <div className="navbar-actions-nav-container" >
-              <Link to="/home">
-                <Button value="Home" />
+              <Link to="/home" className="nav-link" >
+                <Button
+                  name="home"
+                  value="Home"
+                  containerStyleClassName="nav-button-container"
+                  styleClassName="nav-button"
+                  active={this.state.nav.home}
+                  clickHandler={this.navButtonClicked}
+                />
               </Link>
-              <Link to="/profile">
-                <Button value="Profile" />
+              <Link to="/profile" className="nav-link" >
+                <Button
+                  name="profile"
+                  value="Profile"
+                  containerStyleClassName="nav-button-container"
+                  styleClassName="nav-button"
+                  active={this.state.nav.profile}
+                  clickHandler={this.navButtonClicked}
+                />
               </Link>
             </div>
             : null
           }
           {isAuth ? 
-            <Button value="Logout" clickHandler={this.logout}/>
+            <div className="nav-link" >
+              <Button
+                value="Logout"
+                clickHandler={this.logout}
+                containerStyleClassName="nav-button-container"
+                styleClassName="nav-button"
+              />
+            </div>
             : <LoginForm/>
           }
         </div>
