@@ -27,6 +27,7 @@ module.exports.getAllProjectsRequest = (req, res) => {
   
   User.find({})
     .where(roleParams).equals(false)
+    .select('project created_at industry')
     .exec((err, projects) => {
       return res.send({
             projects

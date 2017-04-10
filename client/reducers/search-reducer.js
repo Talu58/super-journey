@@ -140,10 +140,11 @@ export default (state = initialState, action) => {
         newIndustryList: reinitializedIndustryList
       };
     case GET_ALL_PROJECTS:
-      console.log('GET_ALL_PROJECTS dispatched', action.data);
+      console.log('GET_ALL_PROJECTS dispatched');
       return {
-        ...state
-      }  
+        ...state,
+        allDisplayedResults: action.data
+      };
     default: 
       return state;
 

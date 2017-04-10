@@ -112,11 +112,25 @@ export function reinitializeSearchState() {
 export function fetchAllProjects() {
   return dispatch => {
     return search.getAllProjects()
-      .then(projects => {
-        console.log(projects);
+      .then(({ data: { projects } }) => {
+        const allProjects = projects.map(project => {
+          const { project: { title, description }, created_at, industry } = project;
+          let newIndustryName = {};
+          for (let key in industry) {
+            if (industry[key]) {
+              newIndustryName[key] = true;
+            }
+          }
+          return {
+            title ,
+            description,
+            created_at,
+            industryNames: newIndustryName
+          };
+        });
         dispatch({
           type: GET_ALL_PROJECTS,
-          data: projects.data
+          data: allProjects
         })
       })
   };
