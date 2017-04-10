@@ -65,14 +65,10 @@ export default (state = initialState, action) => {
     case ADD_INDUSTRY_FILTER:
       console.log('ADD_INDUSTRY_FILTER dispatched');
       let { isFiltering } = state;
-      let newResultPull;
+      let newResultPull = state.currentPull;
       let finalDisplayedResults = [];
       let newFilters = state.filters.concat(action.data);
-      if (state.userMatchesDisplayed) {
-        newResultPull = state.allMatchResults;
-      } else {
-        newResultPull = state.allProjectsResults;
-      }
+
       if (isFiltering) {
         let tempDisplayedResults = state.allDisplayedResults.concat(newResultPull.filter(project => {
           return project.industryNames[action.data];
@@ -94,23 +90,22 @@ export default (state = initialState, action) => {
       break;
     case REMOVE_INDUSTRY_FILTER:
       console.log('REMOVE_INDUSTRY_FILTER dispatched');
-      const filterIndex = state.filters.indexOf(action.data);
       let newFilter = state.industriesList.filter(industry => industry.checked);
       let newFiltersResults = [];
-      let newPull = state.currentPull;
+      const { currentPull } = state;
       let isDoneFiltering = false;
 
       if (newFilter.length === 0) {
-        newFiltersResults = newPull;
+        newFiltersResults = currentPull;
         isDoneFiltering = true;
       } else {
         let tempFiltersResults = [];
-        state.filters.forEach(filterName => {
-          tempFiltersResults = tempFiltersResults.concat(newPull.filter(project => {
-            return project.industryNames[filterName];
+        newFilter.forEach(({ value }) => {
+          tempFiltersResults = tempFiltersResults.concat(currentPull.filter(project => {
+            return project.industryNames[value];
           }));
         });
-        newFiltersResult = helpers.removeDuplicates(tempFiltersResults);
+        newFiltersResults = helpers.removeDuplicates(tempFiltersResults);
       }
       return {
         ...state,
