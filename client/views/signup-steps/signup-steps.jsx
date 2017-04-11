@@ -14,7 +14,7 @@ class SignUpSteps extends Component {
     this.state = {
       step: 1,
       role: { Donor: false, 'Non-Profit Organisation': false },
-      industry: {Healthcare: false, Tech: false, Climat: false, Inclusion: false, 'Global Change': false},
+      industry: {Healthcare: false, Tech: false, Climate: false, Inclusion: false, 'Global Change': false},
       project: {title: '', description: ''},
       hasRole: false,
       hasCompletedStep: false

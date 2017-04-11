@@ -9,7 +9,7 @@ const roleSchema = mongoose.Schema({
 const industrySchema = mongoose.Schema({
   Healthcare: {type: Boolean, default: false},
   Tech: {type: Boolean, default: false},
-  Climat: {type: Boolean, default: false},
+  Climate: {type: Boolean, default: false},
   Inclusion: {type: Boolean, default: false},
   'Global Change': {type: Boolean, default: false}
 });

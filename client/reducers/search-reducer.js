@@ -18,7 +18,7 @@ const initialState = {
       checked: false},
     {value: 'Tech',
       checked: false},
-    {value: 'Climat',
+    {value: 'Climate',
       checked: false},
     {value: 'Inclusion',
       checked: false},

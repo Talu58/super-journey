@@ -15,7 +15,7 @@ module.exports.createIndustry = industry => {
   newIndustry = {
     Healthcare: industry.Healthcare,
     Tech: industry.Tech,
-    Climat: industry.Climat,
+    Climate: industry.Climate,
     Inclusion: industry.Inclusion,
     'Global Change': industry['Global Change']
   };
