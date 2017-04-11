@@ -65,7 +65,7 @@ export default (state = initialState, action) => {
       };
       break;
     case USER_GET_INFO_REQUEST:
-      console.log('USER_GET_INFO_REQUEST dispatched', action.data);
+      console.log('USER_GET_INFO_REQUEST dispatched');
       return {
         ...state,
         homeIsLoading: false,
@@ -73,6 +73,7 @@ export default (state = initialState, action) => {
         role: action.data.role,
         industry: action.data.industry,
         project: action.data.project,
+        completedProfile: action.data.completedProfile
       };
       break;
     default:

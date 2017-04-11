@@ -16,6 +16,11 @@ export function userSignUpRequest(user) {
   return dispatch => {
     return authentication.signUpRequest(user)
       .then( userInfo => {
+        const token = userInfo.data.token
+        localStorage.setItem('jwtToken', token);
+        setAuthorizationToken(token);
+        console.log('jwt.decode(token)', jwt.decode(token));
+        dispatch(authenticateUser(jwt.decode(token)));
         dispatch({
           type: USER_SIGN_UP_REQUEST,
           data: userInfo.data
@@ -81,12 +86,13 @@ export function getUserInformation(userEmail) {
   return dispatch => {
     return authentication.getUserInfo(userEmail)
       .then(userInfo => {
-        const { email, role, industry, project} = userInfo.data;
+        const { email, role, industry, project, completedProfile } = userInfo.data;
         let newUser = {
           email,
           role,
           industry,
-          project
+          project,
+          completedProfile
         };
         dispatch({
           type: USER_GET_INFO_REQUEST,

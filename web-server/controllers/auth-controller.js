@@ -15,8 +15,8 @@ module.exports.signUpRequest = (req, res) => {
       compareHashedPassword(password, user.password).then(isValid => {
         if (isValid) {
           return res.send({
-            email: email,
-            completedProfile: user.completedProfile,
+            email,
+            completedProfile: user.completedProfile
           });
         } else {
           return res.status(401).send('Password Incorrect');
@@ -32,9 +32,14 @@ module.exports.signUpRequest = (req, res) => {
           if (err) {
             throw err;
           } else {
+            const token = jwt.sign({
+                email,
+                completedProfile: user.completedProfile
+              }, config.jwtSecret);
             return res.send({
-              email: email,
-              completedProfile: user.completedProfile
+              email,
+              completedProfile: user.completedProfile,
+              token
             });
           }
         })
