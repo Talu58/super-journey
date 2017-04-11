@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './_home.sass';
@@ -41,6 +41,22 @@ class Home extends Component {
     )
   }
 }
+
+Home.propTypes = {
+  displayedResults: PropTypes.array.isRequired,
+  role: PropTypes.object,
+  fetchAllProjects: PropTypes.func.isRequired,
+  fetchUserMatches: PropTypes.func.isRequired,
+  searchRequest: PropTypes.func.isRequired,
+  searchCheckboxClicked: PropTypes.func.isRequired,
+  industries: PropTypes.array.isRequired,
+  isFiltering: PropTypes.bool.isRequired,
+  allProjectsResults: PropTypes.array.isRequired,
+  userMatchesDisplayed: PropTypes.bool.isRequired,
+  industriesList: PropTypes.object,
+  homeIsLoading: PropTypes.bool.isRequired,
+  getUserInformation: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = ({ auth, search }) => {
   return {

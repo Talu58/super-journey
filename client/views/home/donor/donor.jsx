@@ -32,7 +32,16 @@ class Donor extends Component {
 }
 
 Donor.propTypes = {
-
+  fetchAllProjects: PropTypes.func.isRequired,
+  fetchUserMatches: PropTypes.func.isRequired,
+  industries: PropTypes.array.isRequired,
+  searchCheckboxClicked: PropTypes.func.isRequired,
+  searchRequest: PropTypes.func.isRequired,
+  allProjectsResults: PropTypes.array.isRequired,
+  userMatchesDisplayed: PropTypes.bool.isRequired,
+  isFiltering: PropTypes.bool.isRequired,
+  matchesResult: PropTypes.array.isRequired,
+  industriesList: PropTypes.object.isRequired
 };
 
 export default Donor;

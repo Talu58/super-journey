@@ -109,5 +109,14 @@ export default class SearchBar extends Component {
       </div>
     );
   }
-}
+};
 
+SearchBar.propTypes = {
+  fetchAllProjects: PropTypes.func.isRequired,
+  fetchUserMatches: PropTypes.func.isRequired,
+  industries: PropTypes.array.isRequired,
+  searchCheckboxClicked: PropTypes.func.isRequired,
+  searchRequest: PropTypes.func.isRequired,
+  allProjectsResults: PropTypes.array.isRequired,
+  userMatchesDisplayed: PropTypes.bool.isRequired
+};

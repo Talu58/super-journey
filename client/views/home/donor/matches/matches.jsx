@@ -42,4 +42,10 @@ export default class Matches extends Component {
       </div>
     );
   }
-}
+};
+
+Matches.propTypes = {
+  isFiltering: PropTypes.bool.isRequired,
+  matchesResult: PropTypes.array.isRequired,
+  industriesList: PropTypes.object.isRequired
+};

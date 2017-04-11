@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './_match.sass';
 import Button from '../../../../components/button/button';
 
@@ -22,4 +22,9 @@ export default class Match extends Component {
       </div>
     );
   }
-}
+};
+
+Match.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired
+};
