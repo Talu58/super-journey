@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import NavBar from './navbar/navbar';
@@ -33,6 +33,13 @@ export class AppLayout extends Component {
       </div>
     );
   }
+}
+
+AppLayout.propTypes = {
+  logout: React.PropTypes.func.isRequired,
+  dispatch: React.PropTypes.func,
+  completedProfile: PropTypes.bool.isRequired,
+  isAuth: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = ({ auth }) => {

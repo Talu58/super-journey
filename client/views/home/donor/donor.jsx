@@ -3,7 +3,7 @@ import './_donor.sass';
 import SearchBar from './search-bar/search-bar';
 import Matches from './matches/matches';
 
-class Donor extends Component {
+export default class Donor extends Component {
   render() {
     const { industries, matchesResult, searchCheckboxClicked, isFiltering, searchRequest, fetchAllProjects, fetchUserMatches, allProjectsResults, userMatchesDisplayed, industriesList } = this.props;
     return (
@@ -44,4 +44,3 @@ Donor.propTypes = {
   industriesList: PropTypes.object.isRequired
 };
 
-export default Donor;

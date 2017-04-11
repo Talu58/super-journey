@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './_try-demo.sass';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -38,6 +38,10 @@ class TryDemo extends Component {
   }
 };
 
-const matchDispatchToProps = dispatch => bindActionCreators({loginDemoUser}, dispatch)
+TryDemo.propTypes = {
+  loginDemoUser: React.PropTypes.func.isRequired
+};
+
+const matchDispatchToProps = dispatch => bindActionCreators({loginDemoUser}, dispatch);
 
 export default connect(null, matchDispatchToProps)(TryDemo);

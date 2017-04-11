@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './_signup-step.sass';
 import Button from '../../components/button/button';
 
@@ -27,4 +27,11 @@ export default class SignupStep extends Component {
       </div>
     )
   }
-}
+};
+
+SignupStep.propTypes = {
+  clickHandler: PropTypes.func.isRequired,
+  buttons: PropTypes.object.isRequired,
+  disabled: PropTypes.bool
+};
+

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './_project-form.sass';
 import InputField from '../../components/input-field/input-field';
 import TextAreaField from '../../components/text-area-field/text-area-field';
@@ -30,4 +30,9 @@ export default class ProjectForm extends Component {
       </div>
     )
   }
-}
+};
+
+ProjectForm.propTypes = {
+  changeHandler: PropTypes.func.isRequired,
+  values: PropTypes.object.isRequired
+};

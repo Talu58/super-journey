@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import InputField from '../../components/input-field/input-field';
@@ -108,17 +108,19 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-  userLoginRequest: React.PropTypes.func.isRequired
-}
+  userLoginRequest: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+  completedProfile: PropTypes.bool.isRequired
+};
 
 const mapStateToProps = ({ auth }) => {
   return {
     isAuth: auth.isAuth,
     completedProfile: auth.completedProfile
-  }
+  };
 };
 
-const matchDispatchToProps = dispatch => bindActionCreators({userLoginRequest: userLoginRequest}, dispatch)
+const matchDispatchToProps = dispatch => bindActionCreators({userLoginRequest}, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(LoginForm);
 

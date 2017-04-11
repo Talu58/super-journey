@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Button from '../../components/button/button';
 import LoginForm from '../login-form/login-form';
 import { Link } from 'react-router-dom';
@@ -86,4 +86,10 @@ export default class NavBar extends Component {
       </header>
     );
   }
-}
+};
+
+NavBar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+  completedProfile: PropTypes.bool.isRequired
+};

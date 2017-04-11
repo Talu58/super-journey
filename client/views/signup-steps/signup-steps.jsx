@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
@@ -195,11 +195,12 @@ class SignUpSteps extends Component {
       </div>
     );
   }
-}
+};
 
 SignUpSteps.propTypes = {
-  userCompletedSignUpRequest: React.PropTypes.func.isRequired
-}
+  userCompletedSignUpRequest: PropTypes.func.isRequired,
+  completedProfile: PropTypes.bool.isRequired
+};
 
 const mapStateToProps = ({ auth }) => {
   return {
@@ -208,6 +209,6 @@ const mapStateToProps = ({ auth }) => {
   }
 };
 
-const matchDispatchToProps = dispatch => bindActionCreators({userCompletedSignUpRequest}, dispatch)
+const matchDispatchToProps = dispatch => bindActionCreators({userCompletedSignUpRequest}, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(SignUpSteps);
