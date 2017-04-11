@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import NavBar from './navbar/navbar';
 import SignUpForm from './signupform/signupform';
+import LandingPage from './landing-page/landing-page';
 import Footer from './footer/footer';
 import SignUpSteps from './signup-steps/signup-steps';
 import Home from './home/home';
@@ -23,7 +24,7 @@ export class AppLayout extends Component {
       <div className="app-layout-container">
         <NavBar isAuth={isAuth} completedProfile={completedProfile} logout={logout}/>
         <main>
-          <Route exact path='/' component={SignUpForm} />
+          <Route exact path='/' component={LandingPage} />
           <PrivateRoute path="/signup" component={SignUpSteps} isAuth={isAuth} />
           <PrivateRoute path="/home" component={Home} isAuth={isAuth} />
           <PrivateRoute path="/profile" component={Profile} isAuth={isAuth} />

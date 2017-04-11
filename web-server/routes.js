@@ -8,6 +8,9 @@ const {
   getIndustryMatchesRequest,
   getAllProjectsRequest
 }= require('./controllers/search-controller');
+const {
+  createDummyUsers
+} = require('./controllers/dummy-data-controller');
 
 module.exports = function(app, express) {
 
@@ -17,5 +20,6 @@ module.exports = function(app, express) {
   app.get('/user/information/:userEmail', getUserInformationRequest);
   app.get('/projects/match/:industryName', getIndustryMatchesRequest);
   app.get('/projects/all', getAllProjectsRequest);
+  app.get('/user/dummy', createDummyUsers);
 
 }
