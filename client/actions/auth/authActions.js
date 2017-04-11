@@ -4,7 +4,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_AUTHENTICATED,
   USER_LOGOUT,
-  USER_GET_INFO_REQUEST
+  USER_GET_INFO_REQUEST,
 } from './authActionTypes';
 import * as authentication from '../../utils-api/auth/authentication-rest-api';
 import setAuthorizationToken from '../../utils-api/auth/authentication-set-token';
@@ -94,6 +94,19 @@ export function getUserInformation(userEmail) {
         });
         dispatch(getUserMatches(userInfo.data));
       });
+  };
+};
+
+export function loginDemoUser(userInfo) {
+  return dispatch => {
+    const token = userInfo.data.token
+    localStorage.setItem('jwtToken', token);
+    setAuthorizationToken(token);
+    dispatch({
+      type: USER_LOGIN_REQUEST,
+      data: userInfo.data
+    })
+    dispatch(authenticateUser(jwt.decode(token)));
   };
 };
 

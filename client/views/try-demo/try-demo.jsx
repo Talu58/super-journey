@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import './_try-demo.sass';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { loginDemoUser } from '../../actions/auth/authActions';
 import Button from '../../components/button/button';
 import axios from 'axios';
 
-export default class TryDemo extends Component {
+class TryDemo extends Component {
   constructor(props) {
     super(props);
     this.demoButtonClicked = this.demoButtonClicked.bind(this);
   }
 
   demoButtonClicked() {
+    const { loginDemoUser } = this.props; 
     axios.get('/user/dummy/non-profit')
       .then(() => {
         return axios.get('/user/dummy/donor')
         .then(user => {
-          console.log('this is a promise', user);  
+          loginDemoUser(user);
         });
       })
   }
@@ -31,4 +35,8 @@ export default class TryDemo extends Component {
       </div>
     );
   }
-}
+};
+
+const matchDispatchToProps = dispatch => bindActionCreators({loginDemoUser}, dispatch)
+
+export default connect(null, matchDispatchToProps)(TryDemo);

@@ -4,7 +4,7 @@ import {
   USER_LOGIN_REQUEST,
   USER_AUTHENTICATED,
   USER_LOGOUT,
-  USER_GET_INFO_REQUEST
+  USER_GET_INFO_REQUEST,
 } from '../actions/auth/authActionTypes';
 
 const initialState = {
@@ -35,6 +35,7 @@ export default (state = initialState, action) => {
         project
       };
       return newState;
+      break;
     case USER_LOGIN_REQUEST:
       console.log('USER_LOGIN_REQUEST dispatched');
       const newLoginState = {
@@ -46,20 +47,23 @@ export default (state = initialState, action) => {
         project: action.data.project
       };
       return newLoginState;
+      break;
     case USER_AUTHENTICATED:
       console.log('USER_AUTHENTICATED dispatched');
       return {
         ...state,
         isAuth: true,
         completedProfile: action.data
-      }
+      };
+      break;
     case USER_LOGOUT:
       console.log('USER_LOGOUT dispatched');
       return {
         ...state,
         isAuth: false,
         completedProfile: false
-      }
+      };
+      break;
     case USER_GET_INFO_REQUEST:
       console.log('USER_GET_INFO_REQUEST dispatched', action.data);
       return {
@@ -68,8 +72,9 @@ export default (state = initialState, action) => {
         email: action.data.email,
         role: action.data.role,
         industry: action.data.industry,
-        project: action.data.project
-      }
+        project: action.data.project,
+      };
+      break;
     default:
       return state;
   }
