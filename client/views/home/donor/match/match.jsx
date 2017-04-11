@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './_match.sass';
+import Button from '../../../../components/button/button';
 
 export default class Match extends Component {
   render() {
@@ -8,6 +9,16 @@ export default class Match extends Component {
       <div className="match-container">
         <h3 className="match-title">{title}</h3>
         <p className="match-description">{description}</p>
+        <section className="match-action-container">
+          <Button
+            value="See More"
+            styleClassName="button-primary"
+          />
+          <Button
+            value="Contact"
+            styleClassName="button-primary"
+          />
+        </section>
       </div>
     );
   }
