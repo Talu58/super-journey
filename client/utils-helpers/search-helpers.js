@@ -1,6 +1,6 @@
 export function removeDuplicates(list) {
   let result = [];
-  list.sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at));
+  list.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
   for (let i = 0; i < list.length; i++) {
     if (result.length === 0) {
       result.push(list[i]);
