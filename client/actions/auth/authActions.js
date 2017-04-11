@@ -5,6 +5,7 @@ import {
   USER_AUTHENTICATED,
   USER_LOGOUT,
   USER_GET_INFO_REQUEST,
+  USER_UPLOADED_IMAGE
 } from './authActionTypes';
 import * as authentication from '../../utils-api/auth/authentication-rest-api';
 import setAuthorizationToken from '../../utils-api/auth/authentication-set-token';
@@ -19,7 +20,6 @@ export function userSignUpRequest(user) {
         const token = userInfo.data.token
         localStorage.setItem('jwtToken', token);
         setAuthorizationToken(token);
-        console.log('jwt.decode(token)', jwt.decode(token));
         dispatch(authenticateUser(jwt.decode(token)));
         dispatch({
           type: USER_SIGN_UP_REQUEST,
@@ -33,7 +33,6 @@ export function userSignUpRequest(user) {
 
 export function userCompletedSignUpRequest(user) {
   return dispatch => {
-    console.log(user);
     return authentication.completedSignUpRequest(user)
       .then( userInfo => {
         dispatch({
@@ -42,6 +41,21 @@ export function userCompletedSignUpRequest(user) {
         })
       }).catch(err => {
         console.log('userCompletedSignUpRequest err', err);
+      });
+  };
+};
+
+export function userUploadedImage(file) {
+  return dispatch => {
+    return authentication.uploadImage(file)
+      .then( message => {
+        console.log('userUploadedImage message', message);
+        dispatch({
+          type: USER_UPLOADED_IMAGE,
+          data: file
+        })
+      }).catch(err => {
+        console.log('userUploadedImage err', err);
       });
   };
 };

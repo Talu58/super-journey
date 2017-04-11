@@ -5,6 +5,7 @@ import {
   USER_AUTHENTICATED,
   USER_LOGOUT,
   USER_GET_INFO_REQUEST,
+  USER_UPLOADED_IMAGE
 } from '../actions/auth/authActionTypes';
 
 const initialState = {
@@ -35,6 +36,12 @@ export default (state = initialState, action) => {
         project
       };
       return newState;
+      break;
+    case USER_UPLOADED_IMAGE:
+      console.log('USER_UPLOADED_IMAGE dispatched');
+      return {
+        ...state
+      };
       break;
     case USER_LOGIN_REQUEST:
       console.log('USER_LOGIN_REQUEST dispatched');

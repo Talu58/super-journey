@@ -5,6 +5,24 @@ const { createRole, createIndustry, createProject } = require('../utils/utils-pr
 const { generateHashedPassword, compareHashedPassword } = require('../utils/utils-auth');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const multer  = require('multer');
+const storage = multer.diskStorage({
+        destination: '../../uploads',
+        filename: function (req, file, cb) {
+            switch (file.mimetype) {
+                case 'image/jpeg':
+                    ext = '.jpeg';
+                    break;
+                case 'image/png':
+                    ext = '.png';
+                    break;
+            }
+            cb(null, file.originalname + ext);
+        }
+    });
+
+var upload = multer({storage: storage}).single('upload');
+
 
 module.exports.signUpRequest = (req, res) => {
   const { email, password } = req.body;
@@ -81,6 +99,18 @@ module.exports.signUpCompletedRequest = (req, res) => {
   });
 };
 
+module.exports.imageUploadRequest = (req, res) => {
+  upload(req, res, function (err) {
+    if (err) {
+      return res.send({'imageUploadRequest err': err});
+    }
+    console.log('body', req.body);
+    console.log('file', req.file);
+    console.log('files', req.files);
+    return res.send('File uploaded sucessfully');
+  })
+}
+
 module.exports.loginRequest = (req, res) => {
   const { email, password} = req.body;
   User.findOne({ 'email': email }, (err, user) => {
@@ -122,7 +152,6 @@ module.exports.getUserInformationRequest = (req, res) => {
     if (err) {
       throw err;
     } else {
-      console.log('user', user);
       return res.send(user);
     }
   }).catch(err => {

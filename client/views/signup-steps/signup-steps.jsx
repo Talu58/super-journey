@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 import './_signup-steps.sass';
-import { userCompletedSignUpRequest } from '../../actions/auth/authActions';
+import { userCompletedSignUpRequest, userUploadedImage } from '../../actions/auth/authActions';
 import Button from '../../components/button/button';
 import SignUpStep from '../signup-step/signup-step';
 import ProjectForm from '../project-form/project-form';
@@ -15,7 +15,8 @@ class SignUpSteps extends Component {
       step: 1,
       role: { Donor: false, 'Non-Profit Organisation': false },
       industry: {Healthcare: false, Tech: false, Climate: false, Inclusion: false, 'Global Change': false},
-      project: {title: '', description: '', image:''},
+      project: {title: '', description: ''},
+      file: {},
       hasRole: false,
       hasCompletedStep: false
     }
@@ -84,11 +85,11 @@ class SignUpSteps extends Component {
   }
 
   uploadFileHandler(e) {
-    const newProject = this.state.project;
-    newProject.image = e.target.files[0];
-    console.log('newProject', newProject);
+    let file = {
+      file: e.target.files[0],
+    };
     this.setState({
-      project: newProject
+      file
     });
   }
 
@@ -108,15 +109,17 @@ class SignUpSteps extends Component {
   }
 
   clickSaveHandler() {
-    const { userCompletedSignUpRequest, email } = this.props;
-    const { role, industry, project } = this.state;
+    const { userCompletedSignUpRequest, userUploadedImage, email } = this.props;
+    const { role, industry, project, file } = this.state;
     const newUser = {
       role,
       industry,
       project,
-      email
-    }
+      email,
+    };
     userCompletedSignUpRequest(newUser);
+    var formData = new FormData(file);
+    userUploadedImage(formData);
   }
 
   render() {
@@ -220,6 +223,6 @@ const mapStateToProps = ({ auth }) => {
   }
 };
 
-const matchDispatchToProps = dispatch => bindActionCreators({userCompletedSignUpRequest}, dispatch);
+const matchDispatchToProps = dispatch => bindActionCreators({userCompletedSignUpRequest, userUploadedImage}, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(SignUpSteps);

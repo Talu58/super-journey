@@ -28,12 +28,14 @@ export default class ProjectForm extends Component {
             name="description"
             value={values.description}
           />
+        </form>
+        <form encType="multipart/form-data">
           <input
             onChange={uploadFileHandler}
             className="project-form-file-upload"
             id="upload-input"
             type="file"
-            name="uploads[]"
+            name="upload"
           />
         </form>
       </div>
