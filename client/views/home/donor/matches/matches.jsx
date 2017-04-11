@@ -13,18 +13,21 @@ export default class Matches extends Component {
     }
     return (
       <div>
-        <h2>{searchMessage}</h2>
-        <section className="match-industry-tags-container">
-          {!isFiltering ? Object.keys(industriesList).sort().map(industry => {
-              if (industriesList[industry] === true) {
-                return <span key={industry} className="match-industry-tags">{industry}</span>
-              }
-            }) : null}
+        <h1 className="matches-view-header" >{searchMessage}</h1>
+        <section className="match-industry-text-container" >
+          <p className="match-result-number" >We found {matchesResult.length} results: </p>
+          <section className="match-industry-tags-container">
+            {!isFiltering ? Object.keys(industriesList).sort().map(industry => {
+                if (industriesList[industry] === true) {
+                  return <span key={industry} className="match-industry-tags">{industry}</span>
+                }
+              }) : null}
+          </section>
         </section>
         { matchesResult.length === 0 ?
           <p>We don't have any match for your profile at the moment. Use our side bar to find other projects</p>
           : 
-          <section className="matches-container">
+          <section className="matches-container" >
             {matchesResult.map(({ title, description }) => {
               return (
                 <Match
