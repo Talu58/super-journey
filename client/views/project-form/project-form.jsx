@@ -6,14 +6,15 @@ import Button from '../../components/button/button';
 
 export default class ProjectForm extends Component {
   render() {
-    const { changeHandler, values } = this.props;
+    const { changeHandler, values, uploadFileHandler } = this.props;
     return (
       <div>
-        <form>
+        <form className="project-form">
           <InputField 
             changeHandler={changeHandler}
             placeholderText="Enter your Project Title"
             styleClassName="project-form-input-field"
+            containerStyleClassName="project-form-input-field-container"
             name="title"
             value={values.title}
             type="text"
@@ -23,8 +24,16 @@ export default class ProjectForm extends Component {
             placeholderText="Enter your Project Description"
             rows={15}
             styleClassName="project-form-text-area-field"
+            containerStyleClassName="project-form-text-area-field-container"
             name="description"
             value={values.description}
+          />
+          <input
+            onChange={uploadFileHandler}
+            className="project-form-file-upload"
+            id="upload-input"
+            type="file"
+            name="uploads[]"
           />
         </form>
       </div>
@@ -34,5 +43,6 @@ export default class ProjectForm extends Component {
 
 ProjectForm.propTypes = {
   changeHandler: PropTypes.func.isRequired,
+  uploadFileHandler: PropTypes.func.isRequired,
   values: PropTypes.object.isRequired
 };

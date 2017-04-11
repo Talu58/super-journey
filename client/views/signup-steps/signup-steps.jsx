@@ -15,12 +15,13 @@ class SignUpSteps extends Component {
       step: 1,
       role: { Donor: false, 'Non-Profit Organisation': false },
       industry: {Healthcare: false, Tech: false, Climate: false, Inclusion: false, 'Global Change': false},
-      project: {title: '', description: ''},
+      project: {title: '', description: '', image:''},
       hasRole: false,
       hasCompletedStep: false
     }
     this.clickOptionHandler = this.clickOptionHandler.bind(this);
     this.fieldChangeHandler = this.fieldChangeHandler.bind(this);
+    this.uploadFileHandler = this.uploadFileHandler.bind(this);
     this.clickPrevHandler = this.clickPrevHandler.bind(this);
     this.clickNextHandler = this.clickNextHandler.bind(this);
     this.clickSaveHandler = this.clickSaveHandler.bind(this);
@@ -68,18 +69,27 @@ class SignUpSteps extends Component {
     const newState = {
       ...project,
       [e.target.name]: e.target.value
-    }
+    };
     if (newState.title !== '' && newState.description !== '') {
       this.setState({
         project: newState,
         hasCompletedStep: true
-      })
+      });
     } else {
       this.setState({
         project: newState,
         hasCompletedStep: false
-      })
+      });
     }
+  }
+
+  uploadFileHandler(e) {
+    const newProject = this.state.project;
+    newProject.image = e.target.files[0];
+    console.log('newProject', newProject);
+    this.setState({
+      project: newProject
+    });
   }
 
   clickPrevHandler() {
@@ -139,6 +149,7 @@ class SignUpSteps extends Component {
           <div>
             <ProjectForm 
               changeHandler={this.fieldChangeHandler}
+              uploadFileHandler={this.uploadFileHandler}
               values={this.state.project}
             />
           </div>

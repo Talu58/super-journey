@@ -4,9 +4,17 @@ import './_text-area-field.sass'
  const TextAreaField = props => {
   
   const { placeholderText, containerStyleClassName, styleClassName, changeHandler, value, rows, name } = props;
-  let textAreaFieldContainerClass = 'textAreaField-container ' + containerStyleClassName;
-  let textAreaFieldClass = 'textAreaField ' + styleClassName;
+  let textAreaFieldContainerClass = 'textAreaField-container';
+  let textAreaFieldClass = 'textAreaField';
   const textAreaName = name || '';
+
+  if (containerStyleClassName) {
+    textAreaFieldContainerClass += ' ' + containerStyleClassName;
+  }
+
+  if (styleClassName) {
+    textAreaFieldClass += ' ' + styleClassName;
+  }
 
   return (
     <div className={textAreaFieldContainerClass}>

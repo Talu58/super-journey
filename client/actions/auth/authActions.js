@@ -33,6 +33,7 @@ export function userSignUpRequest(user) {
 
 export function userCompletedSignUpRequest(user) {
   return dispatch => {
+    console.log(user);
     return authentication.completedSignUpRequest(user)
       .then( userInfo => {
         dispatch({
