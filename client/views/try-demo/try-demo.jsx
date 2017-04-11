@@ -5,14 +5,20 @@ import axios from 'axios';
 
 export default class TryDemo extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.demoButtonClicked = this.demoButtonClicked.bind(this);
   }
 
   demoButtonClicked() {
-    axios.get('/user/dummy');
+    axios.get('/user/dummy/non-profit')
+      .then(() => {
+        return axios.get('/user/dummy/donor')
+        .then(user => {
+          console.log('this is a promise', user);  
+        });
+      })
   }
-  
+
   render() {
     return (
       <div className="try-demo-container" >

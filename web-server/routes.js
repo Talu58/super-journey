@@ -9,7 +9,8 @@ const {
   getAllProjectsRequest
 }= require('./controllers/search-controller');
 const {
-  createDummyUsers
+  createDummyNonProfitUsers,
+  createDummyDonorUser
 } = require('./controllers/dummy-data-controller');
 
 module.exports = function(app, express) {
@@ -20,6 +21,6 @@ module.exports = function(app, express) {
   app.get('/user/information/:userEmail', getUserInformationRequest);
   app.get('/projects/match/:industryName', getIndustryMatchesRequest);
   app.get('/projects/all', getAllProjectsRequest);
-  app.get('/user/dummy', createDummyUsers);
-
+  app.get('/user/dummy/non-profit', createDummyNonProfitUsers);
+  app.get('/user/dummy/donor', createDummyDonorUser)
 }

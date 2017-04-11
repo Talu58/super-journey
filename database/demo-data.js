@@ -1,8 +1,7 @@
-const generateDummyData = () => {
+const generateDummyNonProfitData = () => {
   let dummyData = [];
   let counter = 1;
   let industries = {Healthcare: false, Tech: false, Climat: false, Inclusion: false, 'Global Change': false};
-    console.log('generateDummyDatainvoked');
 
   while (counter < 20) {
     counter++;
@@ -30,12 +29,30 @@ const generateDummyData = () => {
   
     //Adding the newly created user to our pull of users
     dummyData.push(newUser);
-    console.log('dummyData pushed ', dummyData);
   }
   return dummyData;
-}
+};
+
+const generateDummyDonorData = () => {
+  const newUser = {
+    email: 'johndoe@gmail.com',
+    password: 'johndoepassword',
+    role: { Donor: true, 'Non-Profit Organisation': false },
+    industry: {Healthcare: false, Tech: false, Climat: false, Inclusion: false, 'Global Change': false},
+  };
+
+  const indexOneIndustry = Math.floor(Math.random() * 5);
+  const indexTwoIndustry = Math.floor(Math.random() * 5);
+  const keyOneIndustry = Object.keys(newUser.industry)[indexOneIndustry];
+  const keyTwoIndustry = Object.keys(newUser.industry)[indexTwoIndustry];
+  newUser.industry[keyOneIndustry] = true;
+  newUser.industry[keyTwoIndustry] = true;
+
+  return newUser;
+};
 
 module.exports = {
-  generateDummyData
+  generateDummyNonProfitData,
+  generateDummyDonorData
 };
 
