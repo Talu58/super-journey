@@ -148,7 +148,8 @@ export default (state = initialState, action) => {
         ...state,
         allDisplayedResults: state.allMatchResults,
         currentPull: state.allMatchResults,
-        userMatchesDisplayed: true
+        userMatchesDisplayed: true,
+        isFiltering: false
       };
       break;
     case FETCH_ALL_PROJECTS:
@@ -157,7 +158,8 @@ export default (state = initialState, action) => {
         ...state,
         allDisplayedResults: state.allProjectsResults,
         currentPull: state.allProjectsResults,
-        userMatchesDisplayed: false
+        userMatchesDisplayed: false,
+        isFiltering: true
       };
       break;
     default: 
