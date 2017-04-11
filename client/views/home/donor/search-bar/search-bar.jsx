@@ -76,7 +76,7 @@ export default class SearchBar extends Component {
           />
         </div>
         <div className="search-container">
-          <p className="searchbar-header" >Search:</p>
+          <p className="search-bar-category-header" >Search:</p>
           <InputField
             placeholderText="Search"
             changeHandler={this.searchbarChange}
@@ -93,7 +93,7 @@ export default class SearchBar extends Component {
           />
         </div>
         <div className="filter-container">
-          <p className="searchbar-header" >Filters:</p>
+          <p className="search-bar-category-header" >Filters:</p>
           <div className="checkboxes-container">
             {industries.map(({ value, checked }) => (
               <CheckBox
