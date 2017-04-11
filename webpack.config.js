@@ -16,10 +16,13 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        loader: 'url-loader?limit=10000',
+        loader: 'file-loader',
         test: /\.(png|jpg|jpeg|gif|woff)$/
       },
-     { test: /(\.s[ca]ss)$/, loaders: ['style-loader', 'css-loader', 'sass-loader'] }
+     {
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /(\.s[ca]ss)$/
+    }
     ],
   },
   resolve: {

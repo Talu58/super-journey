@@ -1,34 +1,35 @@
 import React, { Component } from 'react';
 
-export default class CheckBox extends Component {
-  render() {
-    const { containerStyleClassName, styleClassName, label, checked, changeHandler, id } = this.props;
-    let checkboxContainerClass = 'checkbox-container';
-    let checkboxClass = 'checkbox';
-    let isChecked = true;
-    if (containerStyleClassName) {
-      checkboxContainerClass += ' ' + checkboxContainerClass;
-    }
+const CheckBox = props => {
 
-    if(styleClassName) {
-      checkboxClass += ' ' + styleClassName;
-    }
-
-    if  (!checked) {
-      isChecked = false;
-    }
-
-    return (
-      <div className={checkboxContainerClass}>
-        <input
-          id={id}
-          className={checkboxClass}
-          type="checkbox"
-          checked={isChecked}
-          onChange={changeHandler}
-        /><label>{label}</label>
-      </div>
-    );
+  const { containerStyleClassName, styleClassName, label, checked, changeHandler, id } = props;
+  let checkboxContainerClass = 'checkbox-container';
+  let checkboxClass = 'checkbox';
+  let isChecked = true;
+  if (containerStyleClassName) {
+    checkboxContainerClass += ' ' + checkboxContainerClass;
   }
+
+  if(styleClassName) {
+    checkboxClass += ' ' + styleClassName;
+  }
+
+  if  (!checked) {
+    isChecked = false;
+  }
+
+  return (
+    <div className={checkboxContainerClass}>
+      <input
+        id={id}
+        className={checkboxClass}
+        type="checkbox"
+        checked={isChecked}
+        onChange={changeHandler}
+      /><label>{label}</label>
+    </div>
+  );
+
 }
 
+export default CheckBox;
