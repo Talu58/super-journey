@@ -7,7 +7,6 @@ const {
 } = require('../../database/demo-data');
 
 module.exports.createDummyUsers = (req, res) => {
-  console.log('createDummyUsers invoked');
-  const dummyData = generateDummyData;
-  console.log(dummyData);
+  const dummyData = generateDummyData();
+  res.send({});
 };

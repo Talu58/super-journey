@@ -2,6 +2,7 @@ const generateDummyData = () => {
   let dummyData = [];
   let counter = 1;
   let industries = {Healthcare: false, Tech: false, Climat: false, Inclusion: false, 'Global Change': false};
+    console.log('generateDummyDatainvoked');
 
   while (counter < 20) {
     counter++;
@@ -29,11 +30,12 @@ const generateDummyData = () => {
   
     //Adding the newly created user to our pull of users
     dummyData.push(newUser);
+    console.log('dummyData pushed ', dummyData);
   }
   return dummyData;
 }
 
-module.export = {
+module.exports = {
   generateDummyData
 };
 
