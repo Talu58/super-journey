@@ -80,7 +80,7 @@ class SignUpForm extends Component {
               value={this.state.emailInputFieldValue}
             />
             {this.state.emailFieldIncomplete ?
-              <span className="signup-error-message">Email field required</span>
+              <span className="signup-error-message">* Email field required</span>
               : null
             }
             <InputField 
@@ -90,7 +90,7 @@ class SignUpForm extends Component {
               value={this.state.passwordInputFieldValue}
             />
             {this.state.passwordFieldIncomplete ?
-              <span className="signup-error-message">Password field required</span>
+              <span className="signup-error-message">* Password field required</span>
               : null
             }
             <Button 

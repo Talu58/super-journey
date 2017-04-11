@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './_landing-page.sass';
 import SignUpForm from '../signupform/signupform';
 import Button from '../../components/button/button';
 import axios from 'axios';
@@ -16,7 +17,7 @@ export default class LandingPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="landing-page-container">
         <div>
           <Button
             value="Try our Demo"
