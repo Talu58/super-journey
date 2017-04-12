@@ -27,9 +27,13 @@ export function getIndustryMatches(industryName) {
     return search.getIndustryMatchesRequest(industryName)
       .then(({ data: { matches } }) => {
         const matchingProject = matches.map(match => {
-          const { project: { title, description }, created_at } = match;
+          const { project: { title, description }, created_at, industry } = match;
           let newIndustryName = {};
-          newIndustryName[industryName] = true;
+          for (let key in industry) {
+            if (industry[key] === true) {
+              newIndustryName[key] = true;
+            }
+          }
           return {
             title ,
             description,
@@ -105,7 +109,7 @@ export function fetchAllProjects(allProjectsList) {
             const { project: { title, description }, created_at, industry } = project;
             let newIndustryName = {};
             for (let key in industry) {
-              if (industry[key]) {
+              if (industry[key] === true) {
                 newIndustryName[key] = true;
               }
             }
