@@ -95,15 +95,20 @@ export default class SearchBar extends Component {
         <div className="filter-container">
           <p className="search-bar-category-header" >Filters:</p>
           <div className="checkboxes-container">
-            {industries.map(({ value, checked }) => (
-              <CheckBox
-                id={value}
-                key={value}
-                label={value}
-                checked={checked}
-                changeHandler={this.checkboxClick}
-              />
-            ))}
+            {industries.map(({ value, checked }) => {
+              const formattedValue = value.replace(/\s/g, '').toLowerCase();
+              console.log('formattedValue', formattedValue);
+              return (
+                <CheckBox
+                  id={value}
+                  key={value}
+                  label={value}
+                  checked={checked}
+                  changeHandler={this.checkboxClick}
+                  containerStyleClassName={`search-bar-checkbox-container-${formattedValue} search-bar-checkbox-container`}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

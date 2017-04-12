@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './_checkbox.sass';
 
 const CheckBox = props => {
 
@@ -7,14 +8,14 @@ const CheckBox = props => {
   let checkboxClass = 'checkbox';
   let isChecked = true;
   if (containerStyleClassName) {
-    checkboxContainerClass += ' ' + checkboxContainerClass;
+    checkboxContainerClass += ' ' + containerStyleClassName;
   }
 
-  if(styleClassName) {
+  if (styleClassName) {
     checkboxClass += ' ' + styleClassName;
   }
 
-  if  (!checked) {
+  if (!checked) {
     isChecked = false;
   }
 
@@ -30,6 +31,6 @@ const CheckBox = props => {
     </div>
   );
 
-}
+};
 
 export default CheckBox;
