@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import './_modal-see-more.sass';
 
-class ModalSeeMore extends Component {
+export default class ModalSeeMore extends Component {
   render() {
     const { props: { title, description, industryNames } } = this.props;
     return (
@@ -16,10 +16,8 @@ class ModalSeeMore extends Component {
       </div>
     );
   }
-}
-
-ModalSeeMore.propTypes = {
-
 };
 
-export default ModalSeeMore;
+ModalSeeMore.propTypes = {
+  props: PropTypes.object.isRequired
+};

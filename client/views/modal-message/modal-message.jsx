@@ -4,7 +4,7 @@ import Button from '../../components/button/button';
 import InputField from '../../components/input-field/input-field';
 import TextAreaField from '../../components/text-area-field/text-area-field';
 
-class ModalMessage extends Component {
+export default class ModalMessage extends Component {
   render() {
     return (
       <div>
@@ -30,10 +30,8 @@ class ModalMessage extends Component {
       </div>
     );
   }
-}
+};
 
 ModalMessage.propTypes = {
 
 };
-
-export default ModalMessage;

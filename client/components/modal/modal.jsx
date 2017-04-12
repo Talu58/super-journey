@@ -6,7 +6,7 @@ export default class Modal extends Component {
   render() {
     const { isOpen, closeModalHandler, ChildComponent, childComponentsProps } = this.props;
     return isOpen ? 
-      <div className="modal-window-container" onClick={closeModalHandler} >
+      <div className="modal-window-container">
         <div className="modal-container">
           <Button 
             clickHandler={closeModalHandler}
@@ -25,5 +25,6 @@ Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   closeModalHandler: PropTypes.func.isRequired,
   childComponentsProps: PropTypes.object,
+  ChildComponent: PropTypes.func.isRequired
 };
 
