@@ -3,9 +3,9 @@ This project is intended to create a matching platform between donors and non-pr
 Stack:
   - React/Redux
   - SASS
-  - React-router v4
-  - Node server
-  - mongoDB + Mongoose
+  - React-Router v4
+  - NodeJS server with Express
+  - MongoDB + Mongoose
   - Webpack + Babel
 
 
