@@ -11,7 +11,7 @@ Stack:
 
 To start the project:
   - run "npm install"
-  - run "mongod"
+  - run "mongod" - Install MongoDB first -
   - run "npm start"
   - run "npm run build:watch"
 
