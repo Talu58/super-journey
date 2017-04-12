@@ -60,41 +60,47 @@ export default class SearchBar extends Component {
     return (
       <div className="search-bar-container">
          <div className="filter-main-actions-container">
-          <Button
-            value="My matches"
-            containerStyleClassName="button-searchbar-action-container"
-            styleClassName="button-searchbar-action"
-            clickHandler={this.seeMyMatchesButtonClicked}
-            active={userMatchesDisplayed}
-          />
-          <Button
-            value="See All"
-            containerStyleClassName="button-searchbar-action-container"
-            styleClassName="button-searchbar-action"
-            clickHandler={this.seeAllButtonClicked}
-            active={!userMatchesDisplayed}
-          />
+          <p className="search-bar-category-header" >Select your view:</p>
+          <section className="filter-main-sub-container">
+            <Button
+              value="My matches"
+              containerStyleClassName="button-searchbar-action-container"
+              styleClassName="button-searchbar-action"
+              clickHandler={this.seeMyMatchesButtonClicked}
+              active={userMatchesDisplayed}
+            />
+            <Button
+              value="See All"
+              containerStyleClassName="button-searchbar-action-container"
+              styleClassName="button-searchbar-action"
+              clickHandler={this.seeAllButtonClicked}
+              active={!userMatchesDisplayed}
+            />
+          </section>
         </div>
-        <div className="search-container">
+        <section className="search-container">
           <p className="search-bar-category-header" >Search:</p>
-          <InputField
-            placeholderText="Search"
-            changeHandler={this.searchbarChange}
-            value={this.state.searchbarValue}
-          />
-          { this.state.searchIsEmpty ? 
-            <span className="search-error-message">* Search field required</span>
-            : null
-          }
-          <Button
-            value="Search"
-            styleClassName="button-primary"
-            clickHandler={this.searchButtonClicked}
-          />
-        </div>
-        <div className="filter-container">
+          <section className="search-sub-container">
+            <InputField
+              containerStyleClassName="search-bar-input-field"
+              placeholderText="Search"
+              changeHandler={this.searchbarChange}
+              value={this.state.searchbarValue}
+            />
+            { this.state.searchIsEmpty ? 
+              <span className="search-error-message">* Search field required</span>
+              : null
+            }
+            <Button
+              value="Search"
+              styleClassName="button-primary"
+              clickHandler={this.searchButtonClicked}
+            />
+          </section>
+        </section>
+        <section className="filter-container">
           <p className="search-bar-category-header" >Filters:</p>
-          <div className="checkboxes-container">
+          <section className="checkboxes-container">
             {industries.map(({ value, checked }) => {
               const formattedValue = value.replace(/\s/g, '').toLowerCase();
               console.log('formattedValue', formattedValue);
@@ -109,8 +115,8 @@ export default class SearchBar extends Component {
                 />
               );
             })}
-          </div>
-        </div>
+          </section>
+        </section>
       </div>
     );
   }

@@ -4,9 +4,17 @@ import './_input-field.sass'
 const InputField = props => {
 
   const { placeholderText, containerStyleClassName, styleClassName, type, changeHandler, value, name } = props;
-  let inputfieldContainerClass = 'inputfield-container ' + containerStyleClassName;
-  let inputfieldClass = 'inputfield ' + styleClassName;
+  let inputfieldContainerClass = 'inputfield-container';
+  let inputfieldClass = 'inputfield';
   const inputName = name || '';
+
+  if (containerStyleClassName) {
+    inputfieldContainerClass += ' ' + containerStyleClassName;
+  }
+
+  if (styleClassName) {
+    inputfieldClass += ' ' + styleClassName;
+  }
 
   return (
     <div className={inputfieldContainerClass}>
