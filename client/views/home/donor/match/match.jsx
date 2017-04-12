@@ -1,8 +1,31 @@
 import React, { Component, PropTypes } from 'react';
 import './_match.sass';
 import Button from '../../../../components/button/button';
+import Modal from '../../../../components/modal/modal';
+
 
 export default class Match extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      seeMoreOpen: false
+    }
+    this.seeMoreClicked = this.seeMoreClicked.bind(this);
+    this.closeModalClicked = this.closeModalClicked.bind(this);
+  }
+
+  seeMoreClicked() {
+    this.setState({
+      seeMoreOpen: true
+    });
+  }
+
+  closeModalClicked() {
+    this.setState({
+      seeMoreOpen: false
+    });
+  }
+
   render() {
     const { title, description, industryNames } = this.props;
     const industryNamesKeys = Object.keys(industryNames);
@@ -21,12 +44,19 @@ export default class Match extends Component {
           <Button
             value="See More"
             styleClassName="button-primary"
+            clickHandler={this.seeMoreClicked}
           />
           <Button
             value="Contact"
             styleClassName="button-primary"
           />
         </section>
+        <Modal
+          isOpen={this.state.seeMoreOpen}
+          closeModalHandler={this.closeModalClicked}
+          title={title}
+          description={description}
+        />
       </div>
     );
   }
