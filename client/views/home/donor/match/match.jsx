@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import './_match.sass';
 import Button from '../../../../components/button/button';
 import Modal from '../../../../components/modal/modal';
+import ModalSeeMore from '../../../modal-see-more/modal-see-more';
 
 
 export default class Match extends Component {
@@ -29,6 +30,11 @@ export default class Match extends Component {
   render() {
     const { title, description, industryNames } = this.props;
     const industryNamesKeys = Object.keys(industryNames);
+    const seeMoreModalProps = {
+      title,
+      description,
+      industryNames: industryNamesKeys
+    };
     return (
       <div className="match-container">
         <section className="industry-name-bullets-container" >
@@ -47,16 +53,15 @@ export default class Match extends Component {
             clickHandler={this.seeMoreClicked}
           />
           <Button
-            value="Contact"
+            value="Message"
             styleClassName="button-primary"
           />
         </section>
         <Modal
           isOpen={this.state.seeMoreOpen}
           closeModalHandler={this.closeModalClicked}
-          title={title}
-          description={description}
-          industryNames={industryNamesKeys}
+          ChildComponent={ModalSeeMore}
+          childComponentsProps={seeMoreModalProps}
         />
       </div>
     );
