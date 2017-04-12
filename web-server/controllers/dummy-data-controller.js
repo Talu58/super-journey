@@ -2,16 +2,18 @@ const { signUpRequest, signUpCompletedRequest } = require('./auth-controller');
 const { User } = require('../../database/user-model');
 const { createRole, createIndustry, createProject } = require('../utils/utils-profile');
 const { generateHashedPassword } = require('../utils/utils-auth');
-const { generateDummyNonProfitData, generateDummyDonorData } = require('../../database/demo-data');
+const { generateDummyNonProfitData, generateDummyDonorData } = require('../../database/demo-data-builders');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 
 module.exports.createDummyNonProfitUsers = (req, res) => {
   const dummyData = generateDummyNonProfitData();
   dummyData.forEach(user => {
-    const { email, password, industry, role, project } = user;
+    const { email, password, industry, role, project, firstname, lastname } = user;
     const newUser = new User;
     newUser.email = email;
+    newUser.firstname = firstname;
+    newUser.lastname = lastname;
 
     let newRole = createRole(role);
     let newIndustry = createIndustry(industry);
@@ -38,9 +40,11 @@ module.exports.createDummyNonProfitUsers = (req, res) => {
 };
 
 module.exports.createDummyDonorUser = (req,res) => {
-  const { email, password, industry, role } = generateDummyDonorData();
+  const { email, password, industry, role, firstname, lastname } = generateDummyDonorData();
   const newUser = new User;
   newUser.email = email;
+  newUser.firstname = firstname;
+  newUser.lastname = lastname;
 
   let newRole = createRole(role);
   let newIndustry = createIndustry(industry);
@@ -67,7 +71,9 @@ module.exports.createDummyDonorUser = (req,res) => {
           role,
           industry,
           email,
-          token
+          token,
+          firstname,
+          lastname
         };
         res.send(responseUserData);
       }

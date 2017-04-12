@@ -58,6 +58,8 @@ module.exports.signUpRequest = (req, res) => {
                 completedProfile: user.completedProfile
               }, config.jwtSecret);
             return res.send({
+              firstname,
+              lastname,
               email,
               completedProfile: user.completedProfile,
               token

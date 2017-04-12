@@ -118,8 +118,10 @@ class SignUpSteps extends Component {
       email,
     };
     userCompletedSignUpRequest(newUser);
-    var formData = new FormData(file);
-    userUploadedImage(formData);
+    if (!role.Donor) {
+      var formData = new FormData(file);
+      userUploadedImage(formData);
+    }
   }
 
   render() {

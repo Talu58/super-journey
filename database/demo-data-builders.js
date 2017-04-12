@@ -3,9 +3,11 @@ const generateDummyNonProfitData = () => {
   let counter = 1;
   let industries = {Healthcare: false, Tech: false, Climate: false, Inclusion: false, 'Global Change': false};
 
-  while (counter < 20) {
+  while (counter <= 20) {
     counter++;
     let newUser = {
+      firstname: `user${counter}`,
+      lastname: `user${counter}`,
       email: `user${counter}@gmail.com`,
       password: `passwordUser${counter}`,
       role: { Donor: false, 'Non-Profit Organisation': true },
@@ -36,6 +38,8 @@ const generateDummyNonProfitData = () => {
 
 const generateDummyDonorData = () => {
   const newUser = {
+    firstname: 'John',
+    lastname: 'Doe',
     email: 'johndoe@gmail.com',
     password: 'johndoepassword',
     role: { Donor: true, 'Non-Profit Organisation': false },
