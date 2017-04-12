@@ -28,7 +28,11 @@ const generateDummyNonProfitData = () => {
     const category = keyOneIndustry === keyTwoIndustry ? 'category' : 'categories';
     newUser.project.title = `${categoryName} project`;
     const basicDescription = `This is a randomly generate project part of the ${categoryName} ${category}.`;
-    newUser.project.description = basicDescription + ' ' + basicDescription + ' ' + basicDescription + ' ' + basicDescription ;
+    let descriptionRepeatCounter = 1;
+    while (descriptionRepeatCounter < 20) {
+      newUser.project.description += basicDescription + ' ';
+      descriptionRepeatCounter++;
+    }
   
     //Adding the newly created user to our pull of users
     dummyData.push(newUser);

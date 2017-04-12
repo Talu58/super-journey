@@ -4,16 +4,23 @@ import Button from '../button/button';
 
 export default class Modal extends Component {
   render() {
-    const { isOpen, closeModalHandler, title, description } = this.props;
+    const { isOpen, closeModalHandler, title, description, industryNames } = this.props;
     return isOpen ? 
       <div className="modal-window-container">
         <div className="modal-container">
           <Button 
             clickHandler={closeModalHandler}
             value="X"
+            containerStyleClassName="modal-close-button-container"
+            styleClassName="modal-close-button"
           />
           <h1>{title}</h1>
-          <p>{description}</p>
+          {industryNames.map(industryName => {
+            const industryNameFormatted = industryName.replace(/\s/g, '').toLowerCase();
+            return <span key={industryName} className={`match-industry-tags match-industry-tags-${industryNameFormatted}`}>{industryName}</span>
+          })}
+          <hr className="modal-separator" />
+          <p className="modal-description">{description}</p>
         </div>
       </div>
       : null

@@ -17,10 +17,10 @@ export default class Matches extends Component {
         <section className="match-industry-text-container" >
           <p className="match-result-number" >We found {matchesResult.length} results: </p>
           <section className="match-industry-tags-container">
-            {!isFiltering ? Object.keys(industriesList).sort().map(industry => {
-                if (industriesList[industry] === true) {
-                  const industryName = industry.replace(/\s/g, '').toLowerCase();
-                  return <span key={industry} className={`match-industry-tags match-industry-tags-${industryName}`}>{industry}</span>
+            {!isFiltering ? Object.keys(industriesList).sort().map(industryName => {
+                if (industriesList[industryName] === true) {
+                  const industryNameFormatted = industryName.replace(/\s/g, '').toLowerCase();
+                  return <span key={industryName} className={`match-industry-tags match-industry-tags-${industryNameFormatted}`}>{industryName}</span>
                 }
               }) : null}
           </section>

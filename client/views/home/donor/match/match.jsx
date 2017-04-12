@@ -56,6 +56,7 @@ export default class Match extends Component {
           closeModalHandler={this.closeModalClicked}
           title={title}
           description={description}
+          industryNames={industryNamesKeys}
         />
       </div>
     );
