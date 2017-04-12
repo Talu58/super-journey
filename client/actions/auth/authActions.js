@@ -12,19 +12,18 @@ import setAuthorizationToken from '../../utils-api/auth/authentication-set-token
 import jwt from 'jsonwebtoken';
 import { getUserMatches, reinitializeSearchState } from '../search/searchActions';
 
-
 export function userSignUpRequest(user) {
   return dispatch => {
     return authentication.signUpRequest(user)
       .then( userInfo => {
-        const token = userInfo.data.token
+        const token = userInfo.data.token;
         localStorage.setItem('jwtToken', token);
         setAuthorizationToken(token);
         dispatch(authenticateUser(jwt.decode(token)));
         dispatch({
           type: USER_SIGN_UP_REQUEST,
           data: userInfo.data
-        })
+        });
       }).catch(err => {
         console.log('userSignUpRequest err', err);
       });
@@ -38,7 +37,7 @@ export function userCompletedSignUpRequest(user) {
         dispatch({
           type: USER_COMPLETED_SIGN_UP_REQUEST,
           data: user
-        })
+        });
       }).catch(err => {
         console.log('userCompletedSignUpRequest err', err);
       });
@@ -53,7 +52,7 @@ export function userUploadedImage(file) {
         dispatch({
           type: USER_UPLOADED_IMAGE,
           data: file
-        })
+        });
       }).catch(err => {
         console.log('userUploadedImage err', err);
       });
@@ -65,13 +64,13 @@ export function userLoginRequest(user) {
     console.log('user', user);
     return authentication.loginRequest(user)
       .then( userInfo => {
-        const token = userInfo.data.token
+        const token = userInfo.data.token;
         localStorage.setItem('jwtToken', token);
         setAuthorizationToken(token);
         dispatch({
           type: USER_LOGIN_REQUEST,
           data: userInfo.data
-        })
+        });
         dispatch(authenticateUser(jwt.decode(token)));
       }).catch(err => {
         console.log('userLoginRequest err', err);
@@ -120,13 +119,13 @@ export function getUserInformation(userEmail) {
 
 export function loginDemoUser(userInfo) {
   return dispatch => {
-    const token = userInfo.data.token
+    const token = userInfo.data.token;
     localStorage.setItem('jwtToken', token);
     setAuthorizationToken(token);
     dispatch({
       type: USER_LOGIN_REQUEST,
       data: userInfo.data
-    })
+    });
     dispatch(authenticateUser(jwt.decode(token)));
   };
 };
