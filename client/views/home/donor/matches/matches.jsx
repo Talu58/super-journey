@@ -4,12 +4,12 @@ import Match from '../match/match';
 
 export default class Matches extends Component {
   render() {
-    const { matchesResult, isFiltering, industriesList, firstname } = this.props;
+    const { matchesResult, isFiltering, industriesList } = this.props;
     let searchMessage = '';
     if (isFiltering) {
-      searchMessage = `Hey ${firstname}! Here is the result of your search:`;
+      searchMessage = 'Here is the result of your search:';
     } else {
-      searchMessage = `Hey ${firstname}! We have matched these projects with your preferences:`; 
+      searchMessage = 'We have matched these projects with your preferences:'; 
     }
     return (
       <div>
@@ -47,7 +47,6 @@ export default class Matches extends Component {
 };
 
 Matches.propTypes = {
-  firstname: PropTypes.string,
   isFiltering: PropTypes.bool.isRequired,
   matchesResult: PropTypes.array.isRequired,
   industriesList: PropTypes.object.isRequired

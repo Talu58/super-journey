@@ -10,7 +10,6 @@ export default class Donor extends Component {
       <div className="donor-view-container">
         <div className="matches-view-container">
           <Matches
-            firstname={firstname}
             matchesResult={matchesResult}
             isFiltering={isFiltering}
             industriesList={industriesList}
@@ -18,6 +17,7 @@ export default class Donor extends Component {
         </div>
         <div className="search-bar-view-container">
           <SearchBar
+            firstname={firstname}
             fetchAllProjects={fetchAllProjects}
             fetchUserMatches={fetchUserMatches}
             industries={industries}

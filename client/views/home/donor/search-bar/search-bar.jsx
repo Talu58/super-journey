@@ -56,9 +56,12 @@ export default class SearchBar extends Component {
   }
 
   render() {
-    const { industries, userMatchesDisplayed } = this.props;
+    const { industries, userMatchesDisplayed, firstname } = this.props;
     return (
       <div className="search-bar-container">
+        <div>
+          <p className="search-bar-welcome-message">Welcome {firstname}!</p>
+        </div>
          <div className="filter-main-actions-container">
           <p className="search-bar-category-header" >Select your view:</p>
           <section className="filter-main-sub-container">
@@ -123,6 +126,7 @@ export default class SearchBar extends Component {
 };
 
 SearchBar.propTypes = {
+  firstname: PropTypes.string.isRequired,
   fetchAllProjects: PropTypes.func.isRequired,
   fetchUserMatches: PropTypes.func.isRequired,
   industries: PropTypes.array.isRequired,
