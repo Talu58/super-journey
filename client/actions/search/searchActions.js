@@ -27,7 +27,7 @@ export function getIndustryMatches(industryName) {
     return search.getIndustryMatchesRequest(industryName)
       .then(({ data: { matches } }) => {
         const matchingProject = matches.map(match => {
-          const { project: { title, description }, created_at, industry } = match;
+          const { project: { title, description }, created_at, industry, email, firstname } = match;
           let newIndustryName = {};
           for (let key in industry) {
             if (industry[key] === true) {
@@ -38,7 +38,9 @@ export function getIndustryMatches(industryName) {
             title ,
             description,
             created_at,
-            industryNames: newIndustryName
+            industryNames: newIndustryName,
+            email,
+            firstname
           };
         });
         dispatch({

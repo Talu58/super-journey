@@ -38,13 +38,17 @@ export default class Match extends Component {
   }
 
   render() {
-    const { title, description, industryNames } = this.props;
+    const { title, description, industryNames, firstname, email } = this.props;
     const industryNamesKeys = Object.keys(industryNames);
     const seeMoreModalProps = {
       title,
       description,
       industryNames: industryNamesKeys
     };
+    const messageModalProps = {
+      email,
+      firstname,
+    }
     return (
       <div className="match-container">
         <section className="industry-name-bullets-container" >
@@ -78,6 +82,7 @@ export default class Match extends Component {
           isOpen={this.state.messageOpen}
           closeModalHandler={this.closeModalClicked}
           ChildComponent={ModalMessage}
+          childComponentsProps={messageModalProps}
         />
       </div>
     );

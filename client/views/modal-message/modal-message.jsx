@@ -5,10 +5,20 @@ import InputField from '../../components/input-field/input-field';
 import TextAreaField from '../../components/text-area-field/text-area-field';
 
 export default class ModalMessage extends Component {
+  constructor(props) {
+    super(props);
+    this.sendButtonClicked = this.sendButtonClicked.bind(this);
+  }
+
+  sendButtonClicked() {
+    console.log('message sent');
+  }
+
   render() {
+    const { props: { firstname } } = this.props
     return (
       <div>
-          <h1 className="message-modal-title">Send a message to John</h1>
+          <h1 className="message-modal-title">Send a message to {firstname}</h1>
           <hr className="message-modal-separator" />
           <form className="message-modal-form">
             <InputField
@@ -25,6 +35,7 @@ export default class ModalMessage extends Component {
             <Button
               value="Send"
               styleClassName="button-primary"
+              clickHandler={this.sendButtonClicked}
             />
           </form>
       </div>

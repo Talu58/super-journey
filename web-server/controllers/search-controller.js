@@ -10,7 +10,7 @@ module.exports.getIndustryMatchesRequest = (req, res) => {
   User.find({})
     .where(roleParams).equals(false)
     .where(industryParams).equals(true)
-    .select('project created_at industry')
+    .select('project created_at industry email firstname')
     .exec((err, projects) => {
       return res.send({
             matches: projects
