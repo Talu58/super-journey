@@ -75,7 +75,7 @@ class LoginForm extends Component {
                 type="email"
                 changeHandler={this.inputFieldChangeHandler}
                 value={this.state.emailInputFieldValue}
-                containerStyleClassName="login-form-input-field"
+                containerStyleClassName="login-form-input-field-container"
               />
               {this.state.emailFieldIncomplete ?
                 <span className="login-error-message">* Email field required</span>
@@ -88,7 +88,7 @@ class LoginForm extends Component {
                 type="password"
                 changeHandler={this.inputFieldChangeHandler}
                 value={this.state.passwordInputFieldValue}
-                containerStyleClassName="login-form-input-field"
+                containerStyleClassName="login-form-input-field-container"
               />
               {this.state.passwordFieldIncomplete ?
                 <span className="login-error-message">* Password field required</span>
@@ -97,7 +97,7 @@ class LoginForm extends Component {
             </div>
             <Button
               value="Login"
-              styleClassName="button-primary"
+              styleClassName="button-primary navbar-login-button"
               clickHandler={this.submitLoginHandler}
             />
           </div>

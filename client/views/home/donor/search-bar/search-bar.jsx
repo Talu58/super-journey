@@ -106,7 +106,6 @@ export default class SearchBar extends Component {
           <section className="checkboxes-container">
             {industries.map(({ value, checked }) => {
               const formattedValue = value.replace(/\s/g, '').toLowerCase();
-              console.log('formattedValue', formattedValue);
               return (
                 <CheckBox
                   id={value}
