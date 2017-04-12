@@ -3,6 +3,7 @@ import './_match.sass';
 import Button from '../../../../components/button/button';
 import Modal from '../../../../components/modal/modal';
 import ModalSeeMore from '../../../modal-see-more/modal-see-more';
+import ModalMessage from '../../../modal-message/modal-message';
 
 
 export default class Match extends Component {
@@ -76,8 +77,7 @@ export default class Match extends Component {
         <Modal
           isOpen={this.state.messageOpen}
           closeModalHandler={this.closeModalClicked}
-          ChildComponent={ModalSeeMore}
-          childComponentsProps={seeMoreModalProps}
+          ChildComponent={ModalMessage}
         />
       </div>
     );
