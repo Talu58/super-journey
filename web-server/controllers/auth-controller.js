@@ -5,24 +5,25 @@ const { createRole, createIndustry, createProject } = require('../utils/utils-pr
 const { generateHashedPassword, compareHashedPassword } = require('../utils/utils-auth');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const path = require('path');
 const multer  = require('multer');
 const storage = multer.diskStorage({
-        destination: '../../uploads',
-        filename: function (req, file, cb) {
-            switch (file.mimetype) {
-                case 'image/jpeg':
-                    ext = '.jpeg';
-                    break;
-                case 'image/png':
-                    ext = '.png';
-                    break;
-            }
-            cb(null, file.originalname + ext);
-        }
-    });
+  destination: path.join(__dirname, '/../../uploads'),
+  filename: function (req, file, cb) {
+    let ext = '';
+    switch (file.mimetype) {
+      case 'image/jpeg':
+        ext = '.jpeg';
+        break;
+      case 'image/png':
+        ext = '.png';
+        break;
+    }
+    cb(null, file.originalname + ext);
+  }
+});
 
 var upload = multer({storage: storage}).single('upload');
-
 
 module.exports.signUpRequest = (req, res) => {
   const { email, password, firstname, lastname } = req.body;
