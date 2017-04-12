@@ -9,9 +9,11 @@ export default class Match extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      seeMoreOpen: false
+      seeMoreOpen: false,
+      messageOpen: false
     }
     this.seeMoreClicked = this.seeMoreClicked.bind(this);
+    this.messageClicked = this.messageClicked.bind(this);
     this.closeModalClicked = this.closeModalClicked.bind(this);
   }
 
@@ -21,9 +23,16 @@ export default class Match extends Component {
     });
   }
 
+  messageClicked() {
+    this.setState({
+      messageOpen: true
+    });
+  }
+
   closeModalClicked() {
     this.setState({
-      seeMoreOpen: false
+      seeMoreOpen: false,
+      messageOpen: false
     });
   }
 
@@ -55,10 +64,17 @@ export default class Match extends Component {
           <Button
             value="Message"
             styleClassName="button-primary"
+            clickHandler={this.messageClicked}
           />
         </section>
         <Modal
           isOpen={this.state.seeMoreOpen}
+          closeModalHandler={this.closeModalClicked}
+          ChildComponent={ModalSeeMore}
+          childComponentsProps={seeMoreModalProps}
+        />
+        <Modal
+          isOpen={this.state.messageOpen}
           closeModalHandler={this.closeModalClicked}
           ChildComponent={ModalSeeMore}
           childComponentsProps={seeMoreModalProps}
