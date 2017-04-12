@@ -11,54 +11,65 @@ class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      emailInputFieldValue: '',
-      passwordInputFieldValue: '',
-      emailFieldIncomplete: false,
-      passwordFieldIncomplete: false,
+      inputFieldsValues: {
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: ''
+      },
+      FieldIncomplete: {
+        firstname: false,
+        lastname: false,
+        email: false,
+        password: false
+      }
     };
 
     this.inputFieldChangeHandler = this.inputFieldChangeHandler.bind(this);
+    this.isFormValid = this.isFormValid.bind(this);
     this.submitSignupHandler = this.submitSignupHandler.bind(this);
   }
 
   inputFieldChangeHandler = e => {
-    if (e.target.type === 'email') {
-      let newEmailValue = e.target.value;
-      this.setState({
-        emailInputFieldValue: newEmailValue
-      });
-    } else if (e.target.type === 'password') {
-      let newPasswordValue = e.target.value;
-      this.setState({
-        passwordInputFieldValue: newPasswordValue
-      });
+    let newInputFieldValue = e.target.value;
+    let newInputFieldsValues = {
+      ...this.state.inputFieldsValues
+    };
+    newInputFieldsValues[e.target.name] = newInputFieldValue;
+    this.setState({
+      inputFieldsValues: newInputFieldsValues
+    });
+  }
+
+  isFormValid() {
+    for (let key in this.state.inputFieldsValues) {
+      if (this.state.inputFieldsValues[key] === '') {
+        return false;
+      }
     }
+    return true;
   }
 
   submitSignupHandler() {
-    const props = this.state;    
-    if (this.state.emailInputFieldValue === '' && this.state.passwordInputFieldValue === '') {
-      this.setState({
-        emailFieldIncomplete: true,
-        passwordFieldIncomplete: true
-      });
-    } else if (this.state.emailInputFieldValue === '') {
-      this.setState({
-        emailFieldIncomplete: true,
-        passwordFieldIncomplete: false
-      });
-    } else if (this.state.passwordInputFieldValue === '') {
-      this.setState({
-        emailFieldIncomplete: false,
-        passwordFieldIncomplete: true
-      });
-    } else {
+    const isValid = this.isFormValid();
+    if (isValid) {
       const { userSignUpRequest } = this.props;
       const newUser = {
-        email: this.state.emailInputFieldValue,
-        password: this.state.passwordInputFieldValue
+        ...this.state.inputFieldsValues
       };
-      userSignUpRequest(newUser)
+      userSignUpRequest(newUser);
+    } else {
+      let newFieldIncomplete = this.state.FieldIncomplete;
+      for (let key in this.state.inputFieldsValues) {
+        if (this.state.inputFieldsValues[key] === '') {
+          newFieldIncomplete[key] = true;
+        } else {
+          newFieldIncomplete[key] = false;
+        }
+      }
+      this.setState({
+        FieldIncomplete: newFieldIncomplete
+      });
     }
   }
 
@@ -74,22 +85,46 @@ class SignUpForm extends Component {
           <h1 className="signup-header">Don't have an account yet? Sign-up here:</h1>
           <div className="signup-inputfields-container">
             <InputField 
+              placeholderText="Firstname"
+              name="firstname"
+              type="text"
+              changeHandler={this.inputFieldChangeHandler}
+              value={this.state.inputFieldsValues.firstname}
+            />
+            {this.state.FieldIncomplete.firstname ?
+              <span className="signup-error-message">* Firstname field required</span>
+              : null
+            }
+            <InputField 
+              placeholderText="Lastname"
+              name="lastname"
+              type="text"
+              changeHandler={this.inputFieldChangeHandler}
+              value={this.state.inputFieldsValues.lastname}
+            />
+            {this.state.FieldIncomplete.lastname ?
+              <span className="signup-error-message">* Lastname field required</span>
+              : null
+            }
+            <InputField 
               placeholderText="Email"
+              name="email"
               type="email"
               changeHandler={this.inputFieldChangeHandler}
-              value={this.state.emailInputFieldValue}
+              value={this.state.inputFieldsValues.email}
             />
-            {this.state.emailFieldIncomplete ?
+            {this.state.FieldIncomplete.email ?
               <span className="signup-error-message">* Email field required</span>
               : null
             }
             <InputField 
               placeholderText="Password"
+              name="password"
               type="password"
               changeHandler={this.inputFieldChangeHandler}
-              value={this.state.passwordInputFieldValue}
+              value={this.state.inputFieldsValues.password}
             />
-            {this.state.passwordFieldIncomplete ?
+            {this.state.FieldIncomplete.password ?
               <span className="signup-error-message">* Password field required</span>
               : null
             }

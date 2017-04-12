@@ -25,7 +25,7 @@ var upload = multer({storage: storage}).single('upload');
 
 
 module.exports.signUpRequest = (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, firstname, lastname } = req.body;
   User.findOne({ 'email': email }, (err, user) => {
     if (err) {
       throw err;
@@ -43,6 +43,9 @@ module.exports.signUpRequest = (req, res) => {
     } else {
       const newUser = new User;
       newUser.email = email;
+      newUser.firstname = firstname;
+      newUser.lastname = lastname;
+
       generateHashedPassword(password).then(hash => {
         newUser.password = hash;
       }).then( () => {
