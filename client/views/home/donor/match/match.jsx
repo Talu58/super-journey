@@ -15,6 +15,7 @@ export default class Match extends Component {
           })}
         </section>
         <h3 className="match-title">{title}</h3>
+        <hr className="match-separator" />
         <p className="match-description">{description}</p>
         <section className="match-action-container">
           <Button

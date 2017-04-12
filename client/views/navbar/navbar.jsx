@@ -51,7 +51,7 @@ export default class NavBar extends Component {
               <Link to="/home" className="nav-link" >
                 <Button
                   name="home"
-                  value="Home"
+                  value="HOME"
                   containerStyleClassName="nav-button-container"
                   styleClassName="nav-button"
                   active={this.state.nav.home}
@@ -61,7 +61,7 @@ export default class NavBar extends Component {
               <Link to="/profile" className="nav-link" >
                 <Button
                   name="profile"
-                  value="Profile"
+                  value="PROFILE"
                   containerStyleClassName="nav-button-container"
                   styleClassName="nav-button"
                   active={this.state.nav.profile}
@@ -74,7 +74,7 @@ export default class NavBar extends Component {
           {isAuth ? 
             <div className="nav-link nav-link-logout" >
               <Button
-                value="Logout"
+                value="LOGOUT"
                 clickHandler={this.logout}
                 containerStyleClassName="nav-button-container"
                 styleClassName="nav-button"
