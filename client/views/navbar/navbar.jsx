@@ -72,7 +72,7 @@ export default class NavBar extends Component {
             : null
           }
           {isAuth ? 
-            <div className="nav-link" >
+            <div className="nav-link nav-link-logout" >
               <Button
                 value="Logout"
                 clickHandler={this.logout}
