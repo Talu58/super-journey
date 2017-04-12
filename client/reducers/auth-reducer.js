@@ -23,7 +23,9 @@ export default (state = initialState, action) => {
         ...state,
         isAuth: true,
         completedProfile: action.data.completedProfile,
-        email: action.data.email
+        email: action.data.email,
+        firstname: action.data.firstname,
+        lastname: action.data.lastname
       };
     case USER_COMPLETED_SIGN_UP_REQUEST:
       console.log('USER_COMPLETED_SIGN_UP_REQUEST dispatched', action.data);
@@ -51,7 +53,9 @@ export default (state = initialState, action) => {
         email: action.data.email,
         role: action.data.role,
         industry: action.data.industry,
-        project: action.data.project
+        project: action.data.project,
+        firstname: action.data.firstname,
+        lastname: action.data.lastname
       };
       return newLoginState;
       break;
@@ -80,7 +84,9 @@ export default (state = initialState, action) => {
         role: action.data.role,
         industry: action.data.industry,
         project: action.data.project,
-        completedProfile: action.data.completedProfile
+        completedProfile: action.data.completedProfile,
+        firstname: action.data.firstname,
+        lastname: action.data.lastname
       };
       break;
     default:
