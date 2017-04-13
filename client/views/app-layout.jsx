@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import NavBar from './navbar/navbar';
 import LandingPage from './landing-page/landing-page';
-import Footer from './footer/footer';
 import SignUpSteps from './signup-steps/signup-steps';
 import Home from './home/home';
 import Profile from './profile/profile';
@@ -28,7 +27,6 @@ export class AppLayout extends Component {
           <PrivateRoute path="/home" component={Home} isAuth={isAuth} />
           <PrivateRoute path="/profile" component={Profile} isAuth={isAuth} />
         </main>
-        <Footer />
       </div>
     );
   }
