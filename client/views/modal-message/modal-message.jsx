@@ -18,6 +18,7 @@ export default class ModalMessage extends Component {
       }
     }
     this.inputFieldChangeHandler = this.inputFieldChangeHandler.bind(this);
+    this.isFormValid = this.isFormValid.bind(this);
     this.sendButtonClicked = this.sendButtonClicked.bind(this);
   }
 
@@ -64,19 +65,6 @@ export default class ModalMessage extends Component {
       console.log('newMessage', newMessage);
       closeModal();
     } 
-    // else {
-    //   let newFieldIncomplete = this.state.fieldIncomplete;
-    //   for (let key in this.state.inputFieldsValues) {
-    //     if (this.state.inputFieldsValues[key] === '') {
-    //       newFieldIncomplete[key] = true;
-    //     } else {
-    //       newFieldIncomplete[key] = '';
-    //     }
-    //   }
-    //   this.setState({
-    //     fieldIncomplete: newFieldIncomplete
-    //   });
-    // }
   }
 
   render() {

@@ -10,53 +10,59 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      emailInputFieldValue: '',
-      passwordInputFieldValue: '',
-      emailFieldIncomplete: false,
-      passwordFieldIncomplete: false,
+      inputFieldsValues: {
+        email: '',
+        password: '',
+      },
+      errors: {
+        email: '',
+        password: '',
+      },
     }
     this.inputFieldChangeHandler = this.inputFieldChangeHandler.bind(this);
+    this.isFormValid = this.isFormValid.bind(this);
     this.submitLoginHandler = this.submitLoginHandler.bind(this);
   }
 
   inputFieldChangeHandler = e => {
-    if (e.target.type === 'email') {
-      let newEmailValue = e.target.value;
+    let newInputFieldValue = e.target.value;
+    let newInputFieldsValues = {
+      ...this.state.inputFieldsValues
+    };
+    newInputFieldsValues[e.target.name] = newInputFieldValue;
+    this.setState({
+      inputFieldsValues: newInputFieldsValues
+    });  
+  }
+
+  isFormValid() {
+    let isValid = true;
+    for (let key in this.state.inputFieldsValues) {
+      const newErrors = this.state.errors;
+      let errorMessage;
+      if (this.state.inputFieldsValues[key] === '') {
+        errorMessage = `* ${key} field is required`;
+        isValid = false;
+      } else {
+        errorMessage = '';
+      }
+      newErrors[key] = errorMessage;
       this.setState({
-        emailInputFieldValue: newEmailValue
-      });
-    } else if (e.target.type === 'password') {
-      let newPasswordValue = e.target.value;
-      this.setState({
-        passwordInputFieldValue: newPasswordValue
+        error: newErrors
       });
     }
+    return isValid;
   }
 
   submitLoginHandler() {
-    const props = this.state;    
-    if (this.state.emailInputFieldValue === '' && this.state.passwordInputFieldValue === '') {
-      this.setState({
-        emailFieldIncomplete: true,
-        passwordFieldIncomplete: true
-      });
-    } else if (this.state.emailInputFieldValue === '') {
-      this.setState({
-        emailFieldIncomplete: true,
-        passwordFieldIncomplete: false
-      });
-    } else if (this.state.passwordInputFieldValue === '') {
-      this.setState({
-        emailFieldIncomplete: false,
-        passwordFieldIncomplete: true
-      });
-    } else {
+    const isValid = this.isFormValid();
+    if (isValid) {
       const { userLoginRequest } = this.props;
       const user = {
         email: this.state.emailInputFieldValue,
         password: this.state.passwordInputFieldValue
       };
-      userLoginRequest(user)
+      userLoginRequest(user);
     }
   }
 
@@ -73,30 +79,33 @@ class LoginForm extends Component {
               <InputField
                 placeholderText="Email address"
                 type="email"
+                name="email"
                 changeHandler={this.inputFieldChangeHandler}
                 value={this.state.emailInputFieldValue}
                 containerStyleClassName="login-form-input-field-container"
               />
-              {this.state.emailFieldIncomplete ?
-                <span className="login-error-message">* Email field required</span>
-                : null
+              {this.state.errors.email !== '' ?
+                <p className="login-error-message">{this.state.errors.email}</p>
+                : <p className="login-error-message"></p>
               }
             </div>
             <div className="login-form-field-container">
               <InputField
                 placeholderText="Password"
                 type="password"
+                name="password"
                 changeHandler={this.inputFieldChangeHandler}
                 value={this.state.passwordInputFieldValue}
                 containerStyleClassName="login-form-input-field-container"
               />
-              {this.state.passwordFieldIncomplete ?
-                <span className="login-error-message">* Password field required</span>
-                : null
+              {this.state.errors.password !== '' ?
+                <p className="login-error-message">{this.state.errors.password}</p>
+                : <p className="login-error-message"></p>
               }
             </div>
             <Button
               value="Login"
+              containerStyleClassName="navbar-login-button-container"
               styleClassName="button-primary navbar-login-button"
               clickHandler={this.submitLoginHandler}
             />
