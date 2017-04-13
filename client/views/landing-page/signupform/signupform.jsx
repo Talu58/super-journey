@@ -137,7 +137,7 @@ class SignUpForm extends Component {
           </section>
           <Button 
             value="Sign-up"
-            styleClassName="button-primary"
+            styleClassName="signup-form-button"
             clickHandler={this.submitSignupHandler}
           />
         </div>

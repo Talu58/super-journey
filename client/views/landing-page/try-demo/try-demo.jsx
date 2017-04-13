@@ -30,7 +30,7 @@ class TryDemo extends Component {
         <Button
           value="Try our Demo"
           clickHandler={this.demoButtonClicked}
-          styleClassName="button-primary"
+          styleClassName="try-demo-button"
         />
         <p className="try-demo-text" >Get setup with a dummy account and test our interface!</p>
       </div>
