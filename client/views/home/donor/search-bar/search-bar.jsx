@@ -91,8 +91,8 @@ export default class SearchBar extends Component {
               value={this.state.searchbarValue}
             />
             { this.state.searchIsEmpty ? 
-              <span className="search-error-message">* Search field required</span>
-              : null
+              <p className="search-error-message">* Search field required</p>
+              : <p className="search-error-message"></p>
             }
             <Button
               value="Search"
