@@ -59,8 +59,7 @@ class LoginForm extends Component {
     if (isValid) {
       const { userLoginRequest } = this.props;
       const user = {
-        email: this.state.emailInputFieldValue,
-        password: this.state.passwordInputFieldValue
+        ...this.state.inputFieldsValues
       };
       userLoginRequest(user);
     }
