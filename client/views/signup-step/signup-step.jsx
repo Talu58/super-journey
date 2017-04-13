@@ -3,26 +3,24 @@ import './_signup-step.sass';
 import Button from '../../components/button/button';
 
 export default class SignupStep extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
-  }
   render() {
     const { buttons, clickHandler, disabled } = this.props;
     return (
       <div className="signup-step-buttons-container">
-        {Object.keys(buttons).map(button => (
-            <Button 
-              key={button}
-              value={button}
-              disabled={disabled && !buttons[button]}
-              clickHandler={clickHandler}
-              name={button}
-              active={buttons[button]}
-              styleClassName="button-signup-step-option"
+        {Object.keys(buttons).map(button => {
+          const buttonNameFormatted = button.replace(/\s/g, '').toLowerCase();
+          return (
+              <Button 
+                key={button}
+                value={button}
+                disabled={disabled && !buttons[button]}
+                clickHandler={clickHandler}
+                name={button}
+                active={buttons[button]}
+                styleClassName={`button-signup-step-option button-signup-step-option-${buttonNameFormatted}`}
               />
-          )
+          );
+        }
         )}
       </div>
     )
