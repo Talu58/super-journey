@@ -48,6 +48,7 @@ export default class Match extends Component {
     const messageModalProps = {
       email,
       firstname,
+      closeModal: this.closeModalClicked
     }
     return (
       <div className="match-container">

@@ -10,8 +10,11 @@ export default class ModalMessage extends Component {
     this.sendButtonClicked = this.sendButtonClicked.bind(this);
   }
 
-  sendButtonClicked() {
+  sendButtonClicked(e) {
+    e.preventDefault();
+    const { props: { closeModal } } = this.props;
     console.log('message sent');
+    closeModal();
   }
 
   render() {
