@@ -22,7 +22,6 @@ export default class ModalMessage extends Component {
     return (
       <div>
           <h1 className="message-modal-title">Send a message to {firstname}</h1>
-          <hr className="message-modal-separator" />
           <form className="message-modal-form">
             <InputField
               placeholderText="Subject"
