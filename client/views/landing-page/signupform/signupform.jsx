@@ -17,7 +17,7 @@ class SignUpForm extends Component {
         email: '',
         password: ''
       },
-      FieldIncomplete: {
+      fieldIncomplete: {
         firstname: false,
         lastname: false,
         email: false,
@@ -59,7 +59,7 @@ class SignUpForm extends Component {
       };
       userSignUpRequest(newUser);
     } else {
-      let newFieldIncomplete = this.state.FieldIncomplete;
+      let newFieldIncomplete = this.state.fieldIncomplete;
       for (let key in this.state.inputFieldsValues) {
         if (this.state.inputFieldsValues[key] === '') {
           newFieldIncomplete[key] = true;
@@ -68,7 +68,7 @@ class SignUpForm extends Component {
         }
       }
       this.setState({
-        FieldIncomplete: newFieldIncomplete
+        fieldIncomplete: newFieldIncomplete
       });
     }
   }
@@ -91,7 +91,7 @@ class SignUpForm extends Component {
               changeHandler={this.inputFieldChangeHandler}
               value={this.state.inputFieldsValues.firstname}
             />
-            {this.state.FieldIncomplete.firstname ?
+            {this.state.fieldIncomplete.firstname ?
               <span className="signup-error-message">* Firstname field required</span>
               : null
             }
@@ -102,7 +102,7 @@ class SignUpForm extends Component {
               changeHandler={this.inputFieldChangeHandler}
               value={this.state.inputFieldsValues.lastname}
             />
-            {this.state.FieldIncomplete.lastname ?
+            {this.state.fieldIncomplete.lastname ?
               <span className="signup-error-message">* Lastname field required</span>
               : null
             }
@@ -113,7 +113,7 @@ class SignUpForm extends Component {
               changeHandler={this.inputFieldChangeHandler}
               value={this.state.inputFieldsValues.email}
             />
-            {this.state.FieldIncomplete.email ?
+            {this.state.fieldIncomplete.email ?
               <span className="signup-error-message">* Email field required</span>
               : null
             }
@@ -124,7 +124,7 @@ class SignUpForm extends Component {
               changeHandler={this.inputFieldChangeHandler}
               value={this.state.inputFieldsValues.password}
             />
-            {this.state.FieldIncomplete.password ?
+            {this.state.fieldIncomplete.password ?
               <span className="signup-error-message">* Password field required</span>
               : null
             }

@@ -38,7 +38,7 @@ export default class Match extends Component {
   }
 
   render() {
-    const { title, description, industryNames, firstname, email } = this.props;
+    const { title, description, industryNames, matchFirstname, matchEmail, userEmail } = this.props;
     const industryNamesKeys = Object.keys(industryNames);
     const seeMoreModalProps = {
       title,
@@ -46,8 +46,9 @@ export default class Match extends Component {
       industryNames: industryNamesKeys
     };
     const messageModalProps = {
-      email,
-      firstname,
+      matchEmail,
+      matchFirstname,
+      userEmail,
       closeModal: this.closeModalClicked
     }
     return (
@@ -93,5 +94,6 @@ export default class Match extends Component {
 Match.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  industryNames: PropTypes.object.isRequired
+  industryNames: PropTypes.object.isRequired,
+  userEmail: PropTypes.string.isRequired
 };

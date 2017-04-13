@@ -5,7 +5,7 @@ import Matches from './matches/matches';
 
 export default class Donor extends Component {
   render() {
-    const { industries, firstname, matchesResult, searchCheckboxClicked, isFiltering, searchRequest, fetchAllProjects, fetchUserMatches, allProjectsResults, userMatchesDisplayed, industriesList } = this.props;
+    const { industries, userFirstname, userEmail, matchesResult, searchCheckboxClicked, isFiltering, searchRequest, fetchAllProjects, fetchUserMatches, allProjectsResults, userMatchesDisplayed, industriesList } = this.props;
     return (
       <div className="donor-view-container">
         <div className="matches-view-container">
@@ -13,11 +13,12 @@ export default class Donor extends Component {
             matchesResult={matchesResult}
             isFiltering={isFiltering}
             industriesList={industriesList}
+            userEmail={userEmail}
           />
         </div>
         <div className="search-bar-view-container">
           <SearchBar
-            firstname={firstname}
+            userFirstname={userFirstname}
             fetchAllProjects={fetchAllProjects}
             fetchUserMatches={fetchUserMatches}
             industries={industries}
@@ -34,7 +35,8 @@ export default class Donor extends Component {
 
 Donor.propTypes = {
   fetchAllProjects: PropTypes.func.isRequired,
-  firstname: PropTypes.string,
+  userFirstname: PropTypes.string,
+  userEmail: PropTypes.string,
   fetchUserMatches: PropTypes.func.isRequired,
   industries: PropTypes.array.isRequired,
   searchCheckboxClicked: PropTypes.func.isRequired,
