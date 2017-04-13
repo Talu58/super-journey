@@ -12,9 +12,9 @@ export default class ModalMessage extends Component {
         subject: '',
         message: '',
       },
-      fieldIncomplete: {
-        subject: false,
-        message: false,
+      errors: {
+        subject: '',
+        message: '',
       }
     }
     this.inputFieldChangeHandler = this.inputFieldChangeHandler.bind(this);
@@ -33,12 +33,22 @@ export default class ModalMessage extends Component {
   }
 
   isFormValid() {
+    let isValid = true;
     for (let key in this.state.inputFieldsValues) {
+      const newErrors = this.state.errors;
+      let errorMessage;
       if (this.state.inputFieldsValues[key] === '') {
-        return false;
+        errorMessage = `* ${key} field is required`;
+        isValid = false;
+      } else {
+        errorMessage = '';
       }
+      newErrors[key] = errorMessage;
+      this.setState({
+        error: newErrors
+      });
     }
-    return true;
+    return isValid;
   }
 
   sendButtonClicked(e) {
@@ -53,19 +63,20 @@ export default class ModalMessage extends Component {
       };
       console.log('newMessage', newMessage);
       closeModal();
-    } else {
-      let newFieldIncomplete = this.state.fieldIncomplete;
-      for (let key in this.state.inputFieldsValues) {
-        if (this.state.inputFieldsValues[key] === '') {
-          newFieldIncomplete[key] = true;
-        } else {
-          newFieldIncomplete[key] = false;
-        }
-      }
-      this.setState({
-        fieldIncomplete: newFieldIncomplete
-      });
-    }
+    } 
+    // else {
+    //   let newFieldIncomplete = this.state.fieldIncomplete;
+    //   for (let key in this.state.inputFieldsValues) {
+    //     if (this.state.inputFieldsValues[key] === '') {
+    //       newFieldIncomplete[key] = true;
+    //     } else {
+    //       newFieldIncomplete[key] = '';
+    //     }
+    //   }
+    //   this.setState({
+    //     fieldIncomplete: newFieldIncomplete
+    //   });
+    // }
   }
 
   render() {
@@ -83,22 +94,22 @@ export default class ModalMessage extends Component {
               name="subject"
               type="text"
             />
-            {this.state.fieldIncomplete.subject ?
-              <span className="message-error-message">* Subject field required</span>
-              : null
+            {this.state.errors.subject !== '' ?
+              <p className="message-error-message">{this.state.errors.subject}</p>
+              : <p className="message-error-message"></p>
             }
             <TextAreaField
               placeholderText="Enter your message here..."
               containerStyleClassName="message-modal-text-area-container"
               styleClassName="message-modal-text-area"
-              rows={17}
+              rows={14}
               changeHandler={this.inputFieldChangeHandler}
               value={this.state.inputFieldsValues.message}
               name="message"
             />
-            {this.state.fieldIncomplete.message ?
-              <span className="message-error-message">* Message field required</span>
-              : null
+            {this.state.errors.message !== '' ?
+              <p className="message-error-message">{this.state.errors.message}</p>
+              : <p className="message-error-message"></p>
             }
             <Button
               value="Send"

@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import NavBar from './navbar/navbar';
-import SignUpForm from './signupform/signupform';
 import LandingPage from './landing-page/landing-page';
 import Footer from './footer/footer';
 import SignUpSteps from './signup-steps/signup-steps';
