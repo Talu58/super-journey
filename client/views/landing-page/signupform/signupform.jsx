@@ -17,11 +17,11 @@ class SignUpForm extends Component {
         email: '',
         password: ''
       },
-      fieldIncomplete: {
-        firstname: false,
-        lastname: false,
-        email: false,
-        password: false
+      errors: {
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: ''
       }
     };
 
@@ -42,12 +42,22 @@ class SignUpForm extends Component {
   }
 
   isFormValid() {
+    let isValid = true;
     for (let key in this.state.inputFieldsValues) {
+      const newErrors = this.state.errors;
+      let errorMessage;
       if (this.state.inputFieldsValues[key] === '') {
-        return false;
+        errorMessage = `* ${key} field is required`;
+        isValid = false;
+      } else {
+        errorMessage = '';
       }
+      newErrors[key] = errorMessage;
+      this.setState({
+        error: newErrors
+      });
     }
-    return true;
+    return isValid;
   }
 
   submitSignupHandler() {
@@ -58,18 +68,6 @@ class SignUpForm extends Component {
         ...this.state.inputFieldsValues
       };
       userSignUpRequest(newUser);
-    } else {
-      let newFieldIncomplete = this.state.fieldIncomplete;
-      for (let key in this.state.inputFieldsValues) {
-        if (this.state.inputFieldsValues[key] === '') {
-          newFieldIncomplete[key] = true;
-        } else {
-          newFieldIncomplete[key] = false;
-        }
-      }
-      this.setState({
-        fieldIncomplete: newFieldIncomplete
-      });
     }
   }
 
@@ -83,57 +81,65 @@ class SignUpForm extends Component {
         <Redirect to="/signup"/>
         : <div className="signup-container">
           <h1 className="signup-header">Don't have an account yet? Sign-up here:</h1>
-          <div className="signup-inputfields-container">
-            <InputField 
-              placeholderText="Firstname"
-              name="firstname"
-              type="text"
-              changeHandler={this.inputFieldChangeHandler}
-              value={this.state.inputFieldsValues.firstname}
-            />
-            {this.state.fieldIncomplete.firstname ?
-              <span className="signup-error-message">* Firstname field required</span>
-              : null
-            }
-            <InputField 
-              placeholderText="Lastname"
-              name="lastname"
-              type="text"
-              changeHandler={this.inputFieldChangeHandler}
-              value={this.state.inputFieldsValues.lastname}
-            />
-            {this.state.fieldIncomplete.lastname ?
-              <span className="signup-error-message">* Lastname field required</span>
-              : null
-            }
-            <InputField 
-              placeholderText="Email"
-              name="email"
-              type="email"
-              changeHandler={this.inputFieldChangeHandler}
-              value={this.state.inputFieldsValues.email}
-            />
-            {this.state.fieldIncomplete.email ?
-              <span className="signup-error-message">* Email field required</span>
-              : null
-            }
-            <InputField 
-              placeholderText="Password"
-              name="password"
-              type="password"
-              changeHandler={this.inputFieldChangeHandler}
-              value={this.state.inputFieldsValues.password}
-            />
-            {this.state.fieldIncomplete.password ?
-              <span className="signup-error-message">* Password field required</span>
-              : null
-            }
-            <Button 
-              value="Sign-up"
-              styleClassName="button-primary"
-              clickHandler={this.submitSignupHandler}
-            />
-          </div>
+          <section className="signup-inputfields-container">
+            <div className="signup-input-field-container">
+              <InputField 
+                placeholderText="Firstname"
+                name="firstname"
+                type="text"
+                changeHandler={this.inputFieldChangeHandler}
+                value={this.state.inputFieldsValues.firstname}
+              />
+              {this.state.errors.firstname ?
+                <p className="signup-error-message">{this.state.errors.firstname}</p>
+                : <p className="signup-error-message"></p>
+              }
+            </div>
+            <div className="signup-input-field-container">
+              <InputField 
+                placeholderText="Lastname"
+                name="lastname"
+                type="text"
+                changeHandler={this.inputFieldChangeHandler}
+                value={this.state.inputFieldsValues.lastname}
+              />
+              {this.state.errors.lastname ?
+                <p className="signup-error-message">{this.state.errors.lastname}</p>
+                : <p className="signup-error-message"></p>
+              }
+            </div>
+            <div className="signup-input-field-container">
+              <InputField 
+                placeholderText="Email"
+                type="email"
+                name="email"
+                changeHandler={this.inputFieldChangeHandler}
+                value={this.state.inputFieldsValues.email}
+              />
+              {this.state.errors.email ?
+                <p className="signup-error-message">{this.state.errors.email}</p>
+                : <p className="signup-error-message"></p>
+              }
+            </div>
+            <div className="signup-input-field-container">
+              <InputField 
+                placeholderText="Password"
+                type="password"
+                name="password"
+                changeHandler={this.inputFieldChangeHandler}
+                value={this.state.inputFieldsValues.password}
+              />
+              {this.state.errors.password ?
+                <p className="signup-error-message">{this.state.errors.password}</p>
+                : <p className="signup-error-message"></p>
+              }
+            </div>
+          </section>
+          <Button 
+            value="Sign-up"
+            styleClassName="button-primary"
+            clickHandler={this.submitSignupHandler}
+          />
         </div>
         )}
         </div>
