@@ -61,7 +61,6 @@ export function userUploadedImage(file) {
 
 export function userLoginRequest(user) {
   return dispatch => {
-    console.log('user', user);
     return authentication.loginRequest(user)
       .then( userInfo => {
         const token = userInfo.data.token;

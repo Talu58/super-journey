@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 import './_signupform.sass';
-import { userSignUpRequest } from '../../actions/auth/authActions';
-import InputField from '../../components/input-field/input-field';
-import Button from '../../components/button/button';
+import { userSignUpRequest } from '../../../actions/auth/authActions';
+import InputField from '../../../components/input-field/input-field';
+import Button from '../../../components/button/button';
 
 class SignUpForm extends Component {
   constructor(props) {

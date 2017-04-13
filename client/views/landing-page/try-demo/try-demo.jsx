@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import './_try-demo.sass';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { loginDemoUser } from '../../actions/auth/authActions';
-import Button from '../../components/button/button';
+import { loginDemoUser } from '../../../actions/auth/authActions';
+import Button from '../../../components/button/button';
 import axios from 'axios';
 
 class TryDemo extends Component {
