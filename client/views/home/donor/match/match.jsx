@@ -38,10 +38,10 @@ export default class Match extends Component {
   }
 
   render() {
-    const { title, description, industryNames, matchFirstname, matchEmail, userEmail } = this.props;
+    const { name, description, industryNames, matchFirstname, matchEmail, userEmail } = this.props;
     const industryNamesKeys = Object.keys(industryNames);
     const seeMoreModalProps = {
-      title,
+      name,
       description,
       industryNames: industryNamesKeys
     };
@@ -59,7 +59,7 @@ export default class Match extends Component {
             return <p key={industryName} className={`industry-name-bullet industry-name-bullet-${industryNameFormatted}`}></p>
           })}
         </section>
-        <h3 className="match-title">{title}</h3>
+        <h3 className="match-name">{name}</h3>
         <hr className="match-separator" />
         <p className="match-description">{description}</p>
         <section className="match-action-container">
@@ -92,7 +92,7 @@ export default class Match extends Component {
 };
 
 Match.propTypes = {
-  title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   industryNames: PropTypes.object.isRequired,
   userEmail: PropTypes.string.isRequired

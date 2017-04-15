@@ -12,11 +12,11 @@ export default class OrganizationForm extends Component {
         <form className="organization-form">
           <InputField 
             changeHandler={changeHandler}
-            placeholderText="Enter your Organization Title"
+            placeholderText="Enter your Organization Name"
             styleClassName="organization-form-input-field"
             containerStyleClassName="organization-form-input-field-container"
-            name="title"
-            value={values.title}
+            name="name"
+            value={values.name}
             type="text"
           />
           <TextAreaField

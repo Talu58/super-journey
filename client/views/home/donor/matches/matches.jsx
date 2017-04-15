@@ -29,12 +29,12 @@ export default class Matches extends Component {
           <p>We don't have any match for your profile at the moment. Use our side bar to find other organizations</p>
           : 
           <section className="matches-container" >
-            {matchesResult.map(({ title, description, industryNames, firstname, email }) => {
+            {matchesResult.map(({ name, description, industryNames, firstname, email }) => {
               return (
                 <Match
                   industryNames={industryNames}
-                  key={title + Math.random() * 1000}
-                  title={title}
+                  key={name + Math.random() * 1000}
+                  name={name}
                   description={description}
                   matchFirstname={firstname}
                   matchEmail={email}

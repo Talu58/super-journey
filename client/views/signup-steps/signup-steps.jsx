@@ -15,7 +15,7 @@ class SignUpSteps extends Component {
       step: 1,
       role: { Donor: false, 'Non-Profit Organisation': false },
       industry: {Healthcare: false, Tech: false, Climate: false, Inclusion: false, 'Global Change': false},
-      organization: {title: '', description: ''},
+      organization: {name: '', description: ''},
       file: {},
       hasRole: false,
       hasCompletedStep: false
@@ -71,7 +71,7 @@ class SignUpSteps extends Component {
       ...organization,
       [e.target.name]: e.target.value
     };
-    if (newState.title !== '' && newState.description !== '') {
+    if (newState.name !== '' && newState.description !== '') {
       this.setState({
         organization: newState,
         hasCompletedStep: true

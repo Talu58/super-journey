@@ -3,10 +3,10 @@ import './_modal-see-more.sass';
 
 export default class ModalSeeMore extends Component {
   render() {
-    const { props: { title, description, industryNames } } = this.props;
+    const { props: { name, description, industryNames } } = this.props;
     return (
       <div>
-          <h1 className="see-more-modal-title">{title}</h1>
+          <h1 className="see-more-modal-name">{name}</h1>
           {industryNames.map(industryName => {
             const industryNameFormatted = industryName.replace(/\s/g, '').toLowerCase();
             return <span key={industryName} className={`match-industry-tags match-industry-tags-${industryNameFormatted}`}>{industryName}</span>

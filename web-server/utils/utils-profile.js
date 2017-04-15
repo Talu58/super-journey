@@ -25,7 +25,7 @@ module.exports.createIndustry = industry => {
 module.exports.createOrganization = organization => {
   let newOrganization = new Organization;
   newOrganization = {
-    title: organization.title,
+    name: organization.name,
     description: organization.description
   };
   return newOrganization;

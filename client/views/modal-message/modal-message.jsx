@@ -71,7 +71,7 @@ export default class ModalMessage extends Component {
     const { props: { matchFirstname } } = this.props
     return (
       <div>
-          <h1 className="message-modal-title">Send a message to {matchFirstname}</h1>
+          <h1 className="message-modal-name">Send a message to {matchFirstname}</h1>
           <form className="message-modal-form">
             <InputField
               placeholderText="Subject"

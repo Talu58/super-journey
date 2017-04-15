@@ -88,7 +88,7 @@ module.exports.signUpCompletedRequest = (req, res) => {
       user.role = newRole;
       user.industry = newIndustry;
 
-      if(organization.title !== '') {
+      if(organization.name !== '') {
         user.organization = newOrganization;
       }
   
@@ -137,7 +137,7 @@ module.exports.loginRequest = (req, res) => {
               industry,
               token
             };
-            if (organization && organization.title !== '') {
+            if (organization && organization.name !== '') {
               userData.organization = organization;
             }
             return res.send(userData);
