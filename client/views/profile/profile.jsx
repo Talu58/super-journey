@@ -1,22 +1,40 @@
 import React, { Component, PropTypes } from 'react';
 import './_profile.sass';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import Button from '../../components/button/button';
+import { getUserInformation } from '../../actions/auth/authActions';
+import jwt from 'jsonwebtoken';
 
 class Profile extends Component {
+
+  componentWillMount() {
+    const { getUserInformation } = this.props;
+    const { email } = jwt.decode(localStorage.jwtToken);
+    getUserInformation(email);
+  }
+
   render() {
     const { role, email, firstname, lastname } = this.props;
     return (
-      <div>
-        <p>Firstname: {firstname}</p>
-        <p>Lastname: {lastname}</p>
-        <p>Email: {email}</p>
+      <div className="profile-container">
+        <h1 className="profile-information-header">Your Profile information:</h1>
+        <section className="profile-information-container">
+          <p>Firstname: {firstname}</p>
+          <p>Lastname: {lastname}</p>
+          <p>Email: {email}</p>
+        </section>
+        <Button
+          value="Edit"
+          styleClassName="profile-edit-button"
+        />
       </div>
     );
   }
 };
 
 Profile.propTypes = {
-  role: PropTypes.object.isRequired,
+  role: PropTypes.object,
   email: PropTypes.string.isRequired,
   firstname: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired
@@ -31,4 +49,8 @@ const mapStateToProps = ({ auth }) => {
   };
 };
 
-export default connect(mapStateToProps)(Profile);
+const matchDispatchToProps = dispatch => bindActionCreators({
+  getUserInformation
+}, dispatch);
+
+export default connect(mapStateToProps, matchDispatchToProps)(Profile);
