@@ -1,4 +1,4 @@
-This project is intended to create a matching platform between donors and non-profit organizations. 
+This organization is intended to create a matching platform between donors and non-profit organizations. 
 
 Stack:
   - React/Redux
@@ -9,7 +9,7 @@ Stack:
   - Webpack + Babel
 
 
-To start the project:
+To start the organization:
   - run "npm install"
   - run "mongod" - Install MongoDB first -
   - run "npm start"

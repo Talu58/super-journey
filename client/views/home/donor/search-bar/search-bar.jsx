@@ -21,8 +21,8 @@ export default class SearchBar extends Component {
   }
 
   seeAllButtonClicked() {
-    const { fetchAllProjects, allProjectsResults } = this.props;
-    fetchAllProjects(allProjectsResults);
+    const { fetchAllOrganizations, allOrganizationsResults } = this.props;
+    fetchAllOrganizations(allOrganizationsResults);
   }
 
   seeMyMatchesButtonClicked() {
@@ -125,12 +125,12 @@ export default class SearchBar extends Component {
 };
 
 SearchBar.propTypes = {
-  userFirstname: PropTypes.string.isRequired,
-  fetchAllProjects: PropTypes.func.isRequired,
+  userFirstname: PropTypes.string,
+  fetchAllOrganizations: PropTypes.func.isRequired,
   fetchUserMatches: PropTypes.func.isRequired,
   industries: PropTypes.array.isRequired,
   searchCheckboxClicked: PropTypes.func.isRequired,
   searchRequest: PropTypes.func.isRequired,
-  allProjectsResults: PropTypes.array.isRequired,
+  allOrganizationsResults: PropTypes.array.isRequired,
   userMatchesDisplayed: PropTypes.bool.isRequired
 };

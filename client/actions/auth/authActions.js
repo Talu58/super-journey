@@ -99,12 +99,12 @@ export function getUserInformation(userEmail) {
   return dispatch => {
     return authentication.getUserInfo(userEmail)
       .then(userInfo => {
-        const { email, role, industry, project, completedProfile, firstname, lastname } = userInfo.data;
+        const { email, role, industry, organization, completedProfile, firstname, lastname } = userInfo.data;
         let newUser = {
           email,
           role,
           industry,
-          project,
+          organization,
           completedProfile,
           firstname,
           lastname

@@ -27,7 +27,7 @@ const initialState = {
   ],
   userMatchesDisplayed: true,
   currentPull: [],
-  allProjectsResults: [],
+  allOrganizationsResults: [],
   allMatchResults: [],
   allFilterResults: [],
   allDisplayedResults: [],
@@ -70,14 +70,14 @@ export default (state = initialState, action) => {
       let newFilters = state.filters.concat(action.data);
 
       if (isFiltering) {
-        let tempDisplayedResults = state.allDisplayedResults.concat(newResultPull.filter(project => {
-          return project.industryNames[action.data];
+        let tempDisplayedResults = state.allDisplayedResults.concat(newResultPull.filter(organization => {
+          return organization.industryNames[action.data];
         }));
         finalDisplayedResults = helpers.removeDuplicates(tempDisplayedResults);
       } else {
         isFiltering = true;
-        finalDisplayedResults = newResultPull.filter(project => {
-          return project.industryNames[action.data];
+        finalDisplayedResults = newResultPull.filter(organization => {
+          return organization.industryNames[action.data];
         });
       }
       return {
@@ -101,8 +101,8 @@ export default (state = initialState, action) => {
       } else {
         let tempFiltersResults = [];
         newFilter.forEach(({ value }) => {
-          tempFiltersResults = tempFiltersResults.concat(currentPull.filter(project => {
-            return project.industryNames[value];
+          tempFiltersResults = tempFiltersResults.concat(currentPull.filter(organization => {
+            return organization.industryNames[value];
           }));
         });
         newFiltersResults = helpers.removeDuplicates(tempFiltersResults);
@@ -117,7 +117,7 @@ export default (state = initialState, action) => {
     case SEARCH_REQUEST: 
       console.log('SEARCH_REQUEST dispatched');
       let searchPull = state.isFiltering ? state.allFilterResults : state.currentPull;
-      let newSearchBarResults = helpers.searchProjects(searchPull, action.data); 
+      let newSearchBarResults = helpers.searchOrganizations(searchPull, action.data); 
       return {
         ...state,
         allDisplayedResults: newSearchBarResults,
@@ -138,7 +138,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allDisplayedResults: action.data,
-        allProjectsResults: action.data,
+        allOrganizationsResults: action.data,
         userMatchesDisplayed: false
       };
       break;
@@ -156,8 +156,8 @@ export default (state = initialState, action) => {
       console.log('FETCH_ALL_PROJECTS dispatched');
       return {
         ...state,
-        allDisplayedResults: state.allProjectsResults,
-        currentPull: state.allProjectsResults,
+        allDisplayedResults: state.allOrganizationsResults,
+        currentPull: state.allOrganizationsResults,
         userMatchesDisplayed: false,
         isFiltering: true
       };

@@ -14,7 +14,7 @@ const industrySchema = mongoose.Schema({
   'Global Change': {type: Boolean, default: false}
 });
 
-const projectSchema = mongoose.Schema({
+const organizationSchema = mongoose.Schema({
   title: {type: String, required: true},
   description: {type: String, required: true}
 })
@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
   completedProfile:   {type: Boolean, default: false},
   role: roleSchema,
   industry: industrySchema,
-  project: projectSchema,
+  organization: organizationSchema,
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 });
@@ -35,11 +35,11 @@ const userSchema = mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 const Role = mongoose.model('Role', roleSchema);
 const Industry = mongoose.model('Industry', industrySchema);
-const Project = mongoose.model('Project', projectSchema);
+const Organization = mongoose.model('Organization', organizationSchema);
 
 module.exports = {
   User,
   Role,
   Industry,
-  Project
+  Organization
 };

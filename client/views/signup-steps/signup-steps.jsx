@@ -6,7 +6,7 @@ import './_signup-steps.sass';
 import { userCompletedSignUpRequest, userUploadedImage } from '../../actions/auth/authActions';
 import Button from '../../components/button/button';
 import SignUpStep from '../signup-step/signup-step';
-import ProjectForm from '../project-form/project-form';
+import OrganizationForm from '../organization-form/organization-form';
 
 class SignUpSteps extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class SignUpSteps extends Component {
       step: 1,
       role: { Donor: false, 'Non-Profit Organisation': false },
       industry: {Healthcare: false, Tech: false, Climate: false, Inclusion: false, 'Global Change': false},
-      project: {title: '', description: ''},
+      organization: {title: '', description: ''},
       file: {},
       hasRole: false,
       hasCompletedStep: false
@@ -66,19 +66,19 @@ class SignUpSteps extends Component {
   }
 
   fieldChangeHandler(e) {
-    const { project } = this.state;
+    const { organization } = this.state;
     const newState = {
-      ...project,
+      ...organization,
       [e.target.name]: e.target.value
     };
     if (newState.title !== '' && newState.description !== '') {
       this.setState({
-        project: newState,
+        organization: newState,
         hasCompletedStep: true
       });
     } else {
       this.setState({
-        project: newState,
+        organization: newState,
         hasCompletedStep: false
       });
     }
@@ -110,11 +110,11 @@ class SignUpSteps extends Component {
 
   clickSaveHandler() {
     const { userCompletedSignUpRequest, userUploadedImage, email } = this.props;
-    const { role, industry, project, file } = this.state;
+    const { role, industry, organization, file } = this.state;
     const newUser = {
       role,
       industry,
-      project,
+      organization,
       email,
     };
     userCompletedSignUpRequest(newUser);
@@ -153,10 +153,10 @@ class SignUpSteps extends Component {
       case 3:
         display = (
           <div>
-            <ProjectForm 
+            <OrganizationForm 
               changeHandler={this.fieldChangeHandler}
               uploadFileHandler={this.uploadFileHandler}
-              values={this.state.project}
+              values={this.state.organization}
             />
           </div>
         );

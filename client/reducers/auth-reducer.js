@@ -32,13 +32,13 @@ export default (state = initialState, action) => {
       };
     case USER_COMPLETED_SIGN_UP_REQUEST:
       console.log('USER_COMPLETED_SIGN_UP_REQUEST dispatched');
-      const { role, industry, project} = action.data;
+      const { role, industry, organization} = action.data;
       const newState = {
         ...state,
         completedProfile: true,
         role,
         industry,
-        project
+        organization
       };
       return newState;
       break;
@@ -56,7 +56,7 @@ export default (state = initialState, action) => {
         email: action.data.email,
         role: action.data.role,
         industry: action.data.industry,
-        project: action.data.project,
+        organization: action.data.organization,
         firstname: action.data.firstname,
         lastname: action.data.lastname
       };
@@ -86,7 +86,7 @@ export default (state = initialState, action) => {
         email: action.data.email,
         role: action.data.role,
         industry: action.data.industry,
-        project: action.data.project,
+        organization: action.data.organization,
         completedProfile: action.data.completedProfile,
         firstname: action.data.firstname,
         lastname: action.data.lastname

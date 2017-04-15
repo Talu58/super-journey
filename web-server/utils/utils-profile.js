@@ -1,4 +1,4 @@
-const { Role, Industry, Project } = require('../../database/user-model');
+const { Role, Industry, Organization } = require('../../database/user-model');
 
 
 module.exports.createRole = role => {
@@ -22,12 +22,12 @@ module.exports.createIndustry = industry => {
   return newIndustry;
 };
 
-module.exports.createProject = project => {
-  let newProject = new Project;
-  newProject = {
-    title: project.title,
-    description: project.description
+module.exports.createOrganization = organization => {
+  let newOrganization = new Organization;
+  newOrganization = {
+    title: organization.title,
+    description: organization.description
   };
-  return newProject;
+  return newOrganization;
 };
 

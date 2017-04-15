@@ -9,7 +9,7 @@ export default class Matches extends Component {
     if (isFiltering) {
       searchMessage = 'Here is the result of your search:';
     } else {
-      searchMessage = 'We have matched these projects with your preferences:'; 
+      searchMessage = 'We have matched these organizations with your preferences:'; 
     }
     return (
       <div>
@@ -26,7 +26,7 @@ export default class Matches extends Component {
           </section>
         </section>
         { matchesResult.length === 0 ?
-          <p>We don't have any match for your profile at the moment. Use our side bar to find other projects</p>
+          <p>We don't have any match for your profile at the moment. Use our side bar to find other organizations</p>
           : 
           <section className="matches-container" >
             {matchesResult.map(({ title, description, industryNames, firstname, email }) => {

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const { User } = require('../../database/user-model');
-const { createRole, createIndustry, createProject } = require('../utils/utils-profile');
+const { createRole, createIndustry, createOrganization } = require('../utils/utils-profile');
 const { generateHashedPassword, compareHashedPassword } = require('../utils/utils-auth');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
@@ -75,21 +75,21 @@ module.exports.signUpRequest = (req, res) => {
 };
 
 module.exports.signUpCompletedRequest = (req, res) => {
-  const { email, role, industry, project } = req.body;
+  const { email, role, industry, organization } = req.body;
   User.findOne({ 'email': email }, (err, user) => {
     if (err) {
       throw err;
     } else {
       let newRole = createRole(role);
       let newIndustry = createIndustry(industry);
-      let newProject = createProject(project);
+      let newOrganization = createOrganization(organization);
 
       user.completedProfile = true;
       user.role = newRole;
       user.industry = newIndustry;
 
-      if(project.title !== '') {
-        user.project = newProject;
+      if(organization.title !== '') {
+        user.organization = newOrganization;
       }
   
       return user.save((err, updatedUser) => {
@@ -129,7 +129,7 @@ module.exports.loginRequest = (req, res) => {
             email: email,
             completedProfile: user.completedProfile,
           }, config.jwtSecret);
-          const { role, industry, project } = user;
+          const { role, industry, organization } = user;
             let userData = {
               email: email,
               completedProfile: user.completedProfile,
@@ -137,8 +137,8 @@ module.exports.loginRequest = (req, res) => {
               industry,
               token
             };
-            if (project && project.title !== '') {
-              userData.project = project;
+            if (organization && organization.title !== '') {
+              userData.organization = organization;
             }
             return res.send(userData);
         } else {

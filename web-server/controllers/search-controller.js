@@ -10,10 +10,10 @@ module.exports.getIndustryMatchesRequest = (req, res) => {
   User.find({})
     .where(roleParams).equals(false)
     .where(industryParams).equals(true)
-    .select('project created_at industry email firstname')
-    .exec((err, projects) => {
+    .select('organization created_at industry email firstname')
+    .exec((err, organizations) => {
       return res.send({
-            matches: projects
+            matches: organizations
       });
   })
   .catch(err => {
@@ -22,19 +22,19 @@ module.exports.getIndustryMatchesRequest = (req, res) => {
 };
 
 
-module.exports.getAllProjectsRequest = (req, res) => {
+module.exports.getAllOrganizationsRequest = (req, res) => {
   let roleParams= "role.Donor";
   
   User.find({})
     .where(roleParams).equals(false)
-    .select('project created_at industry')
-    .exec((err, projects) => {
+    .select('organization created_at industry')
+    .exec((err, organizations) => {
       return res.send({
-            projects
+            organizations
       });
     })
     .catch(err => {
-    console.log('getAllProjectsRequest err', err);
+    console.log('getAllOrganizationsRequest err', err);
     });
 }
 

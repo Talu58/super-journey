@@ -1,6 +1,6 @@
 const { signUpRequest, signUpCompletedRequest } = require('./auth-controller');
 const { User } = require('../../database/user-model');
-const { createRole, createIndustry, createProject } = require('../utils/utils-profile');
+const { createRole, createIndustry, createOrganization } = require('../utils/utils-profile');
 const { generateHashedPassword } = require('../utils/utils-auth');
 const { generateDummyNonProfitData, generateDummyDonorData } = require('../../database/demo-data-builders');
 const jwt = require('jsonwebtoken');
@@ -9,7 +9,7 @@ const config = require('../config');
 module.exports.createDummyNonProfitUsers = (req, res) => {
   const dummyData = generateDummyNonProfitData();
   dummyData.forEach(user => {
-    const { email, password, industry, role, project, firstname, lastname } = user;
+    const { email, password, industry, role, organization, firstname, lastname } = user;
     const newUser = new User;
     newUser.email = email;
     newUser.firstname = firstname;
@@ -17,12 +17,12 @@ module.exports.createDummyNonProfitUsers = (req, res) => {
 
     let newRole = createRole(role);
     let newIndustry = createIndustry(industry);
-    let newProject = createProject(project);
+    let newOrganization = createOrganization(organization);
 
     newUser.completedProfile = true;
     newUser.role = newRole;
     newUser.industry = newIndustry;
-    newUser.project = newProject;
+    newUser.organization = newOrganization;
 
     generateHashedPassword(password).then(hash => {
       newUser.password = hash;

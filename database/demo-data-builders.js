@@ -12,7 +12,7 @@ const generateDummyNonProfitData = () => {
       password: `passwordUser${counter}`,
       role: { Donor: false, 'Non-Profit Organisation': true },
       industry: {Healthcare: false, Tech: false, Climate: false, Inclusion: false, 'Global Change': false},
-      project: {title: '', description: ''},
+      organization: {title: '', description: ''},
     };
 
     //Randomly picking the industries for our user
@@ -23,14 +23,14 @@ const generateDummyNonProfitData = () => {
     newUser.industry[keyOneIndustry] = true;
     newUser.industry[keyTwoIndustry] = true;
 
-    //Generating the content of the project
+    //Generating the content of the organization
     const categoryName = keyOneIndustry === keyTwoIndustry ? `${keyOneIndustry}` : `${keyOneIndustry} and ${keyTwoIndustry}`;
     const category = keyOneIndustry === keyTwoIndustry ? 'category' : 'categories';
-    newUser.project.title = `${categoryName} project`;
-    const basicDescription = `This is a randomly generate project part of the ${categoryName} ${category}.`;
+    newUser.organization.title = `${categoryName} organization`;
+    const basicDescription = `This is a randomly generate organization part of the ${categoryName} ${category}.`;
     let descriptionRepeatCounter = 1;
     while (descriptionRepeatCounter < 20) {
-      newUser.project.description += basicDescription + ' ';
+      newUser.organization.description += basicDescription + ' ';
       descriptionRepeatCounter++;
     }
   

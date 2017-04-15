@@ -7,7 +7,7 @@ const {
 } = require('./controllers/auth-controller');
 const {
   getIndustryMatchesRequest,
-  getAllProjectsRequest
+  getAllOrganizationsRequest
 }= require('./controllers/search-controller');
 const {
   createDummyNonProfitUsers,
@@ -17,11 +17,11 @@ const {
 module.exports = function(app, express) {
   app.post('/user/signup', signUpRequest);
   app.post('/user/signup/completed', signUpCompletedRequest);
-  app.post('/user/project/image/upload', imageUploadRequest);
+  app.post('/user/organization/image/upload', imageUploadRequest);
   app.post('/user/login', loginRequest);
   app.get('/user/information/:userEmail', getUserInformationRequest);
-  app.get('/projects/match/:industryName', getIndustryMatchesRequest);
-  app.get('/projects/all', getAllProjectsRequest);
+  app.get('/organizations/match/:industryName', getIndustryMatchesRequest);
+  app.get('/organizations/all', getAllOrganizationsRequest);
   app.get('/user/dummy/non-profit', createDummyNonProfitUsers);
   app.get('/user/dummy/donor', createDummyDonorUser);
 };

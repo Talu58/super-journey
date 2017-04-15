@@ -11,7 +11,7 @@ export function removeDuplicates(list) {
   return result;
 };
 
-export function searchProjects(searchPull, word) {
+export function searchOrganizations(searchPull, word) {
   let result = [];
   const lowerCaseWord = word.toLowerCase();
   for (let i = 0; i < searchPull.length; i++) {

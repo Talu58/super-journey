@@ -26,8 +26,8 @@ export function getIndustryMatches(industryName) {
   return dispatch => {
     return search.getIndustryMatchesRequest(industryName)
       .then(({ data: { matches } }) => {
-        const matchingProject = matches.map(match => {
-          const { project: { title, description }, created_at, industry, email, firstname } = match;
+        const matchingOrganization = matches.map(match => {
+          const { organization: { title, description }, created_at, industry, email, firstname } = match;
           let newIndustryName = {};
           for (let key in industry) {
             if (industry[key] === true) {
@@ -45,7 +45,7 @@ export function getIndustryMatches(industryName) {
         });
         dispatch({
           type: FIND_INDUSTRY_MATCHES,
-          data: matchingProject
+          data: matchingOrganization
         });
       }).catch( err => {
         console.log('getIndustryMatches err', err);
@@ -102,13 +102,13 @@ export function reinitializeSearchState() {
   };
 };
 
-export function fetchAllProjects(allProjectsList) {
+export function fetchAllOrganizations(allOrganizationsList) {
   return dispatch => {
-    if (allProjectsList.length === 0) {
-      return search.getAllProjects()
-        .then(({ data: { projects } }) => {
-          const allProjects = projects.map(project => {
-            const { project: { title, description }, created_at, industry } = project;
+    if (allOrganizationsList.length === 0) {
+      return search.getAllOrganizations()
+        .then(({ data: { organizations } }) => {
+          const allOrganizations = organizations.map(organization => {
+            const { organization: { title, description }, created_at, industry } = organization;
             let newIndustryName = {};
             for (let key in industry) {
               if (industry[key] === true) {
@@ -122,10 +122,10 @@ export function fetchAllProjects(allProjectsList) {
               industryNames: newIndustryName
             };
           });
-          allProjects.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
+          allOrganizations.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at));
           dispatch({
             type: GET_ALL_PROJECTS,
-            data: allProjects
+            data: allOrganizations
           });
           dispatch({
             type: FETCH_ALL_PROJECTS,

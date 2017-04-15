@@ -5,7 +5,7 @@ import Matches from './matches/matches';
 
 export default class Donor extends Component {
   render() {
-    const { industries, userFirstname, userEmail, matchesResult, searchCheckboxClicked, isFiltering, searchRequest, fetchAllProjects, fetchUserMatches, allProjectsResults, userMatchesDisplayed, industriesList } = this.props;
+    const { industries, userFirstname, userEmail, matchesResult, searchCheckboxClicked, isFiltering, searchRequest, fetchAllOrganizations, fetchUserMatches, allOrganizationsResults, userMatchesDisplayed, industriesList } = this.props;
     return (
       <div className="donor-view-container">
         <div className="matches-view-container">
@@ -19,12 +19,12 @@ export default class Donor extends Component {
         <div className="search-bar-view-container">
           <SearchBar
             userFirstname={userFirstname}
-            fetchAllProjects={fetchAllProjects}
+            fetchAllOrganizations={fetchAllOrganizations}
             fetchUserMatches={fetchUserMatches}
             industries={industries}
             searchCheckboxClicked={searchCheckboxClicked}
             searchRequest={searchRequest}
-            allProjectsResults={allProjectsResults}
+            allOrganizationsResults={allOrganizationsResults}
             userMatchesDisplayed={userMatchesDisplayed}
           />
         </div>
@@ -34,14 +34,14 @@ export default class Donor extends Component {
 }
 
 Donor.propTypes = {
-  fetchAllProjects: PropTypes.func.isRequired,
+  fetchAllOrganizations: PropTypes.func.isRequired,
   userFirstname: PropTypes.string,
   userEmail: PropTypes.string,
   fetchUserMatches: PropTypes.func.isRequired,
   industries: PropTypes.array.isRequired,
   searchCheckboxClicked: PropTypes.func.isRequired,
   searchRequest: PropTypes.func.isRequired,
-  allProjectsResults: PropTypes.array.isRequired,
+  allOrganizationsResults: PropTypes.array.isRequired,
   userMatchesDisplayed: PropTypes.bool.isRequired,
   isFiltering: PropTypes.bool.isRequired,
   matchesResult: PropTypes.array.isRequired,
