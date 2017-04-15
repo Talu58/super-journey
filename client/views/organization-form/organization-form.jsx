@@ -6,9 +6,10 @@ import Button from '../../components/button/button';
 
 export default class OrganizationForm extends Component {
   render() {
-    const { changeHandler, values, uploadFileHandler } = this.props;
+    const { changeHandler, values, uploadFileHandler, header } = this.props;
     return (
       <div>
+        <h1 className="signup-step-header">{header}</h1>
         <form className="organization-form">
           <InputField 
             changeHandler={changeHandler}
@@ -29,7 +30,7 @@ export default class OrganizationForm extends Component {
             value={values.description}
           />
         </form>
-        <form encType="multipart/form-data">
+        <form encType="multipart/form-data"  className="organization-form">
           <input
             onChange={uploadFileHandler}
             className="organization-form-file-upload"

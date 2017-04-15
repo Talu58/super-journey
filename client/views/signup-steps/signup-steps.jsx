@@ -136,6 +136,7 @@ class SignUpSteps extends Component {
               disabled={this.state.hasRole}
               buttons={this.state.role}
               clickHandler={this.clickOptionHandler}
+              header="Are you a Donor or a Non-Profit Organizations"
             />
           </div>
         );
@@ -146,6 +147,7 @@ class SignUpSteps extends Component {
             <SignUpStep
               buttons={this.state.industry}
               clickHandler={this.clickOptionHandler}
+              header="Choose the best matching categories for your project"
             />
           </div>
         );
@@ -157,6 +159,7 @@ class SignUpSteps extends Component {
               changeHandler={this.fieldChangeHandler}
               uploadFileHandler={this.uploadFileHandler}
               values={this.state.organization}
+              header="Give us some details about your organization"
             />
           </div>
         );
@@ -172,7 +175,6 @@ class SignUpSteps extends Component {
         <Redirect to="/home" />
         :
         (<div className="signup-steps-container">
-          <h1>SignUpSteps</h1>
           <div className="signup-step-contianer">
             {display}
           </div>
