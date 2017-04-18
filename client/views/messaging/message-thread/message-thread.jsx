@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import './_message-thread.sass';
+import Message from '../../../components/message/message';
 
 class MessageThread extends Component {
   render() {
-    const { currentMessageThread, currentMessageThreadUserName } = this.props;
-    console.log('currentMessageThread', currentMessageThread);
-    console.log('currentMessageThreadUserName', currentMessageThreadUserName);
+    const { currentMessageThread, currentMessageThreadUserName, curentUserFirstName } = this.props;
 
     return (
       <div>
-        MessageThread
+        <h1>To: {currentMessageThreadUserName}</h1>
+        {currentMessageThread.map(message => {
+          return (
+            <Message
+              key={message.message}
+              message={message}
+              curentUserFirstName={curentUserFirstName}
+            />
+          );
+        })}
       </div>
     );
   }
