@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
+const { User } = require('../../database/user-model');
 const { MessageThread, Message } = require('../../database/message-model');
 const { createMessage } = require('../utils/utils-messaging');
 
@@ -25,9 +26,32 @@ module.exports.userSentFirstMessage = (req, res) => {
           messages: [newMessage]
         });
         newMessageThread.save(function (err, messageThread) {
-          if (err) return console.error(err);
-          return res.send(messageThread);
+          if (err) {
+            return console.error(err);
+          }
+          User.findOne({ 'email': recipientEmail }, (err, user) => {
+            if (err) {
+              throw err;
+            }
+            user.messageThreadsNames.push(messageThreadName);
+            return user.save((err) => {
+              if (err) throw err;
+            });
+          }).then(() => {
+            return User.findOne({ 'email': senderEmail }, (err, user) => {
+              if (err) throw err;
+              user.messageThreadsNames.push(messageThreadName);
+              return user.save((err) => {
+                if (err) throw err;
+              });
+            });
+          }).then(()=> {
+            return res.send(messageThread);
+          });
         });
       }
+    })
+    .catch(err => {
+      console.log('userSentFirstMessage err', err);
     });
 }

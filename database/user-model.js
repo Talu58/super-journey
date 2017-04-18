@@ -28,6 +28,7 @@ const userSchema = mongoose.Schema({
   role: roleSchema,
   industry: industrySchema,
   organization: organizationSchema,
+  messageThreadsNames: {type: Array, default: []},
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 });

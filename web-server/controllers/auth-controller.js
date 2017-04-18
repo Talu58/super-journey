@@ -98,7 +98,7 @@ module.exports.signUpCompletedRequest = (req, res) => {
             email: email,
             completedProfile: true
           });
-      }) 
+      });
     }
   }).catch(err => {
     throw err;
