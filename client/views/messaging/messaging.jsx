@@ -7,11 +7,13 @@ import MessageHistory from './message-history/message-history';
 
 class Messaging extends Component {
   render() {
-    const { currentMessageThread, currentMessageThreadName, allMessageThreads } = this.props;
+    const { currentMessageThread, currentMessageThreadUserName, allMessageThreads } = this.props;
     return (
       <div className="message-container" >
         <div className="message-thread-container" >
         <MessageThread 
+          currentMessageThread={currentMessageThread}
+          currentMessageThreadUserName={currentMessageThreadUserName}
         />
         </div>
         <div className="message-history-container" >
@@ -25,14 +27,14 @@ class Messaging extends Component {
 }
 
 Messaging.propTypes = {
-    currentMessageThreadName: PropTypes.string.isRequired,
+    currentMessageThreadUserName: PropTypes.string.isRequired,
     currentMessageThread: PropTypes.array.isRequired,
     allMessageThreads: PropTypes.array.isRequired
 };
 
 const mapStateToProps = ({ messaging }) => {
   return {
-    currentMessageThreadName: messaging.currentMessageThreadName,
+    currentMessageThreadUserName: messaging.currentMessageThreadUserName,
     currentMessageThread: messaging.currentMessageThread,
     allMessageThreads: messaging.allMessageThreads
   };

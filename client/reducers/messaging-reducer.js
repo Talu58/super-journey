@@ -4,7 +4,7 @@ import {
 import * as helpers from '.././utils-helpers/messaging-helpers';
 
 const initialState = {
-  currentMessageThreadName: '',
+  currentMessageThreadUserName: '',
   currentMessageThread: [],
   allMessageThreads: []
 };
@@ -15,7 +15,7 @@ export default (state = initialState, action ) => {
       console.log('USER_SENT_FIRST_MESSAGE dispatched');
       const newAllMessageThreads = helpers.addMessageThread(state.allMessageThreads, action.data);
       return {
-        currentMessageThreadName: action.data.threadName,
+        currentMessageThreadUserName: action.data.nameUserOne,
         currentMessageThread: action.data.messages,
         allMessageThreads: newAllMessageThreads
       };
