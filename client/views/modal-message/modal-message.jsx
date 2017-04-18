@@ -9,11 +9,9 @@ export default class ModalMessage extends Component {
     super(props);
     this.state = {
       inputFieldsValues: {
-        subject: '',
         message: '',
       },
       errors: {
-        subject: '',
         message: '',
       }
     }
@@ -56,13 +54,14 @@ export default class ModalMessage extends Component {
     e.preventDefault();
     const isValid = this.isFormValid();
     if (isValid) {
-      const { props: { closeModal, matchEmail, userEmail } } = this.props;
+      const { props: { closeModal, matchEmail, userEmail, firstMessageSent } } = this.props;
       const newMessage = {
         ...this.state.inputFieldsValues,
-        recipient: matchEmail,
-        sender: userEmail
+        to: matchEmail,
+        from: userEmail
       };
       console.log('newMessage', newMessage);
+      firstMessageSent(newMessage);
       closeModal();
     } 
   }
@@ -73,24 +72,11 @@ export default class ModalMessage extends Component {
       <div>
           <h1 className="message-modal-name">Send a message to {matchFirstname}</h1>
           <form className="message-modal-form">
-            <InputField
-              placeholderText="Subject"
-              containerStyleClassName="message-modal-input-field-container"
-              styleClassName="message-modal-input-field"
-              changeHandler={this.inputFieldChangeHandler}
-              value={this.state.inputFieldsValues.subject}
-              name="subject"
-              type="text"
-            />
-            {this.state.errors.subject !== '' ?
-              <p className="message-error-message">{this.state.errors.subject}</p>
-              : <p className="message-error-message"></p>
-            }
             <TextAreaField
               placeholderText="Enter your message here..."
               containerStyleClassName="message-modal-text-area-container"
               styleClassName="message-modal-text-area"
-              rows={14}
+              rows={17}
               changeHandler={this.inputFieldChangeHandler}
               value={this.state.inputFieldsValues.message}
               name="message"

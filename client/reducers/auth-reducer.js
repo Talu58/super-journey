@@ -21,7 +21,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case USER_SIGN_UP_REQUEST:
       console.log('USER_SIGN_UP_REQUEST dispatched');
-      console.log('action.data.firstname', action.data.firstname);
       return {
         ...state,
         isAuth: true,
@@ -30,6 +29,7 @@ export default (state = initialState, action) => {
         firstname: action.data.firstname,
         lastname: action.data.lastname
       };
+      break;
     case USER_COMPLETED_SIGN_UP_REQUEST:
       console.log('USER_COMPLETED_SIGN_UP_REQUEST dispatched');
       const { role, industry, organization} = action.data;

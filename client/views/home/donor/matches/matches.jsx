@@ -4,7 +4,7 @@ import Match from '../match/match';
 
 export default class Matches extends Component {
   render() {
-    const { matchesResult, isFiltering, industriesList, userEmail } = this.props;
+    const { matchesResult, isFiltering, industriesList, userEmail, firstMessageSent } = this.props;
     let searchMessage = '';
     if (isFiltering) {
       searchMessage = 'Here is the result of your search:';
@@ -39,6 +39,7 @@ export default class Matches extends Component {
                   matchFirstname={firstname}
                   matchEmail={email}
                   userEmail={userEmail}
+                  firstMessageSent={firstMessageSent}
                 />
               );
             })}
@@ -53,5 +54,6 @@ Matches.propTypes = {
   isFiltering: PropTypes.bool.isRequired,
   matchesResult: PropTypes.array.isRequired,
   industriesList: PropTypes.object.isRequired,
-  userEmail: PropTypes.string.isRequired
+  userEmail: PropTypes.string.isRequired,
+  firstMessageSent: PropTypes.func.isRequired
 };

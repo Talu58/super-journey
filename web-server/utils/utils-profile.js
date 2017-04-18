@@ -1,6 +1,5 @@
 const { Role, Industry, Organization } = require('../../database/user-model');
 
-
 module.exports.createRole = role => {
   let newRole = new Role;
   newRole = {

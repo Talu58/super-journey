@@ -6,6 +6,7 @@ import Donor from './donor/donor';
 import NonProfit from './non-profit/non-profit';
 import { searchCheckboxClicked, searchRequest, fetchAllOrganizations, fetchUserMatches } from '../../actions/search/searchActions';
 import { getUserInformation } from '../../actions/auth/authActions';
+import { firstMessageSent } from '../../actions/messaging/messagingActions';
 import jwt from 'jsonwebtoken';
 
 
@@ -18,7 +19,23 @@ class Home extends Component {
   }
 
   render() {
-    const { role, firstname, email, industries, displayedResults, searchCheckboxClicked, isFiltering, homeIsLoading, searchRequest, fetchAllOrganizations, fetchUserMatches, allOrganizationsResults, userMatchesDisplayed, industriesList } = this.props;
+    const {
+      role,
+      firstname,
+      email,
+      industries,
+      displayedResults,
+      searchCheckboxClicked,
+      isFiltering,
+      homeIsLoading,
+      searchRequest,
+      fetchAllOrganizations,
+      fetchUserMatches,
+      allOrganizationsResults,
+      userMatchesDisplayed,
+      industriesList,
+      firstMessageSent
+    } = this.props;
     return (
       <div>
         { homeIsLoading ? <div>Loading</div> :
@@ -36,6 +53,7 @@ class Home extends Component {
               allOrganizationsResults={allOrganizationsResults}
               userMatchesDisplayed={userMatchesDisplayed}
               industriesList={industriesList}
+              firstMessageSent={firstMessageSent}
             />
             : <NonProfit/>
         }
@@ -60,6 +78,7 @@ Home.propTypes = {
   industriesList: PropTypes.object,
   homeIsLoading: PropTypes.bool.isRequired,
   getUserInformation: PropTypes.func.isRequired,
+  firstMessageSent: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ auth, search }) => {
@@ -83,7 +102,8 @@ const matchDispatchToProps = dispatch => bindActionCreators(
     getUserInformation,
     searchRequest,
     fetchAllOrganizations,
-    fetchUserMatches
+    fetchUserMatches,
+    firstMessageSent
   }, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(Home);

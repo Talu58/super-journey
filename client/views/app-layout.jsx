@@ -11,7 +11,6 @@ import PrivateRoute from '../utils-router/private-route';
 import { logout } from '../actions/auth/authActions';
 import { bindActionCreators } from 'redux';
 
-
 export class AppLayout extends Component {
   constructor(props) {
     super(props);
