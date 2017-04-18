@@ -9,10 +9,10 @@ export function firstMessageSent(messageInformation) {
     messaging.sendFirstMessageRequest(messageInformation)
     .then(messageThread => {
       console.log('firstMessageSent messageThread', messageThread);
-    });
-    dispatch({
-      type: USER_SENT_FIRST_MESSAGE,
-      data: messageInformation
+      dispatch({
+        type: USER_SENT_FIRST_MESSAGE,
+        data: messageThread
+      });
     });
   };
 };

@@ -10,7 +10,9 @@ var messageSchema = new mongoose.Schema({
 
 const messageThreadSchema = mongoose.Schema({
   thread: {type:String, required: true},
-  messages: [messageSchema]
+  messages: [messageSchema],
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now }
 });
 
 const Message = mongoose.model('Message', messageSchema);

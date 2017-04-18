@@ -16,6 +16,7 @@ module.exports.userSentFirstMessage = (req, res) => {
         console.log('messageThread err', err);
       }
       if (messageThread) {
+        //implement adding new message to existing message thread
         return res.send({});
       } else {
         newMessageThread = new MessageThread({
