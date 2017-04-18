@@ -6,7 +6,6 @@ export function addMessageThread(messagingThreads, thread) {
     messages,
     threadName
   };
-  console.log('addMessageThread newThread', newThread);
   let newMessagingThreads = [...messagingThreads];
   newMessagingThreads.unshift(newThread);
   return newMessagingThreads
