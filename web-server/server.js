@@ -22,7 +22,7 @@ io.on('connection', function(socket) {
   console.log('A user connected');
 });
 
-app.listen(PORT, () => {
+http.listen(PORT, () => {
   console.log('Server is up and running on port:', PORT);
 });
 
