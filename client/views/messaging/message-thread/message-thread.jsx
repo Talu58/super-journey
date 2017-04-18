@@ -27,8 +27,6 @@ class MessageThread extends Component {
       this.setState({
         messageInputFieldValue: ''
       });
-    } else {
-      console.log('nothing');
     }
   }
 
