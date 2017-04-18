@@ -10,7 +10,7 @@ module.exports.userSentFirstMessage = (req, res) => {
   console.log('newMessage', newMessage);
   const messageThreadName = from + to;
   MessageThread.findOne({})
-    .where('thread').equals(messageThreadName)
+    .where('threadName').equals(messageThreadName)
     .exec((err, messageThread) => {
       if (err) {
         console.log('messageThread err', err);
@@ -20,7 +20,7 @@ module.exports.userSentFirstMessage = (req, res) => {
         return res.send({});
       } else {
         newMessageThread = new MessageThread({
-          thread: messageThreadName,
+          threadName: messageThreadName,
           messages: [newMessage]
         });
         newMessageThread.save(function (err, messageThread) {
