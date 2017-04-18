@@ -10,6 +10,7 @@ export default class NavBar extends Component {
     this.state = {
       nav: {
         home: true,
+        messaging: false,
         profile: false
       }
     }
@@ -55,6 +56,16 @@ export default class NavBar extends Component {
                   containerStyleClassName="nav-button-container"
                   styleClassName="nav-button"
                   active={this.state.nav.home}
+                  clickHandler={this.navButtonClicked}
+                />
+              </Link>
+              <Link to="/messaging" className="nav-link" >
+                <Button
+                  name="messaging"
+                  value="MESSAGING"
+                  containerStyleClassName="nav-button-container"
+                  styleClassName="nav-button"
+                  active={this.state.nav.messaging}
                   clickHandler={this.navButtonClicked}
                 />
               </Link>

@@ -5,6 +5,7 @@ import NavBar from './navbar/navbar';
 import LandingPage from './landing-page/landing-page';
 import SignUpSteps from './signup-steps/signup-steps';
 import Home from './home/home';
+import Messaging from './messaging/messaging';
 import Profile from './profile/profile';
 import PrivateRoute from '../utils-router/private-route';
 import { logout } from '../actions/auth/authActions';
@@ -25,6 +26,7 @@ export class AppLayout extends Component {
           <Route exact path='/' component={LandingPage} />
           <PrivateRoute path="/signup" component={SignUpSteps} isAuth={isAuth} />
           <PrivateRoute path="/home" component={Home} isAuth={isAuth} />
+          <PrivateRoute path="/messaging" component={Messaging} isAuth={isAuth} />
           <PrivateRoute path="/profile" component={Profile} isAuth={isAuth} />
         </main>
       </div>
