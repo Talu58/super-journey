@@ -54,11 +54,13 @@ export default class ModalMessage extends Component {
     e.preventDefault();
     const isValid = this.isFormValid();
     if (isValid) {
-      const { props: { closeModal, matchEmail, userEmail, firstMessageSent } } = this.props;
+      const { props: { closeModal, matchEmail, userEmail, firstMessageSent, matchFirstname, userFirstname } } = this.props;
       const newMessage = {
         ...this.state.inputFieldsValues,
-        to: matchEmail,
-        from: userEmail
+        recipient: matchFirstname,
+        recipientEmail: matchEmail,
+        sender: userFirstname,
+        senderEmail: userEmail
       };
       console.log('newMessage', newMessage);
       firstMessageSent(newMessage);

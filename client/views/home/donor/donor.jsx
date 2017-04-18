@@ -24,6 +24,7 @@ export default class Donor extends Component {
       <div className="donor-view-container">
         <div className="matches-view-container">
           <Matches
+            userFirstname={userFirstname}
             matchesResult={matchesResult}
             isFiltering={isFiltering}
             industriesList={industriesList}

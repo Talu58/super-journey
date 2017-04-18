@@ -12,7 +12,7 @@ const initialState = {
 export default (state = initialState, action ) => {
   switch (action.type) {
     case USER_SENT_FIRST_MESSAGE:
-      console.log('USER_SENT_FIRST_MESSAGE dispatched', action.data);
+      console.log('USER_SENT_FIRST_MESSAGE dispatched');
       const newAllMessageThreads = helpers.addMessageThread(state.allMessageThreads, action.data);
       return {
         currentMessageThreadName: action.data.threadName,
@@ -24,3 +24,6 @@ export default (state = initialState, action ) => {
       return state;
   }
 }
+
+
+

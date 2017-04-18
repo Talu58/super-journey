@@ -12,8 +12,6 @@ class Messaging extends Component {
       <div className="message-container" >
         <div className="message-thread-container" >
         <MessageThread 
-          currentMessageThread={currentMessageThread}
-          currentMessageThreadName={currentMessageThreadName}
         />
         </div>
         <div className="message-history-container" >

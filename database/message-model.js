@@ -10,6 +10,8 @@ var messageSchema = new mongoose.Schema({
 
 const messageThreadSchema = mongoose.Schema({
   threadName: {type:String, required: true},
+  nameUserOne: {type:String, required: true},
+  nameUserTwo: {type:String, required: true},
   messages: [messageSchema],
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
