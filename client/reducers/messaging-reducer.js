@@ -14,7 +14,6 @@ export default (state = initialState, action ) => {
     case USER_SENT_FIRST_MESSAGE:
       console.log('USER_SENT_FIRST_MESSAGE dispatched', action.data);
       const newAllMessageThreads = helpers.addMessageThread(state.allMessageThreads, action.data);
-      console.log('newAllMessageThreads', newAllMessageThreads);
       return {
         currentMessageThreadName: action.data.threadName,
         currentMessageThread: action.data.messages,

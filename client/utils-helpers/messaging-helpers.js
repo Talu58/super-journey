@@ -1,5 +1,5 @@
 export function addMessageThread(messagingThreads, thread) {
-  const { data: {created_at, updated_at, messages, threadName }} = thread;
+  const { created_at, updated_at, messages, threadName } = thread;
   const newThread = {
     created_at,
     updated_at,

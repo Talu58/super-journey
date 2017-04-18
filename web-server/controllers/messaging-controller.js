@@ -8,7 +8,7 @@ module.exports.userSentFirstMessage = (req, res) => {
   const { to, from } = req.body;
   const newMessage = createMessage(req.body);
   console.log('newMessage', newMessage);
-  const messageThreadName = from + to;
+  const messageThreadName = from + '-' + to;
   MessageThread.findOne({})
     .where('threadName').equals(messageThreadName)
     .exec((err, messageThread) => {
