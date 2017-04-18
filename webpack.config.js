@@ -12,10 +12,6 @@ module.exports = {
     loaders: [
       {
         loader: 'babel-loader',
-        test: /\socket.io.js/,
-      },
-      {
-        loader: 'babel-loader',
         test: /\.jsx?$/,
         exclude: /node_modules/,
       },
