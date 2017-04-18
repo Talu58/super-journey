@@ -6,6 +6,7 @@ import './_signupform.sass';
 import { userSignUpRequest } from '../../../actions/auth/authActions';
 import InputField from '../../../components/input-field/input-field';
 import Button from '../../../components/button/button';
+import validateEmail from '../../../utils-helpers/input-validation-helpers.js';
 
 class SignUpForm extends Component {
   constructor(props) {
@@ -53,6 +54,15 @@ class SignUpForm extends Component {
         errorMessage = '';
       }
       newErrors[key] = errorMessage;
+      this.setState({
+        error: newErrors
+      });
+    }
+    if (!validateEmail(this.state.inputFieldsValues.email)) {
+      const errorMessage = 'Email address invalid';
+      const newErrors = this.state.errors;
+      newErrors.email = errorMessage;
+      isValid = false;
       this.setState({
         error: newErrors
       });
