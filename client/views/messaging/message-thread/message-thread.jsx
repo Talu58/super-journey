@@ -73,7 +73,7 @@ export default class MessageThread extends Component {
         </div>
         <div className="messaging-thread-new-message-container">
           <InputField
-            placeholderText="Enter your message here"
+            placeholderText="Write your message here"
             changeHandler={this.newMessageInputFieldChange}
             value={this.state.messageInputFieldValue}
             styleClassName="messaging-thread-new-message-input-field"
