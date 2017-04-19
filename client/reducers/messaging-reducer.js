@@ -24,9 +24,13 @@ export default (state = initialState, action ) => {
       };
       break;
     case USER_SENT_MESSAGE:
-      console.log('USER_SENT_MESSAGE dispatched');
+      console.log('USER_SENT_MESSAGE dispatched', action.data);
+      const replacedAllMessageThreads = helpers.replaceMessageThread(state.allMessageThreads, action.data);
+      console.log('replacedAllMessageThreads', replacedAllMessageThreads);
       return {
-        ...state
+        ...state,
+        currentMessageThread: action.data.messages,
+        allMessageThreads: replacedAllMessageThreads
       };
       break;
     default:

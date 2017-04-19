@@ -22,7 +22,7 @@ export function newMessageSent(messageInformation) {
   return dispatch => {
     messaging.sendNewMessageRequest(messageInformation)
     .then(messageThread => {
-      console.log('firstMessageSent messageThread', messageThread.data);
+      console.log('newMessageSent messageThread', messageThread.data);
       dispatch({
         type: USER_SENT_MESSAGE,
         data: messageThread.data

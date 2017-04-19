@@ -25,7 +25,7 @@ module.exports.userSentFirstMessage = (req, res) => {
           nameUserTwo: sender,
           messages: [newMessage]
         });
-        newMessageThread.save(function (err, messageThread) {
+        newMessageThread.save((err, messageThread) => {
           if (err) {
             return console.error(err);
           }
@@ -58,13 +58,19 @@ module.exports.userSentFirstMessage = (req, res) => {
 
 
 module.exports.userSentNewMessage = (req, res) => {
-    const { threadName, recipient, sender } = req.body;
-     MessageThread.findOne({threadName: threadName}, (err, thread) => {
+    const { threadName } = req.body;
+    MessageThread.findOne({threadName: threadName}, (err, thread) => {
       if (err) {
         throw err;
       }
-      console.log('userSentFirstMessage thread', thread);
-      res.send({});
-     });
+      const newMessage = createMessage(req.body);
+      thread.messages.push(newMessage);
+      thread.save((err, messageThread) => {
+        if (err) {
+          return console.error(err);
+        }
+        res.send(messageThread);
+      });
+    });
 };
 
