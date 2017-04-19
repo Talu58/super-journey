@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import MessageThread from './message-thread/message-thread';
 import MessageHistory from './message-history/message-history';
 import { getUserInformation } from '../../actions/auth/authActions';
-import { newMessageSent } from '../../actions/messaging/messagingActions';
+import { newMessageSent, userChangedCurrentThread } from '../../actions/messaging/messagingActions';
 import jwt from 'jsonwebtoken';
 
 class Messaging extends Component {
@@ -17,7 +17,7 @@ class Messaging extends Component {
   }
 
   render() {
-    const { currentMessageThread, currentMessageThreadUserName, currentMessageThreadName, allMessageThreads, firstname, newMessageSent, role } = this.props;
+    const { currentMessageThread, currentMessageThreadUserName, currentMessageThreadName, allMessageThreads, firstname, newMessageSent, role, userChangedCurrentThread } = this.props;
     return (
       <div className="messaging-container" >
         <div className="messaging-thread-container" >
@@ -34,6 +34,7 @@ class Messaging extends Component {
             allMessageThreads={allMessageThreads}
             currentMessageThreadName={currentMessageThreadName}
             role={role}
+            userChangedCurrentThread={userChangedCurrentThread}
           />
         </div>
       </div>
@@ -49,6 +50,7 @@ Messaging.propTypes = {
     firstname: PropTypes.string.isRequired,
     newMessageSent: PropTypes.func.isRequired,
     getUserInformation: PropTypes.func.isRequired
+    userChangedCurrentThread:
 };
 
 const mapStateToProps = ({ auth, messaging }) => {
@@ -62,7 +64,12 @@ const mapStateToProps = ({ auth, messaging }) => {
   };
 }
 
-const matchDispatchToProps = dispatch => bindActionCreators({newMessageSent, getUserInformation}, dispatch);
+const matchDispatchToProps = dispatch => bindActionCreators(
+  {
+    newMessageSent,
+    getUserInformation,
+    userChangedCurrentThread
+  }, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(Messaging);
 

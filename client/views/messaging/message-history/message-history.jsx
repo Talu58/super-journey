@@ -3,6 +3,18 @@ import './_message-history.sass';
 import MessageHistoryItem from '../../../components/message-history-item/message-history-item';
 
 class MessageHistory extends Component {
+  constructor(props) {
+    super(props);
+
+    this.messageHistoryItemClicked = this.messageHistoryItemClicked.bind(this);
+  }
+
+  messageHistoryItemClicked(e) {
+    const { userChangedCurrentThread } = this.props;
+    const threadName = e.target.id ? e.target.id : e.target.parentNode.id;
+    userChangedCurrentThread(threadName);
+  }
+
   render() {
     const { allMessageThreads, role, currentMessageThreadName } = this.props;
     return (
@@ -16,6 +28,7 @@ class MessageHistory extends Component {
                 messageThread={messageThread}
                 role={role}
                 isActive={isActive}
+                clickHandler={this.messageHistoryItemClicked}
               />
             )
           })
