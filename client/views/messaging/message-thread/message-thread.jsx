@@ -3,6 +3,7 @@ import './_message-thread.sass';
 import Message from '../../../components/message/message';
 import Button from '../../../components/button/button';
 import InputField from '../../../components/input-field/input-field';
+import moment from 'moment';
 
 export default class MessageThread extends Component {
   constructor(props) {
@@ -46,15 +47,22 @@ export default class MessageThread extends Component {
           <h1 className="messaging-thread-header">Discussion with {currentMessageThreadUserName}</h1>
         </div>
         <div className="messages-container">
-          {currentMessageThread.map(message => {
-            return (
-              <Message
-                key={message['_id']}
-                message={message}
-                curentUserFirstName={curentUserFirstName}
-              />
-            );
-          })}
+          <div className="messages-container-inner">
+            {currentMessageThread.map((message, i, messageList) => {
+              let displayTime = true;
+              if (i !== 0 && moment(message.time).fromNow() === moment(messageList[i-1].time).fromNow()) {
+                displayTime = false;
+              }
+              return (
+                <Message
+                  key={message['_id']}
+                  message={message}
+                  displayTime={displayTime}
+                  curentUserFirstName={curentUserFirstName}
+                />
+              );
+            })}
+          </div>
         </div>
         <div className="messaging-thread-new-message-container">
           <InputField
