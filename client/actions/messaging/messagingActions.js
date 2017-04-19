@@ -1,7 +1,8 @@
 import {
   USER_SENT_FIRST_MESSAGE,
   USER_SENT_MESSAGE,
-  GET_USER_MESSAGES
+  GET_USER_MESSAGES,
+  USER_CHANGED_CURRENT_THREAD
 } from './messagingActionTypes';
 import * as messaging from '../../utils-api/messaging/messaging-rest-api';
 
@@ -41,5 +42,12 @@ export function getUserMessages(userEmail, role) {
         role: role
       });
     });
+  };
+};
+
+export function userChangedCurrentThread(threadName) {
+  return {
+    type: USER_CHANGED_CURRENT_THREAD,
+    data: threadName
   };
 };

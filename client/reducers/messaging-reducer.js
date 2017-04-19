@@ -1,7 +1,8 @@
 import {
   USER_SENT_FIRST_MESSAGE,
   USER_SENT_MESSAGE,
-  GET_USER_MESSAGES
+  GET_USER_MESSAGES,
+  USER_CHANGED_CURRENT_THREAD
 } from '../actions/messaging/messagingActionTypes';
 import * as helpers from '.././utils-helpers/messaging-helpers';
 
@@ -51,6 +52,12 @@ export default (state = initialState, action ) => {
         currentMessageThreadName: newCurrentMessageThreadName,
         currentMessageThread: newCurrentMessageThread,
         allMessageThreads: action.data.reverse()
+      };
+      break;
+    case USER_CHANGED_CURRENT_THREAD:
+      console.log('USER_CHANGED_CURRENT_THREAD dispatched');
+      return {
+        ...state
       };
       break;
     default:
