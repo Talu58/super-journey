@@ -16,11 +16,12 @@ const initialState = {
 export default (state = initialState, action ) => {
   let newCurrentMessageThreadUserName;
   let newCurrentMessageThread;
-  
+  let newAllMessageThreads;
+
   switch (action.type) {
     case USER_SENT_FIRST_MESSAGE:
       console.log('USER_SENT_FIRST_MESSAGE dispatched');
-      const newAllMessageThreads = helpers.addMessageThread(state.allMessageThreads, action.data);
+      newAllMessageThreads = helpers.addMessageThread(state.allMessageThreads, action.data);
       return {
         currentMessageThreadUserName: action.data.nameUserOne,
         currentMessageThreadName: action.data.threadName,
@@ -31,15 +32,17 @@ export default (state = initialState, action ) => {
     case USER_SENT_MESSAGE:
       console.log('USER_SENT_MESSAGE dispatched');
       const replacedAllMessageThreads = helpers.replaceMessageThread(state.allMessageThreads, action.data);
+      newAllMessageThreads = helpers.sortAllMessageThreads(replacedAllMessageThreads);
       return {
         ...state,
         currentMessageThread: action.data.messages,
-        allMessageThreads: replacedAllMessageThreads
+        allMessageThreads: newAllMessageThreads
       };
       break;
     case GET_USER_MESSAGES:
       console.log('GET_USER_MESSAGES dispatched');
-      const lastThread = action.data[action.data.length - 1];
+      newAllMessageThreads = helpers.sortAllMessageThreads(action.data);
+      const lastThread = newAllMessageThreads[0];
       newCurrentMessageThread = lastThread.messages;
       const newCurrentMessageThreadName = lastThread.threadName;
       if (action.role.Donor) {
@@ -47,13 +50,12 @@ export default (state = initialState, action ) => {
       } else {
         newCurrentMessageThreadUserName = lastThread.nameUserTwo;
       }
-      console.log('GET_USER_MESSAGES', action.data);
       return {
         ...state,
         currentMessageThreadUserName: newCurrentMessageThreadUserName,
         currentMessageThreadName: newCurrentMessageThreadName,
         currentMessageThread: newCurrentMessageThread,
-        allMessageThreads: action.data.reverse()
+        allMessageThreads: newAllMessageThreads
       };
       break;
     case USER_CHANGED_CURRENT_THREAD:

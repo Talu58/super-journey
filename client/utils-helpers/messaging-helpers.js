@@ -25,4 +25,13 @@ export function replaceMessageThread(messagingThreads, thread) {
     return thread;
   });
   return newMessagingThreads;
+};
+
+export function sortAllMessageThreads(allMessageThreads) {
+  let newAllMessageThread = [...allMessageThreads];
+  
+  newAllMessageThread.sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at));
+  return newAllMessageThread;
 }
+
+
