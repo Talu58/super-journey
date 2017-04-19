@@ -14,7 +14,8 @@ const {
   createDummyDonorUser
 } = require('./controllers/dummy-data-controller');
 const {
-  userSentFirstMessage
+  userSentFirstMessage,
+  userSentNewMessage
 } = require('./controllers/messaging-controller');
 
 module.exports = function(app, express) {
@@ -29,5 +30,7 @@ module.exports = function(app, express) {
   app.get('/organizations/match/:industryName', getIndustryMatchesRequest);
   app.get('/organizations/all', getAllOrganizationsRequest);
 
-  app.post('/message/first', userSentFirstMessage)
+  app.post('/message/first', userSentFirstMessage);
+  app.post('/message/new', userSentNewMessage);
+
 };

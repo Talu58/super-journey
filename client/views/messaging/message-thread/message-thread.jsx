@@ -4,7 +4,7 @@ import Message from '../../../components/message/message';
 import Button from '../../../components/button/button';
 import InputField from '../../../components/input-field/input-field';
 
-class MessageThread extends Component {
+export default class MessageThread extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,8 +22,15 @@ class MessageThread extends Component {
   }
 
   sendNewMessageClicked() {
+    const { newMessageSent, currentMessageThreadName, currentMessageThreadUserName, curentUserFirstName } = this.props;
     if (this.state.messageInputFieldValue !== '') {
-      console.log('send message', this.state.messageInputFieldValue);
+      const newMessage = {
+        message: this.state.messageInputFieldValue,
+        recipient: currentMessageThreadUserName,
+        sender: curentUserFirstName,
+        threadName:currentMessageThreadName
+      };
+      newMessageSent(newMessage);
       this.setState({
         messageInputFieldValue: ''
       });
@@ -60,6 +67,5 @@ class MessageThread extends Component {
       </div>
     );
   }
-}
+};
 
-export default MessageThread;

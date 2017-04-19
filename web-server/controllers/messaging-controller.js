@@ -54,4 +54,17 @@ module.exports.userSentFirstMessage = (req, res) => {
     .catch(err => {
       console.log('userSentFirstMessage err', err);
     });
-}
+};
+
+
+module.exports.userSentNewMessage = (req, res) => {
+    const { threadName, recipient, sender } = req.body;
+     MessageThread.findOne({threadName: threadName}, (err, thread) => {
+      if (err) {
+        throw err;
+      }
+      console.log('userSentFirstMessage thread', thread);
+      res.send({});
+     });
+};
+
