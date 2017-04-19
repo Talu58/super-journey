@@ -13,6 +13,7 @@ export default class MessageThread extends Component {
     }
     this.newMessageInputFieldChange = this.newMessageInputFieldChange.bind(this);
     this.sendNewMessageClicked=this.sendNewMessageClicked.bind(this);
+    this.shouldDisplayTime = this.shouldDisplayTime.bind(this);
   }
 
   newMessageInputFieldChange(e) {
@@ -38,6 +39,15 @@ export default class MessageThread extends Component {
     }
   }
 
+  shouldDisplayTime(timeOne, timeTwo) {
+    let displayTime = true;
+    console.log('time difference', moment.duration(moment(timeOne) - moment(timeTwo)).asMinutes());
+    if (moment(timeOne).fromNow() === moment(timeTwo).fromNow() || moment.duration(moment(timeOne) - moment(timeTwo)).asMinutes() < 30) {
+      displayTime = false;
+    }
+    return displayTime;
+  }
+
   render() {
     const { currentMessageThread, currentMessageThreadUserName, curentUserFirstName } = this.props;
 
@@ -49,10 +59,7 @@ export default class MessageThread extends Component {
         <div className="messages-container">
           <div className="messages-container-inner">
             {currentMessageThread.map((message, i, messageList) => {
-              let displayTime = true;
-              if (i !== 0 && moment(message.time).fromNow() === moment(messageList[i-1].time).fromNow()) {
-                displayTime = false;
-              }
+              let displayTime = i === 0 ? true : this.shouldDisplayTime(message.time, messageList[i-1].time);
               return (
                 <Message
                   key={message['_id']}
