@@ -32,6 +32,7 @@ class Messaging extends Component {
         <div className="messaging-history-container" >
           <MessageHistory 
             allMessageThreads={allMessageThreads}
+            currentMessageThreadName={currentMessageThreadName}
             role={role}
           />
         </div>

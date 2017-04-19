@@ -49,7 +49,7 @@ export default class MessageThread extends Component {
           {currentMessageThread.map(message => {
             return (
               <Message
-                key={message.message}
+                key={message['_id']}
                 message={message}
                 curentUserFirstName={curentUserFirstName}
               />

@@ -49,7 +49,7 @@ export default (state = initialState, action ) => {
         currentMessageThreadUserName: newCurrentMessageThreadUserName,
         currentMessageThreadName: newCurrentMessageThreadName,
         currentMessageThread: newCurrentMessageThread,
-        allMessageThreads: action.data
+        allMessageThreads: action.data.reverse()
       };
       break;
     default:

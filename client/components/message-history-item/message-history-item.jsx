@@ -3,14 +3,19 @@ import './_message-history-item.sass';
 
 export default class MessageHistoryItem extends Component {
   render() {
-    const { messageThread, role } = this.props;
+    const { messageThread, role, isActive } = this.props;
     const UserName = role.Donor ? messageThread.nameUserOne : messageThread.nameUserTwo;
     const lastMessage = messageThread.messages[messageThread.messages.length - 1].message;
-    console.log('messageThread', messageThread);
+    let messageHistoryItemContainerClass = 'message-history-item-container';
+
+    if (isActive) {
+      messageHistoryItemContainerClass += ' message-history-item-container-active'
+    }
+
     return (
-      <div>
-        <h1>{UserName}</h1>
-        <p>{lastMessage}</p>
+      <div  className={messageHistoryItemContainerClass}>
+        <h1 className="message-history-item-header">{UserName}</h1>
+        <p  className="message-history-item-text">{lastMessage}</p>
       </div>
     );
   }

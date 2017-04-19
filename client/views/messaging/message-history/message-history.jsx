@@ -4,17 +4,18 @@ import MessageHistoryItem from '../../../components/message-history-item/message
 
 class MessageHistory extends Component {
   render() {
-    const { allMessageThreads, role } = this.props;
-    console.log('allMessageThreads', allMessageThreads);
+    const { allMessageThreads, role, currentMessageThreadName } = this.props;
     return (
       <div className="message-history-container">
         { allMessageThreads ? 
           allMessageThreads.map(messageThread => {
+            const isActive = messageThread.threadName === currentMessageThreadName ? true: false;
             return (
               <MessageHistoryItem
                 key={messageThread['_id']}
                 messageThread={messageThread}
                 role={role}
+                isActive={isActive}
               />
             )
           })
