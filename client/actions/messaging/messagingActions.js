@@ -25,7 +25,7 @@ export function newMessageSent(messageInformation) {
     .then(messageThread => {
       dispatch({
         type: USER_SENT_MESSAGE,
-        data: messageThread.data
+        data: messageThread.data,
       });
     });
   };

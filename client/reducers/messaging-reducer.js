@@ -13,6 +13,8 @@ const initialState = {
 };
 
 export default (state = initialState, action ) => {
+  let newCurrentMessageThreadUserName;
+  
   switch (action.type) {
     case USER_SENT_FIRST_MESSAGE:
       console.log('USER_SENT_FIRST_MESSAGE dispatched');
@@ -38,7 +40,6 @@ export default (state = initialState, action ) => {
       const lastThread = action.data[action.data.length - 1];
       const newCurrentMessageThread = lastThread.messages;
       const newCurrentMessageThreadName = lastThread.threadName;
-      let newCurrentMessageThreadUserName;
       if (action.role.Donor) {
         newCurrentMessageThreadUserName = lastThread.nameUserOne;
       } else {

@@ -14,16 +14,9 @@ export function addMessageThread(messagingThreads, thread) {
 };
 
 export function replaceMessageThread(messagingThreads, thread) {
-  const { created_at, updated_at, messages, threadName, sender, recipient } = thread;
-  console.log('messagingThreads', messagingThreads);
-  console.log('thread', thread);
+  const { threadName } = thread;
   const newThread = {
-    created_at,
-    updated_at,
-    messages,
-    threadName,
-    sender,
-    recipient
+    ...thread
   };
   let newMessagingThreads = messagingThreads.map(thread => {
     if (thread.threadName === threadName) {
