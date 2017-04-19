@@ -7,7 +7,7 @@ class MessageHistory extends Component {
     const { allMessageThreads, role } = this.props;
     console.log('allMessageThreads', allMessageThreads);
     return (
-      <div>
+      <div className="message-history-container">
         { allMessageThreads ? 
           allMessageThreads.map(messageThread => {
             return (

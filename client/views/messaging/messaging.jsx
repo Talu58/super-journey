@@ -20,7 +20,7 @@ class Messaging extends Component {
     const { currentMessageThread, currentMessageThreadUserName, currentMessageThreadName, allMessageThreads, firstname, newMessageSent, role } = this.props;
     return (
       <div className="messaging-container" >
-        <div className="message-thread-container" >
+        <div className="messaging-thread-container" >
         <MessageThread 
           currentMessageThread={currentMessageThread}
           currentMessageThreadUserName={currentMessageThreadUserName}
@@ -29,7 +29,7 @@ class Messaging extends Component {
           newMessageSent={newMessageSent}
         />
         </div>
-        <div className="message-history-container" >
+        <div className="messaging-history-container" >
           <MessageHistory 
             allMessageThreads={allMessageThreads}
             role={role}
