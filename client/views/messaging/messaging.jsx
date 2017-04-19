@@ -12,7 +12,7 @@ class Messaging extends Component {
   componentWillMount() {
     const { getUserMessages } = this.props;
     const { email } = jwt.decode(localStorage.jwtToken);
-    getUserMessages(email);
+    getUserMessages(email , role);
   }
 
   render() {
@@ -54,7 +54,8 @@ const mapStateToProps = ({ auth, messaging }) => {
     currentMessageThreadName: messaging.currentMessageThreadName,
     currentMessageThread: messaging.currentMessageThread,
     allMessageThreads: messaging.allMessageThreads,
-    firstname: auth.firstname
+    firstname: auth.firstname,
+    role: auth.role
   };
 }
 

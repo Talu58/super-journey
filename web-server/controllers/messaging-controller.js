@@ -80,16 +80,18 @@ module.exports.getUserMessagesRequest = (req, res) => {
       throw err;
     }
     //implement promiseAll
-    let allMessagesThread = []
-    user.messageThreadsNames.forEach(threadName => {
-      MessageThread.findOne({threadName: threadName}, (err, thread) => {
+    let allMessagesThreads = []
+    const messageThreadsNamesPromisified = user.messageThreadsNames.map(threadName => {
+      return MessageThread.findOne({threadName: threadName}, (err, thread) => {
         if (err) {
           throw err;
         }
-        allMessagesThread.push(thread);
+        allMessagesThreads.push(thread);
       });
     });
-    return res.send(allMessagesThread);
+    Promise.all(messageThreadsNamesPromisified).then(() => {
+      return res.send(allMessagesThreads);
+    });
   }).catch(err => {
     throw err;
   });

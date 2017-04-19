@@ -34,8 +34,8 @@ export default (state = initialState, action ) => {
       };
       break;
     case GET_USER_MESSAGES:
-      console.log('GET_USER_MESSAGES dispatched');
-      // implement state changes
+      console.log('GET_USER_MESSAGES dispatched', action.data);
+
       return {
         ...state,
       };

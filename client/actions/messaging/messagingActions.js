@@ -35,7 +35,6 @@ export function getUserMessages(userEmail) {
   return dispatch => {
     messaging.getAllUserMessagesRequest(userEmail)
     .then(allMessageThreads => {
-      console.log('getAllUserMessagesRequest', allMessageThreads);
       dispatch({
         type: GET_USER_MESSAGES,
         data: allMessageThreads.data

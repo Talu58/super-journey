@@ -42,16 +42,20 @@ export default class MessageThread extends Component {
 
     return (
       <div>
-        <h1 className="messaging-thread-header">Discussion with {currentMessageThreadUserName}</h1>
-        {currentMessageThread.map(message => {
-          return (
-            <Message
-              key={message.message}
-              message={message}
-              curentUserFirstName={curentUserFirstName}
-            />
-          );
-        })}
+        <div  className="messaging-thread-header-container">
+          <h1 className="messaging-thread-header">Discussion with {currentMessageThreadUserName}</h1>
+        </div>
+        <div className="messages-container">
+          {currentMessageThread.map(message => {
+            return (
+              <Message
+                key={message.message}
+                message={message}
+                curentUserFirstName={curentUserFirstName}
+              />
+            );
+          })}
+        </div>
         <div className="messaging-thread-new-message-container">
           <InputField
             placeholderText="Enter your message here"
