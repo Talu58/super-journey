@@ -74,3 +74,23 @@ module.exports.userSentNewMessage = (req, res) => {
     });
 };
 
+module.exports.getUserMessagesRequest = (req, res) => {
+  User.findOne({email: req.params.userEmail}, (err, user) => {
+    if (err) {
+      throw err;
+    }
+    //implement promiseAll
+    let allMessagesThread = []
+    user.messageThreadsNames.forEach(threadName => {
+      MessageThread.findOne({threadName: threadName}, (err, thread) => {
+        if (err) {
+          throw err;
+        }
+        allMessagesThread.push(thread);
+      });
+    });
+    return res.send(allMessagesThread);
+  }).catch(err => {
+    throw err;
+  });
+}

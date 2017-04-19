@@ -1,6 +1,7 @@
 import {
   USER_SENT_FIRST_MESSAGE,
-  USER_SENT_MESSAGE
+  USER_SENT_MESSAGE,
+  GET_USER_MESSAGES
 } from '../actions/messaging/messagingActionTypes';
 import * as helpers from '.././utils-helpers/messaging-helpers';
 
@@ -24,13 +25,18 @@ export default (state = initialState, action ) => {
       };
       break;
     case USER_SENT_MESSAGE:
-      console.log('USER_SENT_MESSAGE dispatched', action.data);
+      console.log('USER_SENT_MESSAGE dispatched');
       const replacedAllMessageThreads = helpers.replaceMessageThread(state.allMessageThreads, action.data);
-      console.log('replacedAllMessageThreads', replacedAllMessageThreads);
       return {
         ...state,
         currentMessageThread: action.data.messages,
         allMessageThreads: replacedAllMessageThreads
+      };
+      break;
+    case GET_USER_MESSAGES:
+      console.log('GET_USER_MESSAGES dispatched');
+      return {
+        ...state,
       };
       break;
     default:

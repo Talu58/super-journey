@@ -1,6 +1,7 @@
 import {
   USER_SENT_FIRST_MESSAGE,
-  USER_SENT_MESSAGE
+  USER_SENT_MESSAGE,
+  GET_USER_MESSAGES
 } from './messagingActionTypes';
 import * as messaging from '../../utils-api/messaging/messaging-rest-api';
 
@@ -22,11 +23,23 @@ export function newMessageSent(messageInformation) {
   return dispatch => {
     messaging.sendNewMessageRequest(messageInformation)
     .then(messageThread => {
-      console.log('newMessageSent messageThread', messageThread.data);
       dispatch({
         type: USER_SENT_MESSAGE,
         data: messageThread.data
       });
     });
   };
-}
+};
+
+export function getUserMessages(userEmail) {
+  return dispatch => {
+    messaging.getAllUserMessagesRequest(userEmail)
+    .then(allMessageThreads => {
+      console.log('getAllUserMessagesRequest', allMessageThreads);
+      dispatch({
+        type: GET_USER_MESSAGES,
+        data: allMessageThreads.data
+      });
+    });
+  };
+};

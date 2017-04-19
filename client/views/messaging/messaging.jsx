@@ -4,9 +4,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MessageThread from './message-thread/message-thread';
 import MessageHistory from './message-history/message-history';
-import { newMessageSent } from '../../actions/messaging/messagingActions';
+import { newMessageSent, getUserMessages } from '../../actions/messaging/messagingActions';
+import jwt from 'jsonwebtoken';
 
 class Messaging extends Component {
+
+  componentWillMount() {
+    const { getUserMessages } = this.props;
+    const { email } = jwt.decode(localStorage.jwtToken);
+    getUserMessages(email);
+  }
 
   render() {
     const { currentMessageThread, currentMessageThreadUserName, currentMessageThreadName, allMessageThreads, firstname, newMessageSent } = this.props;
@@ -37,7 +44,8 @@ Messaging.propTypes = {
     currentMessageThread: PropTypes.array.isRequired,
     allMessageThreads: PropTypes.array.isRequired,
     firstname: PropTypes.string.isRequired,
-    newMessageSent: PropTypes.func.isRequired
+    newMessageSent: PropTypes.func.isRequired,
+    getUserMessages: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ auth, messaging }) => {
@@ -50,7 +58,7 @@ const mapStateToProps = ({ auth, messaging }) => {
   };
 }
 
-const matchDispatchToProps = dispatch => bindActionCreators({newMessageSent}, dispatch);
+const matchDispatchToProps = dispatch => bindActionCreators({newMessageSent, getUserMessages}, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(Messaging);
 

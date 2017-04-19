@@ -15,7 +15,8 @@ const {
 } = require('./controllers/dummy-data-controller');
 const {
   userSentFirstMessage,
-  userSentNewMessage
+  userSentNewMessage,
+  getUserMessagesRequest
 } = require('./controllers/messaging-controller');
 
 module.exports = function(app, express) {
@@ -26,6 +27,7 @@ module.exports = function(app, express) {
   app.get('/user/information/:userEmail', getUserInformationRequest);
   app.get('/user/dummy/non-profit', createDummyNonProfitUsers);
   app.get('/user/dummy/donor', createDummyDonorUser);
+  app.get('/user/messages/:userEmail', getUserMessagesRequest);
   
   app.get('/organizations/match/:industryName', getIndustryMatchesRequest);
   app.get('/organizations/all', getAllOrganizationsRequest);
