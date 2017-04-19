@@ -31,13 +31,14 @@ export function newMessageSent(messageInformation) {
   };
 };
 
-export function getUserMessages(userEmail) {
+export function getUserMessages(userEmail, role) {
   return dispatch => {
     messaging.getAllUserMessagesRequest(userEmail)
     .then(allMessageThreads => {
       dispatch({
         type: GET_USER_MESSAGES,
-        data: allMessageThreads.data
+        data: allMessageThreads.data,
+        role: role
       });
     });
   };

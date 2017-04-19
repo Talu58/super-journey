@@ -15,7 +15,7 @@ class Home extends Component {
   componentWillMount() {
     const { getUserInformation } = this.props;
     const { email } = jwt.decode(localStorage.jwtToken);
-    getUserInformation(email);
+    getUserInformation(email, 'home');
   }
 
   render() {

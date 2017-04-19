@@ -4,19 +4,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MessageThread from './message-thread/message-thread';
 import MessageHistory from './message-history/message-history';
-import { newMessageSent, getUserMessages } from '../../actions/messaging/messagingActions';
+import { getUserInformation } from '../../actions/auth/authActions';
+import { newMessageSent } from '../../actions/messaging/messagingActions';
 import jwt from 'jsonwebtoken';
 
 class Messaging extends Component {
 
   componentWillMount() {
-    const { getUserMessages } = this.props;
+    const { getUserInformation } = this.props;
     const { email } = jwt.decode(localStorage.jwtToken);
-    getUserMessages(email , role);
+    getUserInformation(email, 'messaging');
   }
 
   render() {
-    const { currentMessageThread, currentMessageThreadUserName, currentMessageThreadName, allMessageThreads, firstname, newMessageSent } = this.props;
+    const { currentMessageThread, currentMessageThreadUserName, currentMessageThreadName, allMessageThreads, firstname, newMessageSent, role } = this.props;
     return (
       <div className="messaging-container" >
         <div className="message-thread-container" >
@@ -31,6 +32,7 @@ class Messaging extends Component {
         <div className="message-history-container" >
           <MessageHistory 
             allMessageThreads={allMessageThreads}
+            role={role}
           />
         </div>
       </div>
@@ -45,7 +47,7 @@ Messaging.propTypes = {
     allMessageThreads: PropTypes.array.isRequired,
     firstname: PropTypes.string.isRequired,
     newMessageSent: PropTypes.func.isRequired,
-    getUserMessages: PropTypes.func.isRequired
+    getUserInformation: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ auth, messaging }) => {
@@ -59,7 +61,7 @@ const mapStateToProps = ({ auth, messaging }) => {
   };
 }
 
-const matchDispatchToProps = dispatch => bindActionCreators({newMessageSent, getUserMessages}, dispatch);
+const matchDispatchToProps = dispatch => bindActionCreators({newMessageSent, getUserInformation}, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(Messaging);
 

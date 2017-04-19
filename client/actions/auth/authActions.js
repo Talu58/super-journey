@@ -11,6 +11,7 @@ import * as authentication from '../../utils-api/auth/authentication-rest-api';
 import setAuthorizationToken from '../../utils-api/auth/authentication-set-token';
 import jwt from 'jsonwebtoken';
 import { getUserMatches, reinitializeSearchState } from '../search/searchActions';
+import { getUserMessages } from '../messaging/messagingActions';
 
 export function userSignUpRequest(user) {
   return dispatch => {
@@ -95,7 +96,7 @@ export function logout() {
   };
 };
 
-export function getUserInformation(userEmail) {
+export function getUserInformation(userEmail, location) {
   return dispatch => {
     return authentication.getUserInfo(userEmail)
       .then(userInfo => {
@@ -113,7 +114,11 @@ export function getUserInformation(userEmail) {
           type: USER_GET_INFO_REQUEST,
           data: newUser
         });
-        dispatch(getUserMatches(userInfo.data));
+        if (location === 'home') {
+          dispatch(getUserMatches(userInfo.data));
+        } else if (location === 'messaging') {
+          dispatch(getUserMessages(userEmail, userInfo.data.role));
+        }
       });
   };
 };

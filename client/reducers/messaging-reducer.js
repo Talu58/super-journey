@@ -34,10 +34,22 @@ export default (state = initialState, action ) => {
       };
       break;
     case GET_USER_MESSAGES:
-      console.log('GET_USER_MESSAGES dispatched', action.data);
-
+      console.log('GET_USER_MESSAGES dispatched');
+      const lastThread = action.data[action.data.length - 1];
+      const newCurrentMessageThread = lastThread.messages;
+      const newCurrentMessageThreadName = lastThread.threadName;
+      let newCurrentMessageThreadUserName;
+      if (action.role.Donor) {
+        newCurrentMessageThreadUserName = lastThread.nameUserOne;
+      } else {
+        newCurrentMessageThreadUserName = lastThread.nameUserTwo;
+      }
       return {
         ...state,
+        currentMessageThreadUserName: newCurrentMessageThreadUserName,
+        currentMessageThreadName: newCurrentMessageThreadName,
+        currentMessageThread: newCurrentMessageThread,
+        allMessageThreads: action.data
       };
       break;
     default:
