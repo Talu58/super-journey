@@ -45,9 +45,10 @@ export function getUserMessages(userEmail, role) {
   };
 };
 
-export function userChangedCurrentThread(threadName) {
+export function userChangedCurrentThread(threadName, role) {
   return {
     type: USER_CHANGED_CURRENT_THREAD,
-    data: threadName
+    data: threadName,
+    role: role
   };
 };

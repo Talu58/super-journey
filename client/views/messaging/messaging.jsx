@@ -49,8 +49,8 @@ Messaging.propTypes = {
     allMessageThreads: PropTypes.array.isRequired,
     firstname: PropTypes.string.isRequired,
     newMessageSent: PropTypes.func.isRequired,
-    getUserInformation: PropTypes.func.isRequired
-    userChangedCurrentThread:
+    getUserInformation: PropTypes.func.isRequired,
+    userChangedCurrentThread: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ auth, messaging }) => {

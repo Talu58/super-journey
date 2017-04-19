@@ -15,6 +15,7 @@ const initialState = {
 
 export default (state = initialState, action ) => {
   let newCurrentMessageThreadUserName;
+  let newCurrentMessageThread;
   
   switch (action.type) {
     case USER_SENT_FIRST_MESSAGE:
@@ -39,13 +40,14 @@ export default (state = initialState, action ) => {
     case GET_USER_MESSAGES:
       console.log('GET_USER_MESSAGES dispatched');
       const lastThread = action.data[action.data.length - 1];
-      const newCurrentMessageThread = lastThread.messages;
+      newCurrentMessageThread = lastThread.messages;
       const newCurrentMessageThreadName = lastThread.threadName;
       if (action.role.Donor) {
         newCurrentMessageThreadUserName = lastThread.nameUserOne;
       } else {
         newCurrentMessageThreadUserName = lastThread.nameUserTwo;
       }
+      console.log('GET_USER_MESSAGES', action.data);
       return {
         ...state,
         currentMessageThreadUserName: newCurrentMessageThreadUserName,
@@ -56,8 +58,20 @@ export default (state = initialState, action ) => {
       break;
     case USER_CHANGED_CURRENT_THREAD:
       console.log('USER_CHANGED_CURRENT_THREAD dispatched');
+      const newCurrentThread = state.allMessageThreads.filter(thread => {
+        return thread.threadName === action.data;
+      }).pop();
+      newCurrentMessageThread = newCurrentThread.messages;
+      if (action.role.Donor) {
+        newCurrentMessageThreadUserName = newCurrentThread.nameUserOne;
+      } else {
+        newCurrentMessageThreadUserName = newCurrentThread.nameUserTwo;
+      }      
       return {
-        ...state
+        ...state,
+        currentMessageThreadName: action.data,
+        currentMessageThread: newCurrentMessageThread,
+        currentMessageThreadUserName: newCurrentMessageThreadUserName
       };
       break;
     default:

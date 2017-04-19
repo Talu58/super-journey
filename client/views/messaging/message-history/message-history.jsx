@@ -10,9 +10,9 @@ class MessageHistory extends Component {
   }
 
   messageHistoryItemClicked(e) {
-    const { userChangedCurrentThread } = this.props;
+    const { userChangedCurrentThread, role } = this.props;
     const threadName = e.target.id ? e.target.id : e.target.parentNode.id;
-    userChangedCurrentThread(threadName);
+    userChangedCurrentThread(threadName, role);
   }
 
   render() {
