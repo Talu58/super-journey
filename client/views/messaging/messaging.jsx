@@ -18,7 +18,7 @@ class Messaging extends Component {
   render() {
     const { currentMessageThread, currentMessageThreadUserName, currentMessageThreadName, allMessageThreads, firstname, newMessageSent } = this.props;
     return (
-      <div className="message-container" >
+      <div className="messaging-container" >
         <div className="message-thread-container" >
         <MessageThread 
           currentMessageThread={currentMessageThread}

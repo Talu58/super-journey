@@ -4,19 +4,22 @@ import './_message.sass';
 export default class Message extends Component {
   render() {
     const { message, curentUserFirstName } = this.props;
-    let messageContainerClass = 'message-container';
     let messageSender = message.from === curentUserFirstName ? 'You' : message.from;
+    let messageClass = 'message';
+    let messageSenderClass = 'message-sender';
 
     if (message.from === curentUserFirstName) {
-      messageContainerClass += '-from'
+      messageClass += ' message-from';
+      messageSenderClass += ' message-sender-from';
     } else {
-      messageContainerClass += '-to'
+      messageClass += ' message-to';
+      messageSenderClass += ' message-sender-to';
     }
 
     return (
-      <div className={messageContainerClass}>
-        <h2>{messageSender}</h2>
-        <p>{message.message}</p>
+      <div className="message-container">
+        <h2 className={messageSenderClass}>{messageSender}</h2>
+        <p  className={messageClass}>{message.message}</p>
       </div>
     );
   }

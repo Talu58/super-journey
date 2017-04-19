@@ -42,7 +42,7 @@ export default class MessageThread extends Component {
 
     return (
       <div>
-        <h1>To: {currentMessageThreadUserName}</h1>
+        <h1 className="messaging-thread-header">Discussion with {currentMessageThreadUserName}</h1>
         {currentMessageThread.map(message => {
           return (
             <Message
@@ -52,16 +52,19 @@ export default class MessageThread extends Component {
             />
           );
         })}
-        <div>
+        <div className="messaging-thread-new-message-container">
           <InputField
             placeholderText="Enter your message here"
             changeHandler={this.newMessageInputFieldChange}
             value={this.state.messageInputFieldValue}
+            styleClassName="messaging-thread-new-message-input-field"
+            containerStyleClassName="messaging-thread-new-message-input-field-container"
           />
           <Button
             value="Send"
             styleClassName="button-primary"
             clickHandler={this.sendNewMessageClicked}
+            containerStyleClassName="messaging-thread-new-message-button-container"
           />
         </div>
       </div>
