@@ -65,6 +65,7 @@ module.exports.userSentNewMessage = (req, res) => {
       }
       const newMessage = createMessage(req.body);
       thread.messages.push(newMessage);
+      thread['updated_at'] = new Date();
       thread.save((err, messageThread) => {
         if (err) {
           return console.error(err);
