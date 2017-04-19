@@ -41,7 +41,7 @@ export default class MessageThread extends Component {
 
   shouldDisplayTime(timeOne, timeTwo) {
     let displayTime = true;
-    console.log('time difference', moment.duration(moment(timeOne) - moment(timeTwo)).asMinutes());
+    // Time is only displayed if there is more than 30min between messages
     if (moment(timeOne).fromNow() === moment(timeTwo).fromNow() || moment.duration(moment(timeOne) - moment(timeTwo)).asMinutes() < 30) {
       displayTime = false;
     }
