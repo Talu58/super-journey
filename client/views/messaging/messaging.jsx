@@ -29,26 +29,42 @@ class Messaging extends Component {
       userReceivedANewMessage,
       messagesNotification
     } = this.props;
+
+    let MessagingHeaderMessage = '';
+    
+    if (currentMessageThreadName === '') {
+      if (role) {
+        MessagingHeaderMessage = role.Donor ? 'Get in touch with Organizations on your home page' : 'No one has contacted you yet, improve your Organization\'s page to be contacted';
+      }
+    } else {
+      MessagingHeaderMessage = 'Check how everybody has been doing';
+    }
+
     return (
-      <div className="messaging-container" >
-        <div className="messaging-thread-container" >
-        <MessageThread 
-          currentMessageThread={currentMessageThread}
-          currentMessageThreadUserName={currentMessageThreadUserName}
-          currentMessageThreadName={currentMessageThreadName}
-          curentUserFirstName={firstname}
-          newMessageSent={newMessageSent}
-          userReceivedANewMessage={userReceivedANewMessage}
-        />
+      <div className="messaging-view-container" >
+        <div className="messaging-empty-message">
+          <p>{MessagingHeaderMessage}</p>
         </div>
-        <div className="messaging-history-container" >
-          <MessageHistory 
-            allMessageThreads={allMessageThreads}
+        <div className="messaging-container" >
+          <div className="messaging-thread-container" >
+          <MessageThread 
+            currentMessageThread={currentMessageThread}
+            currentMessageThreadUserName={currentMessageThreadUserName}
             currentMessageThreadName={currentMessageThreadName}
-            role={role}
-            userChangedCurrentThread={userChangedCurrentThread}
-            messagesNotification={messagesNotification}
+            curentUserFirstName={firstname}
+            newMessageSent={newMessageSent}
+            userReceivedANewMessage={userReceivedANewMessage}
           />
+          </div>
+          <div className="messaging-history-container" >
+            <MessageHistory 
+              allMessageThreads={allMessageThreads}
+              currentMessageThreadName={currentMessageThreadName}
+              role={role}
+              userChangedCurrentThread={userChangedCurrentThread}
+              messagesNotification={messagesNotification}
+            />
+          </div>
         </div>
       </div>
     );

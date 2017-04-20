@@ -3,6 +3,8 @@ import './_non-profit.sass';
 
 class NonProfit extends Component {
   render() {
+    const { organization } = this.props;
+    console.log('NonProfit organization', organization);
     return (
       <div>
         NonProfit

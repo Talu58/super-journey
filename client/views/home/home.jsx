@@ -23,6 +23,7 @@ class Home extends Component {
       role,
       firstname,
       email,
+      organization,
       industries,
       displayedResults,
       searchCheckboxClicked,
@@ -55,7 +56,9 @@ class Home extends Component {
               industriesList={industriesList}
               firstMessageSent={firstMessageSent}
             />
-            : <NonProfit/>
+            : <NonProfit
+                organization={organization}
+              />
         }
       </div>
     )
@@ -67,6 +70,7 @@ Home.propTypes = {
   role: PropTypes.object,
   firstname: PropTypes.string,
   email: PropTypes.string,
+  organization: PropTypes.object,
   fetchAllOrganizations: PropTypes.func.isRequired,
   fetchUserMatches: PropTypes.func.isRequired,
   searchRequest: PropTypes.func.isRequired,
@@ -86,6 +90,7 @@ const mapStateToProps = ({ auth, search }) => {
     role: auth.role,
     firstname: auth.firstname,
     email: auth.email,
+    organization: auth.organization,
     homeIsLoading: auth.homeIsLoading,
     industries: search.industriesList,
     displayedResults: search.allDisplayedResults,

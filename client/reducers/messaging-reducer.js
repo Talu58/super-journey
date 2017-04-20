@@ -47,13 +47,21 @@ export default (state = initialState, action ) => {
       console.log('GET_USER_MESSAGES dispatched');
       newAllMessageThreads = helpers.sortAllMessageThreads(action.data);
       newMessagesNotification = helpers.setNotificationList(action.data);
-      const lastThread = newAllMessageThreads[0];
-      newCurrentMessageThread = lastThread.messages;
-      const newCurrentMessageThreadName = lastThread.threadName;
-      if (action.role.Donor) {
-        newCurrentMessageThreadUserName = lastThread.nameUserOne;
+      let lastThread, newCurrentMessageThreadName;
+
+      if (newAllMessageThreads.length !== 0) {
+        lastThread = newAllMessageThreads[0];
+        newCurrentMessageThread = lastThread.messages;
+        newCurrentMessageThreadName = lastThread.threadName;
+        if (action.role.Donor) {
+          newCurrentMessageThreadUserName = lastThread.nameUserOne;
+        } else {
+          newCurrentMessageThreadUserName = lastThread.nameUserTwo;
+        }
       } else {
-        newCurrentMessageThreadUserName = lastThread.nameUserTwo;
+        newCurrentMessageThread = state.currentMessageThread;
+        newCurrentMessageThreadName = state.currentMessageThreadName;
+        newCurrentMessageThreadUserName = state.currentMessageThreadUserName;
       }
       return {
         ...state,
