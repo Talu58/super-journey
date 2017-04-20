@@ -110,9 +110,6 @@ module.exports.imageUploadRequest = (req, res) => {
     if (err) {
       return res.send({'imageUploadRequest err': err});
     }
-    console.log('body', req.body);
-    console.log('file', req.file);
-    console.log('files', req.files);
     return res.send('File uploaded sucessfully');
   })
 }
@@ -164,3 +161,30 @@ module.exports.getUserInformationRequest = (req, res) => {
     throw err;
   });
 };
+
+module.exports.changePasswordRequest = (req, res) => {
+  const { email, previousPassword, newPassword } = req.body;
+  console.log('req.body', req.body);
+  User.findOne({email: email}, (err, user) => {
+    if (err) throw err;
+    compareHashedPassword(previousPassword, user.password).then(isValid => {
+        if (isValid) {
+          generateHashedPassword(newPassword).then(hash => {
+            user.password = hash;
+          }).then( () => {
+            return user.save((err, user) => {
+              if (err) {
+                throw err;
+              } else {
+                return res.send(true);
+              }
+            });
+          });
+        } else {
+          return res.send(false);
+        }
+      });
+  }).catch(err => {
+    throw err;
+  });
+}
