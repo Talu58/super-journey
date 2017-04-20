@@ -25,7 +25,7 @@ class Profile extends Component {
           <p>Email: {email}</p>
         </section>
         <Button
-          value="Edit"
+          value="Change Password"
           styleClassName="profile-edit-button"
         />
       </div>
