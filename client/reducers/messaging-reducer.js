@@ -4,7 +4,8 @@ import {
   GET_USER_MESSAGES,
   USER_CHANGED_CURRENT_THREAD,
   NEW_MESSAGE_RECEIVED_ON_CURRENT_THREAD,
-  NEW_MESSAGE_RECEIVED_ON_OTHER_THREAD
+  NEW_MESSAGE_RECEIVED_ON_OTHER_THREAD,
+  REINITIALIZE_MESSAGING_STATE
 } from '../actions/messaging/messagingActionTypes';
 import * as helpers from '.././utils-helpers/messaging-helpers';
 
@@ -117,6 +118,12 @@ export default (state = initialState, action ) => {
         ...state,
         allMessageThreads: newAllMessageThreads,
         messagesNotification: newMessagesNotification
+      };
+      break;
+    case REINITIALIZE_MESSAGING_STATE:
+      console.log('REINITIALIZE_MESSAGING_STATE dispatched');
+      return {
+        ...initialState
       };
       break;
     default:

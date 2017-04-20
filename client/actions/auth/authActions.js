@@ -11,7 +11,8 @@ import * as authentication from '../../utils-api/auth/authentication-rest-api';
 import setAuthorizationToken from '../../utils-api/auth/authentication-set-token';
 import jwt from 'jsonwebtoken';
 import { getUserMatches, reinitializeSearchState } from '../search/searchActions';
-import { getUserMessages } from '../messaging/messagingActions';
+import { getUserMessages, reinitializeMessagingState } from '../messaging/messagingActions';
+import socket from '../../utils-socket/socket-connection.js';
 
 export function userSignUpRequest(user) {
   return dispatch => {
@@ -85,14 +86,16 @@ export function authenticateUser({ completedProfile }) {
   };
 };
 
-export function logout() {
+export function logout(allMessageThreads) {
   return dispatch => {
+    socket.emit('disconnect', allMessageThreads);
     localStorage.removeItem('jwtToken');
     setAuthorizationToken(false);
     dispatch({
       type: USER_LOGOUT
     });
     dispatch(reinitializeSearchState());
+    dispatch(reinitializeMessagingState());
   };
 };
 

@@ -18,9 +18,12 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
 });
 
+
+// SOCKET.IO MANAGEMENT //
 io.on('connection', function(socket) {  
   console.log('A user connected');
   socket.on('subscribe to threads', threads => {
+    // Subscription to all the previous conversations
     threads.forEach(thread => {
       socket.join(thread.threadName);
     });
@@ -32,7 +35,16 @@ io.on('connection', function(socket) {
     });
   });
 
+  socket.on('disconnect', threads => {
+    console.log('A user disconnected', threads);
+    threads.forEach(thread => {
+      socket.leave(thread.threadName);
+    });
+  });
+
 });
+
+///////////////////////////////////////////////////////
 
 http.listen(PORT, () => {
   console.log('Server is up and running on port:', PORT);

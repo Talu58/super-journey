@@ -12,8 +12,8 @@ export default class NavBar extends Component {
   }
 
   logout() {
-    const { logout } = this.props;
-    logout();
+    const { logout, allMessageThreads } = this.props;
+    logout(allMessageThreads);
   }
 
   render() {
@@ -66,5 +66,6 @@ export default class NavBar extends Component {
 NavBar.propTypes = {
   logout: PropTypes.func.isRequired,
   isAuth: PropTypes.bool.isRequired,
-  completedProfile: PropTypes.bool.isRequired
+  completedProfile: PropTypes.bool.isRequired,
+  allMessageThreads: PropTypes.array
 };

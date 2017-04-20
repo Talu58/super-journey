@@ -17,10 +17,15 @@ export class AppLayout extends Component {
   }
 
   render() {
-    const { isAuth, completedProfile, dispatch, logout } = this.props;
+    const { isAuth, completedProfile, dispatch, logout, allMessageThreads } = this.props;
     return (
       <div className="app-layout-container">
-        <NavBar isAuth={isAuth} completedProfile={completedProfile} logout={logout}/>
+        <NavBar
+          isAuth={isAuth}
+          completedProfile={completedProfile}
+          logout={logout}
+          allMessageThreads={allMessageThreads}
+        />
         <main>
           <Route exact path='/' component={LandingPage} />
           <PrivateRoute path="/signup" component={SignUpSteps} isAuth={isAuth} />
@@ -40,10 +45,11 @@ AppLayout.propTypes = {
   isAuth: PropTypes.bool.isRequired
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, messaging }) => {
   return {
     isAuth: auth.isAuth,
-    completedProfile: auth.completedProfile
+    completedProfile: auth.completedProfile,
+    allMessageThreads: messaging.allMessageThreads
   }
 };
 
