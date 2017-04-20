@@ -35,7 +35,6 @@ export function sortAllMessageThreads(allMessageThreads) {
 }
 
 export function addReceivedMessageToAllMessageThreads(allMessageThreads, newMessage) {
-  console.log('newMessage', newMessage);
   let newAllMessageThread = allMessageThreads.map(thread => {
     if (thread.threadName === newMessage.threadName) {
       thread.messages.push(newMessage);
