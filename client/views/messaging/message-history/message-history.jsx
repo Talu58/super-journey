@@ -27,12 +27,12 @@ export default class MessageHistory extends Component {
             const isActive = messageThread.threadName === currentMessageThreadName ? true: false;
             return (
               <MessageHistoryItem
-                key={messageThread['_id']}
+                key={messageThread['_id'] + Math.floor(Math.random() * 1000)}
                 messageThread={messageThread}
                 role={role}
                 isActive={isActive}
                 clickHandler={this.messageHistoryItemClicked}
-                messagesNotification={messagesNotification[messageThread.threadName]}
+                messagesNotification={messagesNotification ? messagesNotification[messageThread.threadName] : 0}
               />
             )
           })
@@ -46,7 +46,7 @@ export default class MessageHistory extends Component {
 MessageHistory.propTypes = {
   currentMessageThreadName: PropTypes.string.isRequired,
   allMessageThreads: PropTypes.array.isRequired,
-  messagesNotification: PropTypes.object.isRequired,
+  messagesNotification: PropTypes.object,
   role: PropTypes.object,
   userChangedCurrentThread: PropTypes.func.isRequired,
 };

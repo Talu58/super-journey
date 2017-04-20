@@ -26,6 +26,7 @@ module.exports = function(app, express) {
   app.post('/user/organization/image/upload', imageUploadRequest);
   app.post('/user/login', loginRequest);
   app.post('/user/password/change', changePasswordRequest);
+
   app.get('/user/information/:userEmail', getUserInformationRequest);
   app.get('/user/dummy/non-profit', createDummyNonProfitUsers);
   app.get('/user/dummy/donor', createDummyDonorUser);
@@ -36,5 +37,4 @@ module.exports = function(app, express) {
 
   app.post('/message/first', userSentFirstMessage);
   app.post('/message/new', userSentNewMessage);
-
 };

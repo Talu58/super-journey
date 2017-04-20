@@ -76,7 +76,7 @@ Messaging.propTypes = {
     currentMessageThreadName: PropTypes.string.isRequired,
     currentMessageThread: PropTypes.array.isRequired,
     allMessageThreads: PropTypes.array.isRequired,
-    messagesNotification: PropTypes.object.isRequired,
+    messagesNotification: PropTypes.object,
     firstname: PropTypes.string.isRequired,
     role: PropTypes.object,
     newMessageSent: PropTypes.func.isRequired,

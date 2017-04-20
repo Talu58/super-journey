@@ -6,6 +6,7 @@ const { generateHashedPassword, compareHashedPassword } = require('../utils/util
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const path = require('path');
+// Multer is used to parse the image upload
 const multer  = require('multer');
 const storage = multer.diskStorage({
   destination: path.join(__dirname, '/../../uploads'),
