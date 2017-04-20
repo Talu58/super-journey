@@ -4,7 +4,8 @@ import {
   GET_USER_MESSAGES,
   USER_CHANGED_CURRENT_THREAD,
   NEW_MESSAGE_RECEIVED_ON_CURRENT_THREAD,
-  NEW_MESSAGE_RECEIVED_ON_OTHER_THREAD
+  NEW_MESSAGE_RECEIVED_ON_OTHER_THREAD,
+  REINITIALIZE_MESSAGING_STATE
 } from './messagingActionTypes';
 import * as messaging from '../../utils-api/messaging/messaging-rest-api';
 import socket from '../../utils-socket/socket-connection.js';
@@ -71,5 +72,11 @@ export function userReceivedANewMessage(newMessage, currentMessageThreadName) {
       });
     }
   }
-}
+};
+
+export function reinitializeMessagingState() {
+  return {
+    type: REINITIALIZE_MESSAGING_STATE
+  };
+};
 

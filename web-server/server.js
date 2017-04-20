@@ -35,11 +35,15 @@ io.on('connection', function(socket) {
     });
   });
 
-  socket.on('disconnect', threads => {
-    console.log('A user disconnected', threads);
+  socket.on('logout', threads => {
+    // Unsubscription from all conversations
     threads.forEach(thread => {
       socket.leave(thread.threadName);
     });
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
   });
 
 });

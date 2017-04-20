@@ -88,7 +88,7 @@ export function authenticateUser({ completedProfile }) {
 
 export function logout(allMessageThreads) {
   return dispatch => {
-    socket.emit('disconnect', allMessageThreads);
+    socket.emit('logout', allMessageThreads);
     localStorage.removeItem('jwtToken');
     setAuthorizationToken(false);
     dispatch({
