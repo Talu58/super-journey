@@ -17,17 +17,22 @@ class Profile extends Component {
   render() {
     const { role, email, firstname, lastname } = this.props;
     return (
-      <div className="profile-container">
-        <h1 className="profile-information-header">Your Profile information:</h1>
-        <section className="profile-information-container">
-          <p>Firstname: {firstname}</p>
-          <p>Lastname: {lastname}</p>
-          <p>Email: {email}</p>
-        </section>
-        <Button
-          value="Change Password"
-          styleClassName="profile-edit-button"
-        />
+      <div className="profile-view">
+        <div className="profile-container">
+          <h1 className="profile-information-header">Your Profile information:</h1>
+          <section className="profile-information-container">
+            <p>Firstname:</p>
+            <p className="profile-details">{firstname}</p>
+            <p>Lastname:</p>
+            <p className="profile-details">{lastname}</p>
+            <p>Email:</p>
+            <p className="profile-details">{email}</p>
+          </section>
+          <Button
+            value="Change Password"
+            styleClassName="profile-edit-button"
+          />
+        </div>
       </div>
     );
   }
