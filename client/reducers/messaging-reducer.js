@@ -81,9 +81,12 @@ export default (state = initialState, action ) => {
       console.log('NEW_MESSAGE_RECEIVED dispatched');
       newCurrentMessageThread = [...state.currentMessageThread];
       newCurrentMessageThread.push(action.data.message);
+      newAllMessageThreads = helpers.addReceivedMessageToAllMessageThreads(state.allMessageThreads, action.data.message);
+      console.log('newAllMessageThreads', newAllMessageThreads);
       return {
         ...state,
         currentMessageThread: newCurrentMessageThread,
+        allMessageThreads: newAllMessageThreads
       };
       break;
     default:

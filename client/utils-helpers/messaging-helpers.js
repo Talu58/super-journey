@@ -34,4 +34,14 @@ export function sortAllMessageThreads(allMessageThreads) {
   return newAllMessageThread;
 }
 
+export function addReceivedMessageToAllMessageThreads(allMessageThreads, newMessage) {
+  console.log('newMessage', newMessage);
+  let newAllMessageThread = allMessageThreads.map(thread => {
+    if (thread.threadName === newMessage.threadName) {
+      thread.messages.push(newMessage);
+    }
+    return thread;
+  });
 
+  return newAllMessageThread;
+}
