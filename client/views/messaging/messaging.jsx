@@ -42,8 +42,8 @@ class Messaging extends Component {
 
     return (
       <div className="messaging-view-container" >
-        <div className="messaging-empty-message">
-          <p>{MessagingHeaderMessage}</p>
+        <div className="messaging-top-message-container">
+          <p className="messaging-top-message">{MessagingHeaderMessage}</p>
         </div>
         <div className="messaging-container" >
           <div className="messaging-thread-container" >
