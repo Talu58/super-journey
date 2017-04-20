@@ -14,11 +14,11 @@ export default class MessageHistoryItem extends Component {
 
     return (
       <div  className={messageHistoryItemContainerClass} onClick={clickHandler} id={messageThread.threadName} >
-        <div className="message-history-item-text-container">
-        <h1 className="message-history-item-header" >{UserName}</h1>
-        <p  className="message-history-item-text" >{lastMessage}</p>
+        <div className="message-history-item-text-container" id={messageThread.threadName}>
+          <h1 className="message-history-item-header" >{UserName}</h1>
+          <p  className="message-history-item-text" >{lastMessage}</p>
         </div>
-        <div className="message-history-item-notification-container">
+        <div className="message-history-item-notification-container" id={messageThread.threadName}>
           {messagesNotification === 0 ? 
             <p></p> 
             : <p className="message-history-notification">{messagesNotification}</p>

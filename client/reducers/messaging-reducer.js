@@ -69,6 +69,10 @@ export default (state = initialState, action ) => {
       const newCurrentThread = state.allMessageThreads.filter(thread => {
         return thread.threadName === action.data;
       }).pop();
+      newMessagesNotification = {
+        ...state.messagesNotification
+      };
+      newMessagesNotification[action.data] = 0;
       newCurrentMessageThread = newCurrentThread.messages;
       if (action.role.Donor) {
         newCurrentMessageThreadUserName = newCurrentThread.nameUserOne;
@@ -79,7 +83,8 @@ export default (state = initialState, action ) => {
         ...state,
         currentMessageThreadName: action.data,
         currentMessageThread: newCurrentMessageThread,
-        currentMessageThreadUserName: newCurrentMessageThreadUserName
+        currentMessageThreadUserName: newCurrentMessageThreadUserName,
+        messagesNotification: newMessagesNotification
       };
       break;
     case NEW_MESSAGE_RECEIVED_ON_CURRENT_THREAD:
