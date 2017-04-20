@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './_message-history-item.sass';
 
 export default class MessageHistoryItem extends Component {
@@ -27,5 +27,12 @@ export default class MessageHistoryItem extends Component {
       </div>
     );
   }
-}
+};
 
+MessageHistoryItem.propTypes = {
+  role: PropTypes.object,
+  messagesNotification: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  clickHandler: PropTypes.func.isRequired,
+  messageThread: PropTypes.object.isRequired
+};

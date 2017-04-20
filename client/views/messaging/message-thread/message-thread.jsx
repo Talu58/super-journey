@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './_message-thread.sass';
 import Message from '../../../components/message/message';
 import Button from '../../../components/button/button';
@@ -113,5 +113,14 @@ export default class MessageThread extends Component {
       </div>
     );
   }
+};
+
+MessageThread.propTypes = {
+  currentMessageThreadUserName: PropTypes.string.isRequired,
+  currentMessageThreadName: PropTypes.string.isRequired,
+  currentMessageThread: PropTypes.array.isRequired,
+  curentUserFirstName: PropTypes.string.isRequired,
+  newMessageSent: PropTypes.func.isRequired,
+  userReceivedANewMessage: PropTypes.func.isRequired
 };
 

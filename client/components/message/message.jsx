@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './_message.sass';
 import moment from 'moment';
 
@@ -24,3 +24,8 @@ export default class Message extends Component {
   }
 }
 
+Message.propTypes = {
+  message: PropTypes.object.isRequired,
+  displayTime: PropTypes.bool.isRequired,
+  curentUserFirstName: PropTypes.string.isRequired,
+};

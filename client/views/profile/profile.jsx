@@ -205,7 +205,8 @@ Profile.propTypes = {
   role: PropTypes.object,
   email: PropTypes.string.isRequired,
   firstname: PropTypes.string.isRequired,
-  lastname: PropTypes.string.isRequired
+  lastname: PropTypes.string.isRequired,
+  getUserInformation: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ auth }) => {

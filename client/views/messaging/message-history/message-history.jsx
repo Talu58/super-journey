@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './_message-history.sass';
 import MessageHistoryItem from '../../../components/message-history-item/message-history-item';
 
-class MessageHistory extends Component {
+export default class MessageHistory extends Component {
   constructor(props) {
     super(props);
 
@@ -43,4 +43,10 @@ class MessageHistory extends Component {
   }
 }
 
-export default MessageHistory;
+MessageHistory.propTypes = {
+  currentMessageThreadName: PropTypes.string.isRequired,
+  allMessageThreads: PropTypes.array.isRequired,
+  messagesNotification: PropTypes.object.isRequired,
+  role: PropTypes.object,
+  userChangedCurrentThread: PropTypes.func.isRequired,
+};
