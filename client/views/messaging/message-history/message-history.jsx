@@ -16,7 +16,7 @@ class MessageHistory extends Component {
   }
 
   render() {
-    const { allMessageThreads, role, currentMessageThreadName } = this.props;
+    const { allMessageThreads, role, currentMessageThreadName, messagesNotification } = this.props;
     return (
       <div className="message-history-container">
         { allMessageThreads ? 
@@ -29,6 +29,7 @@ class MessageHistory extends Component {
                 role={role}
                 isActive={isActive}
                 clickHandler={this.messageHistoryItemClicked}
+                messagesNotification={messagesNotification[messageThread.threadName]}
               />
             )
           })

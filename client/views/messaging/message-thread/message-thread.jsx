@@ -25,8 +25,8 @@ export default class MessageThread extends Component {
   }
 
   newMessageReceived(newMessage) {
-    const { userReceivedANewMessage } = this.props;
-    userReceivedANewMessage(newMessage);
+    const { userReceivedANewMessage, currentMessageThreadName } = this.props;
+    userReceivedANewMessage(newMessage, currentMessageThreadName);
   }
 
   newMessageInputFieldChange(e) {

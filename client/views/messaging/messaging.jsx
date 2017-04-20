@@ -26,7 +26,8 @@ class Messaging extends Component {
       newMessageSent,
       role,
       userChangedCurrentThread,
-      userReceivedANewMessage
+      userReceivedANewMessage,
+      messagesNotification
     } = this.props;
     return (
       <div className="messaging-container" >
@@ -46,6 +47,7 @@ class Messaging extends Component {
             currentMessageThreadName={currentMessageThreadName}
             role={role}
             userChangedCurrentThread={userChangedCurrentThread}
+            messagesNotification={messagesNotification}
           />
         </div>
       </div>
@@ -70,6 +72,7 @@ const mapStateToProps = ({ auth, messaging }) => {
     currentMessageThreadName: messaging.currentMessageThreadName,
     currentMessageThread: messaging.currentMessageThread,
     allMessageThreads: messaging.allMessageThreads,
+    messagesNotification: messaging.messagesNotification,
     firstname: auth.firstname,
     role: auth.role
   };

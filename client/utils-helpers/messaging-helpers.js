@@ -32,7 +32,7 @@ export function sortAllMessageThreads(allMessageThreads) {
   
   newAllMessageThread.sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at));
   return newAllMessageThread;
-}
+};
 
 export function addReceivedMessageToAllMessageThreads(allMessageThreads, newMessage) {
   let newAllMessageThread = allMessageThreads.map(thread => {
@@ -43,4 +43,12 @@ export function addReceivedMessageToAllMessageThreads(allMessageThreads, newMess
   });
 
   return newAllMessageThread;
-}
+};
+
+export function setNotificationList(allMessageThreads) {
+  let notificationList = {};
+  allMessageThreads.forEach(thread => {
+    notificationList[thread.threadName] = 0;
+  });
+  return notificationList;
+};

@@ -3,7 +3,8 @@ import {
   USER_SENT_MESSAGE,
   GET_USER_MESSAGES,
   USER_CHANGED_CURRENT_THREAD,
-  NEW_MESSAGE_RECEIVED
+  NEW_MESSAGE_RECEIVED_ON_CURRENT_THREAD,
+  NEW_MESSAGE_RECEIVED_ON_OTHER_THREAD
 } from './messagingActionTypes';
 import * as messaging from '../../utils-api/messaging/messaging-rest-api';
 import socket from '../../utils-socket/socket-connection.js';
@@ -56,10 +57,19 @@ export function userChangedCurrentThread(threadName, role) {
   };
 };
 
-export function userReceivedANewMessage(newMessage) {
-  return {
-    type: NEW_MESSAGE_RECEIVED,
-    data: newMessage
-  };
+export function userReceivedANewMessage(newMessage, currentMessageThreadName) {
+  return dispatch => {
+    if (newMessage.threadName === currentMessageThreadName) {
+      dispatch({
+        type: NEW_MESSAGE_RECEIVED_ON_CURRENT_THREAD,
+        data: newMessage
+      });
+    } else {
+      dispatch({
+        type: NEW_MESSAGE_RECEIVED_ON_OTHER_THREAD,
+        data: newMessage
+      });
+    }
+  }
 }
 

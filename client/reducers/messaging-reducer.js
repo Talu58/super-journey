@@ -3,7 +3,8 @@ import {
   USER_SENT_MESSAGE,
   GET_USER_MESSAGES,
   USER_CHANGED_CURRENT_THREAD,
-  NEW_MESSAGE_RECEIVED
+  NEW_MESSAGE_RECEIVED_ON_CURRENT_THREAD,
+  NEW_MESSAGE_RECEIVED_ON_OTHER_THREAD
 } from '../actions/messaging/messagingActionTypes';
 import * as helpers from '.././utils-helpers/messaging-helpers';
 
@@ -11,13 +12,15 @@ const initialState = {
   currentMessageThreadUserName: '',
   currentMessageThreadName: '',
   currentMessageThread: [],
-  allMessageThreads: []
+  allMessageThreads: [],
+  messagesNotification: {}
 };
 
 export default (state = initialState, action ) => {
   let newCurrentMessageThreadUserName;
   let newCurrentMessageThread;
   let newAllMessageThreads;
+  let newMessagesNotification;
 
   switch (action.type) {
     case USER_SENT_FIRST_MESSAGE:
@@ -43,6 +46,7 @@ export default (state = initialState, action ) => {
     case GET_USER_MESSAGES:
       console.log('GET_USER_MESSAGES dispatched');
       newAllMessageThreads = helpers.sortAllMessageThreads(action.data);
+      newMessagesNotification = helpers.setNotificationList(action.data);
       const lastThread = newAllMessageThreads[0];
       newCurrentMessageThread = lastThread.messages;
       const newCurrentMessageThreadName = lastThread.threadName;
@@ -56,7 +60,8 @@ export default (state = initialState, action ) => {
         currentMessageThreadUserName: newCurrentMessageThreadUserName,
         currentMessageThreadName: newCurrentMessageThreadName,
         currentMessageThread: newCurrentMessageThread,
-        allMessageThreads: newAllMessageThreads
+        allMessageThreads: newAllMessageThreads,
+        messagesNotification: newMessagesNotification
       };
       break;
     case USER_CHANGED_CURRENT_THREAD:
@@ -77,8 +82,8 @@ export default (state = initialState, action ) => {
         currentMessageThreadUserName: newCurrentMessageThreadUserName
       };
       break;
-    case NEW_MESSAGE_RECEIVED:
-      console.log('NEW_MESSAGE_RECEIVED dispatched');
+    case NEW_MESSAGE_RECEIVED_ON_CURRENT_THREAD:
+      console.log('NEW_MESSAGE_RECEIVED_ON_CURRENT_THREAD dispatched');
       newCurrentMessageThread = [...state.currentMessageThread];
       newCurrentMessageThread.push(action.data.message);
       newAllMessageThreads = helpers.addReceivedMessageToAllMessageThreads(state.allMessageThreads, action.data.message);
@@ -86,6 +91,19 @@ export default (state = initialState, action ) => {
         ...state,
         currentMessageThread: newCurrentMessageThread,
         allMessageThreads: newAllMessageThreads
+      };
+      break;
+    case NEW_MESSAGE_RECEIVED_ON_OTHER_THREAD:
+      console.log('NEW_MESSAGE_RECEIVED_ON_OTHER_THREAD dispatched');
+      newAllMessageThreads = helpers.addReceivedMessageToAllMessageThreads(state.allMessageThreads, action.data.message);
+      newMessagesNotification = {
+        ...state.messagesNotification
+      };
+      newMessagesNotification[action.data.message.threadName]++;
+      return {
+        ...state,
+        allMessageThreads: newAllMessageThreads,
+        messagesNotification: newMessagesNotification
       };
       break;
     default:
