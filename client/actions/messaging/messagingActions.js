@@ -37,6 +37,7 @@ export function newMessageSent(messageInformation) {
 
 export function getUserMessages(userEmail, role) {
   return dispatch => {
+    console.log('getUserMessages', userEmail)
     messaging.getAllUserMessagesRequest(userEmail)
     .then(allMessageThreads => {
       socket.emit('subscribe to threads', allMessageThreads.data);

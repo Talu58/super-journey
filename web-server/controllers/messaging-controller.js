@@ -6,7 +6,7 @@ const { createMessage } = require('../utils/utils-messaging');
 
 
 module.exports.userSentFirstMessage = (req, res) => {
-  const { recipientEmail, senderEmail, recipient, sender } = req.body;
+  const { recipientEmail, senderEmail, to, from } = req.body;
   const newMessage = createMessage(req.body);
   const messageThreadName = recipientEmail + '-' + senderEmail;
   MessageThread.findOne({})
@@ -21,8 +21,8 @@ module.exports.userSentFirstMessage = (req, res) => {
       } else {
         newMessageThread = new MessageThread({
           threadName: messageThreadName,
-          nameUserOne: recipient,
-          nameUserTwo: sender,
+          nameUserOne: to,
+          nameUserTwo: from,
           messages: [newMessage]
         });
         newMessageThread.save((err, messageThread) => {

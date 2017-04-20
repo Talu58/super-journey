@@ -57,12 +57,11 @@ export default class ModalMessage extends Component {
       const { props: { closeModal, matchEmail, userEmail, firstMessageSent, matchFirstname, userFirstname } } = this.props;
       const newMessage = {
         ...this.state.inputFieldsValues,
-        recipient: matchFirstname,
+        to: matchFirstname,
         recipientEmail: matchEmail,
-        sender: userFirstname,
+        from: userFirstname,
         senderEmail: userEmail
       };
-      console.log('newMessage', newMessage);
       firstMessageSent(newMessage);
       closeModal();
     } 
