@@ -59,7 +59,7 @@ class SignUpForm extends Component {
       });
     }
     if (!validateEmail(this.state.inputFieldsValues.email)) {
-      const errorMessage = 'Email address invalid';
+      const errorMessage = '* email address invalid';
       const newErrors = this.state.errors;
       newErrors.email = errorMessage;
       isValid = false;
