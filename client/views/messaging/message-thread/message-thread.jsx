@@ -43,7 +43,7 @@ export default class MessageThread extends Component {
         message: this.state.messageInputFieldValue,
         to: currentMessageThreadUserName,
         from: curentUserFirstName,
-        threadName:currentMessageThreadName,
+        threadName: currentMessageThreadName,
         time: new Date(),
         _id: Math.floor(Math.random() * 1000)
       };

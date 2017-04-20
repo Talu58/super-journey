@@ -60,7 +60,9 @@ export function userChangedCurrentThread(threadName, role) {
 
 export function userReceivedANewMessage(newMessage, currentMessageThreadName) {
   return dispatch => {
-    if (newMessage.threadName === currentMessageThreadName) {
+    console.log('currentMessageThreadName', currentMessageThreadName);
+    console.log('newMessage.threadName', newMessage);
+    if (newMessage.message.threadName === currentMessageThreadName) {
       dispatch({
         type: NEW_MESSAGE_RECEIVED_ON_CURRENT_THREAD,
         data: newMessage
