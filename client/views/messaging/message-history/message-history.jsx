@@ -19,6 +19,9 @@ class MessageHistory extends Component {
     const { allMessageThreads, role, currentMessageThreadName, messagesNotification } = this.props;
     return (
       <div className="message-history-container">
+         <div  className="messaging-history-header-container">
+          <h1 className="messaging-history-header">Message History</h1>
+        </div>
         { allMessageThreads ? 
           allMessageThreads.map(messageThread => {
             const isActive = messageThread.threadName === currentMessageThreadName ? true: false;

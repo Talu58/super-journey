@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './_message-thread.sass';
 import Message from '../../../components/message/message';
 import Button from '../../../components/button/button';
-import InputField from '../../../components/input-field/input-field';
+import TextAreaField from '../../../components/text-area-field/text-area-field';
 import moment from 'moment';
 import socket from '../../../utils-socket/socket-connection.js';
 
@@ -87,12 +87,13 @@ export default class MessageThread extends Component {
           </div>
         </div>
         <div className="messaging-thread-new-message-container">
-          <InputField
+          <TextAreaField
             placeholderText="Write your message here"
             changeHandler={this.newMessageInputFieldChange}
             value={this.state.messageInputFieldValue}
-            styleClassName="messaging-thread-new-message-input-field"
-            containerStyleClassName="messaging-thread-new-message-input-field-container"
+            styleClassName="messaging-thread-new-message-text-area-field"
+            containerStyleClassName="messaging-thread-new-message-text-area-field-container"
+            row={3}
           />
           <Button
             value="Send"
