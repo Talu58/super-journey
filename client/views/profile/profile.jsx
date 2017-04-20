@@ -30,6 +30,7 @@ class Profile extends Component {
     this.inputFieldChangeHandler = this.inputFieldChangeHandler.bind(this);
     this.isFormValid = this.isFormValid.bind(this);
     this.savePassword = this.savePassword.bind(this);
+    this.cancelPasswordChange = this.cancelPasswordChange.bind(this);
   }
 
   componentWillMount() {
@@ -116,6 +117,24 @@ class Profile extends Component {
     }
   }
 
+  cancelPasswordChange() {
+    const newInputFieldsValues = {
+      previousPassword: '',
+      newPassword: '',
+      newPassword2: '',
+    };
+    const newErrors = {
+      previousPassword: '',
+      newPassword: '',
+      newPassword2: '',
+    };
+    this.setState({
+      inputFieldsValues: newInputFieldsValues,
+      errors: newErrors,
+      shouldChangePassword: false
+    });
+  }
+
   render() {
     const { role, email, firstname, lastname } = this.props;
     let passwordChangeMessageClass = 'password-change-message';
@@ -183,13 +202,21 @@ class Profile extends Component {
                 <p className="password-change-error-message">{this.state.errors.newPassword2}</p>
                 : <p className="password-change-error-message"></p>
               }
+              <div className="profile-change-password-button-container">
+                <Button
+                value="Save Password"
+                containerStyleClassName="profile-button-container"
+                styleClassName="profile-button"
+                clickHandler={this.savePassword}
+              />
               <Button
-              value="Save Password"
-              containerStyleClassName="profile-button-container"
-              styleClassName="profile-button"
-              clickHandler={this.savePassword}
-            />
+                value="Cancel"
+                containerStyleClassName="profile-button-container"
+                styleClassName="profile-button profile-change-password-cancel-button"
+                clickHandler={this.cancelPasswordChange}
+              />
             </div>
+          </div>
           : <Button
               value="Change Password"
               containerStyleClassName="profile-button-container"
