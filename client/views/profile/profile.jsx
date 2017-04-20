@@ -133,12 +133,18 @@ class Profile extends Component {
         <div className="profile-container">
           <h1 className="profile-information-header">Your Profile information:</h1>
           <section className="profile-information-container">
-            <p>Firstname:</p>
-            <p className="profile-details">{firstname}</p>
-            <p>Lastname:</p>
+            <div className="profile-information-sub-container">
+              <p className="profile-details-title">Firstname:</p>
+              <p className="profile-details">{firstname}</p>
+            </div>
+            <div className="profile-information-sub-container">
+            <p className="profile-details-title">Lastname:</p>
             <p className="profile-details">{lastname}</p>
-            <p>Email:</p>
+            </div>
+            <div className="profile-information-sub-container">
+            <p className="profile-details-title">Email:</p>
             <p className="profile-details">{email}</p>
+            </div>
           { this.state.shouldChangePassword ?
             <div className="password-change-input-fields-container">
               <InputField
