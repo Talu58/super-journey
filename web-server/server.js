@@ -20,6 +20,18 @@ app.get('*', (req, res) => {
 
 io.on('connection', function(socket) {  
   console.log('A user connected');
+  socket.on('subscribe to threads', threads => {
+    threads.forEach(thread => {
+      socket.join(thread.threadName);
+    });
+  });
+
+  socket.on('new message', newMessage => {
+    socket.broadcast.to(newMessage.threadName).emit('new message', {
+      message: newMessage
+    });
+  });
+
 });
 
 http.listen(PORT, () => {

@@ -4,6 +4,7 @@ import Message from '../../../components/message/message';
 import Button from '../../../components/button/button';
 import InputField from '../../../components/input-field/input-field';
 import moment from 'moment';
+import socket from '../../../utils-socket/socket-connection.js';
 
 export default class MessageThread extends Component {
   constructor(props) {
@@ -14,6 +15,18 @@ export default class MessageThread extends Component {
     this.newMessageInputFieldChange = this.newMessageInputFieldChange.bind(this);
     this.sendNewMessageClicked=this.sendNewMessageClicked.bind(this);
     this.shouldDisplayTime = this.shouldDisplayTime.bind(this);
+    this.newMessageReceived = this.newMessageReceived.bind(this);
+  }
+
+  componentDidMount() {
+    socket.on('new message', newMessage => {
+      this.newMessageReceived(newMessage);
+    });
+  }
+
+  newMessageReceived(newMessage) {
+    const { userReceivedANewMessage } = this.props;
+    userReceivedANewMessage(newMessage);
   }
 
   newMessageInputFieldChange(e) {
@@ -28,11 +41,14 @@ export default class MessageThread extends Component {
     if (this.state.messageInputFieldValue !== '') {
       const newMessage = {
         message: this.state.messageInputFieldValue,
-        recipient: currentMessageThreadUserName,
-        sender: curentUserFirstName,
-        threadName:currentMessageThreadName
+        to: currentMessageThreadUserName,
+        from: curentUserFirstName,
+        threadName:currentMessageThreadName,
+        time: new Date(),
+        _id: Math.floor(Math.random() * 1000)
       };
       newMessageSent(newMessage);
+      socket.emit('new message', newMessage);
       this.setState({
         messageInputFieldValue: ''
       });
@@ -50,7 +66,6 @@ export default class MessageThread extends Component {
 
   render() {
     const { currentMessageThread, currentMessageThreadUserName, curentUserFirstName } = this.props;
-
     return (
       <div>
         <div  className="messaging-thread-header-container">

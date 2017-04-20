@@ -6,8 +6,7 @@ import Router from './views/app-router-connector';
 import setAuthorizationToken from './utils-api/auth/authentication-set-token';
 import { authenticateUser } from './actions/auth/authActions';
 import jwt from 'jsonwebtoken';
-const io = require('socket.io-client');
-const socket = io('http://localhost:3000');
+import socket from './utils-socket/socket-connection.js';
 
 const store = configureStore({});
 

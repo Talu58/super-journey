@@ -7,7 +7,6 @@ export default class Message extends Component {
     const { message, curentUserFirstName, displayTime } = this.props;
     let messageClass = 'message';
     let messageTimeClass = 'message-time';
-    console.log(displayTime);
 
     if (message.from === curentUserFirstName) {
       messageClass += ' message-from';

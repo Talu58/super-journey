@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import MessageThread from './message-thread/message-thread';
 import MessageHistory from './message-history/message-history';
 import { getUserInformation } from '../../actions/auth/authActions';
-import { newMessageSent, userChangedCurrentThread } from '../../actions/messaging/messagingActions';
+import { newMessageSent, userChangedCurrentThread, userReceivedANewMessage } from '../../actions/messaging/messagingActions';
 import jwt from 'jsonwebtoken';
 
 class Messaging extends Component {
@@ -17,7 +17,17 @@ class Messaging extends Component {
   }
 
   render() {
-    const { currentMessageThread, currentMessageThreadUserName, currentMessageThreadName, allMessageThreads, firstname, newMessageSent, role, userChangedCurrentThread } = this.props;
+    const {
+      currentMessageThread,
+      currentMessageThreadUserName,
+      currentMessageThreadName,
+      allMessageThreads,
+      firstname,
+      newMessageSent,
+      role,
+      userChangedCurrentThread,
+      userReceivedANewMessage
+    } = this.props;
     return (
       <div className="messaging-container" >
         <div className="messaging-thread-container" >
@@ -27,6 +37,7 @@ class Messaging extends Component {
           currentMessageThreadName={currentMessageThreadName}
           curentUserFirstName={firstname}
           newMessageSent={newMessageSent}
+          userReceivedANewMessage={userReceivedANewMessage}
         />
         </div>
         <div className="messaging-history-container" >
@@ -68,7 +79,8 @@ const matchDispatchToProps = dispatch => bindActionCreators(
   {
     newMessageSent,
     getUserInformation,
-    userChangedCurrentThread
+    userChangedCurrentThread,
+    userReceivedANewMessage
   }, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(Messaging);

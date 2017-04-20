@@ -2,7 +2,8 @@ import {
   USER_SENT_FIRST_MESSAGE,
   USER_SENT_MESSAGE,
   GET_USER_MESSAGES,
-  USER_CHANGED_CURRENT_THREAD
+  USER_CHANGED_CURRENT_THREAD,
+  NEW_MESSAGE_RECEIVED
 } from '../actions/messaging/messagingActionTypes';
 import * as helpers from '.././utils-helpers/messaging-helpers';
 
@@ -74,6 +75,15 @@ export default (state = initialState, action ) => {
         currentMessageThreadName: action.data,
         currentMessageThread: newCurrentMessageThread,
         currentMessageThreadUserName: newCurrentMessageThreadUserName
+      };
+      break;
+    case NEW_MESSAGE_RECEIVED:
+      console.log('NEW_MESSAGE_RECEIVED dispatched');
+      newCurrentMessageThread = [...state.currentMessageThread];
+      newCurrentMessageThread.push(action.data.message);
+      return {
+        ...state,
+        currentMessageThread: newCurrentMessageThread,
       };
       break;
     default:

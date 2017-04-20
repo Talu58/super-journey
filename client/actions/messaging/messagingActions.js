@@ -2,9 +2,11 @@ import {
   USER_SENT_FIRST_MESSAGE,
   USER_SENT_MESSAGE,
   GET_USER_MESSAGES,
-  USER_CHANGED_CURRENT_THREAD
+  USER_CHANGED_CURRENT_THREAD,
+  NEW_MESSAGE_RECEIVED
 } from './messagingActionTypes';
 import * as messaging from '../../utils-api/messaging/messaging-rest-api';
+import socket from '../../utils-socket/socket-connection.js';
 
 
 export function firstMessageSent(messageInformation) {
@@ -36,6 +38,7 @@ export function getUserMessages(userEmail, role) {
   return dispatch => {
     messaging.getAllUserMessagesRequest(userEmail)
     .then(allMessageThreads => {
+      socket.emit('subscribe to threads', allMessageThreads.data);
       dispatch({
         type: GET_USER_MESSAGES,
         data: allMessageThreads.data,
@@ -52,3 +55,11 @@ export function userChangedCurrentThread(threadName, role) {
     role: role
   };
 };
+
+export function userReceivedANewMessage(newMessage) {
+  return {
+    type: NEW_MESSAGE_RECEIVED,
+    data: newMessage
+  };
+}
+
