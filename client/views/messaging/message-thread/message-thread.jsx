@@ -12,6 +12,7 @@ export default class MessageThread extends Component {
     this.state = {
       messageInputFieldValue: ''
     }
+    this.scrollToBottom = this.scrollToBottom.bind(this);
     this.newMessageInputFieldChange = this.newMessageInputFieldChange.bind(this);
     this.sendNewMessageClicked=this.sendNewMessageClicked.bind(this);
     this.shouldDisplayTime = this.shouldDisplayTime.bind(this);
@@ -22,6 +23,15 @@ export default class MessageThread extends Component {
     socket.on('new message', newMessage => {
       this.newMessageReceived(newMessage);
     });
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    const messages = document.getElementById('messages-container-for-scroll')
+    messages.scrollTop = messages.scrollHeight;
   }
 
   newMessageReceived(newMessage) {
@@ -71,8 +81,7 @@ export default class MessageThread extends Component {
         <div  className="messaging-thread-header-container">
           <h1 className="messaging-thread-header">Discussion with {currentMessageThreadUserName}</h1>
         </div>
-        <div className="messages-container">
-          <div className="messages-container-inner">
+        <div className="messages-container"  id="messages-container-for-scroll">
             {currentMessageThread.map((message, i, messageList) => {
               let displayTime = i === 0 ? true : this.shouldDisplayTime(message.time, messageList[i-1].time);
               return (
@@ -84,7 +93,6 @@ export default class MessageThread extends Component {
                 />
               );
             })}
-          </div>
         </div>
         <div className="messaging-thread-new-message-container">
           <TextAreaField

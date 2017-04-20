@@ -44,7 +44,7 @@ export default (state = initialState, action ) => {
       };
       break;
     case GET_USER_MESSAGES:
-      console.log('GET_USER_MESSAGES dispatched', action.data);
+      console.log('GET_USER_MESSAGES dispatched');
       newAllMessageThreads = helpers.sortAllMessageThreads(action.data);
       newMessagesNotification = helpers.setNotificationList(action.data);
       const lastThread = newAllMessageThreads[0];
