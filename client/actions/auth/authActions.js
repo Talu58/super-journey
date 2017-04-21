@@ -5,7 +5,8 @@ import {
   USER_AUTHENTICATED,
   USER_LOGOUT,
   USER_GET_INFO_REQUEST,
-  USER_UPLOADED_IMAGE
+  USER_UPLOADED_IMAGE,
+  EDIT_ORGANIZATION_INFORMATION
 } from './authActionTypes';
 import * as authentication from '../../utils-api/auth/authentication-rest-api';
 import setAuthorizationToken from '../../utils-api/auth/authentication-set-token';
@@ -138,3 +139,14 @@ export function loginDemoUser(userInfo) {
   };
 };
 
+export function editOrganizationInformation(userInfo) {
+  return dispatch => {
+    authentication.updateOrganizationInformation(userInfo)
+    .then(oganizationInformation => {
+      dispatch({
+        type: EDIT_ORGANIZATION_INFORMATION,
+        data: oganizationInformation.data
+      });
+    });
+  };
+};

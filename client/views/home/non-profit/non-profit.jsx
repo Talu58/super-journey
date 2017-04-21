@@ -41,7 +41,7 @@ export default class NonProfit extends Component {
     let isValid = true;
     let newErrors = {
       ...this.state.errors
-    }
+    };
     for (let key in this.state.inputFieldsValues) {
       if (this.state.inputFieldsValues[key] === '') {
         newErrors[key] = '* This field is required';
@@ -58,6 +58,7 @@ export default class NonProfit extends Component {
 
   saveEditedOrganizationClicked() {
     const isValid = this.isFormValid();
+    const { editOrganizationInformation } = this.props;
     if (isValid) {
       this.setState({
         editOrganizationDataOpen: false
@@ -86,7 +87,7 @@ export default class NonProfit extends Component {
       values: this.state.inputFieldsValues,
       clickHandler: this.saveEditedOrganizationClicked,
       errors: this.state.errors
-    }
+    };
     return (
       <div className="organization-profile-view">
         <div className="organization-profile-container">
@@ -115,6 +116,7 @@ export default class NonProfit extends Component {
 }
 
 NonProfit.propTypes = {
-  organization: PropTypes.object.isRequired
+  organization: PropTypes.object.isRequired,
+  editOrganizationInformation: PropTypes.func.isRequired
 };
 

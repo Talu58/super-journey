@@ -5,7 +5,8 @@ import {
   USER_AUTHENTICATED,
   USER_LOGOUT,
   USER_GET_INFO_REQUEST,
-  USER_UPLOADED_IMAGE
+  USER_UPLOADED_IMAGE,
+  EDIT_ORGANIZATION_INFORMATION
 } from '../actions/auth/authActionTypes';
 
 const initialState = {
@@ -90,6 +91,12 @@ export default (state = initialState, action) => {
         completedProfile: action.data.completedProfile,
         firstname: action.data.firstname,
         lastname: action.data.lastname
+      };
+      break;
+    case EDIT_ORGANIZATION_INFORMATION:
+      console.log('EDIT_ORGANIZATION_INFORMATION dispatched', action.data);
+      return {
+        ...state
       };
       break;
     default:

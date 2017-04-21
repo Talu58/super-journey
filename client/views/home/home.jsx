@@ -5,7 +5,7 @@ import './_home.sass';
 import Donor from './donor/donor';
 import NonProfit from './non-profit/non-profit';
 import { searchCheckboxClicked, searchRequest, fetchAllOrganizations, fetchUserMatches } from '../../actions/search/searchActions';
-import { getUserInformation } from '../../actions/auth/authActions';
+import { getUserInformation, editOrganizationInformation } from '../../actions/auth/authActions';
 import { firstMessageSent } from '../../actions/messaging/messagingActions';
 import jwt from 'jsonwebtoken';
 
@@ -35,7 +35,8 @@ class Home extends Component {
       allOrganizationsResults,
       userMatchesDisplayed,
       industriesList,
-      firstMessageSent
+      firstMessageSent,
+      editOrganizationInformation
     } = this.props;
     return (
       <div>
@@ -58,6 +59,7 @@ class Home extends Component {
             />
             : <NonProfit
                 organization={organization}
+                editOrganizationInformation={editOrganizationInformation}
               />
         }
       </div>
@@ -82,7 +84,8 @@ Home.propTypes = {
   industriesList: PropTypes.object,
   homeIsLoading: PropTypes.bool.isRequired,
   getUserInformation: PropTypes.func.isRequired,
-  firstMessageSent: PropTypes.func.isRequired
+  firstMessageSent: PropTypes.func.isRequired,
+  editOrganizationInformation: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ auth, search }) => {
@@ -108,7 +111,8 @@ const matchDispatchToProps = dispatch => bindActionCreators(
     searchRequest,
     fetchAllOrganizations,
     fetchUserMatches,
-    firstMessageSent
+    firstMessageSent,
+    editOrganizationInformation
   }, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(Home);
