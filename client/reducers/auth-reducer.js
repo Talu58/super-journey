@@ -94,9 +94,10 @@ export default (state = initialState, action) => {
       };
       break;
     case EDIT_ORGANIZATION_INFORMATION:
-      console.log('EDIT_ORGANIZATION_INFORMATION dispatched', action.data);
+      console.log('EDIT_ORGANIZATION_INFORMATION dispatched');
       return {
-        ...state
+        ...state,
+        organization: action.data
       };
       break;
     default:
