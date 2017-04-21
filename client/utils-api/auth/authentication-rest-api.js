@@ -19,3 +19,8 @@ export function loginRequest(userData) {
 export function getUserInfo(userEmail) {
     return axios.get('/user/information/' + userEmail);
 };
+
+export function updateOrganizationInformation(userInfo) {
+    return axios.post('/user/organization/update', userInfo);
+};
+

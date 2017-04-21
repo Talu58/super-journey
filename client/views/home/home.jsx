@@ -60,6 +60,7 @@ class Home extends Component {
             : <NonProfit
                 organization={organization}
                 editOrganizationInformation={editOrganizationInformation}
+                userEmail={email}
               />
         }
       </div>

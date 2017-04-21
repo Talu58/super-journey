@@ -58,11 +58,17 @@ export default class NonProfit extends Component {
 
   saveEditedOrganizationClicked() {
     const isValid = this.isFormValid();
-    const { editOrganizationInformation } = this.props;
+    const { editOrganizationInformation, userEmail } = this.props;
     if (isValid) {
       this.setState({
         editOrganizationDataOpen: false
       });
+      const information = {
+        organizationName: this.state.inputFieldsValues.name,
+        organizationDescription: this.state.inputFieldsValues.description,
+        userEmail
+      }
+      editOrganizationInformation()
     }
   }
 
@@ -117,6 +123,7 @@ export default class NonProfit extends Component {
 
 NonProfit.propTypes = {
   organization: PropTypes.object.isRequired,
-  editOrganizationInformation: PropTypes.func.isRequired
+  editOrganizationInformation: PropTypes.func.isRequired,
+  userEmail: PropTypes.string.isRequired
 };
 
