@@ -38,13 +38,11 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case FIND_USER_MATCHES:
-      console.log('FIND_USER_MATCHES dispatched');
       return {
         ...state
       };
       break;
     case FIND_INDUSTRY_MATCHES:
-      console.log('FIND_INDUSTRY_MATCHES dispatched');
       let tempMatches = state.allMatchResults.concat(action.data);
       let finalMatches = helpers.removeDuplicates(tempMatches);
       return {
@@ -55,7 +53,6 @@ export default (state = initialState, action) => {
       };
       break;
     case CHECKBOX_CLICKED:
-      console.log('CHECKBOX_CLICKED dispatched');
       const newIndustryList = action.data.slice();
       return {
         ...state,
@@ -63,7 +60,6 @@ export default (state = initialState, action) => {
       };
       break;
     case ADD_INDUSTRY_FILTER:
-      console.log('ADD_INDUSTRY_FILTER dispatched');
       let { isFiltering } = state;
       let newResultPull = state.currentPull;
       let finalDisplayedResults = [];
@@ -89,7 +85,6 @@ export default (state = initialState, action) => {
       };
       break;
     case REMOVE_INDUSTRY_FILTER:
-      console.log('REMOVE_INDUSTRY_FILTER dispatched');
       let newFilter = state.industriesList.filter(industry => industry.checked);
       let newFiltersResults = [];
       const { currentPull } = state;
@@ -115,7 +110,6 @@ export default (state = initialState, action) => {
       };
       break;
     case SEARCH_REQUEST: 
-      console.log('SEARCH_REQUEST dispatched');
       let searchPull = state.isFiltering ? state.allFilterResults : state.currentPull;
       let newSearchBarResults = helpers.searchOrganizations(searchPull, action.data); 
       return {
@@ -125,7 +119,6 @@ export default (state = initialState, action) => {
       };
       break;
     case REINITIALIZE_SEARCH_STATE:
-      console.log('REINITIALIZE_SEARCH_STATE dispatched');
       let reinitializedIndustryList = initialState.industriesList;
       reinitializedIndustryList.forEach(industry => industry.checked = false);
       return {
@@ -134,7 +127,6 @@ export default (state = initialState, action) => {
       };
       break;
     case GET_ALL_PROJECTS:
-      console.log('GET_ALL_PROJECTS dispatched');
       return {
         ...state,
         allDisplayedResults: action.data,
@@ -143,7 +135,6 @@ export default (state = initialState, action) => {
       };
       break;
       case FETCH_USER_MATCHES:
-      console.log('FETCH_USER_MATCHES dispatched');
       return {
         ...state,
         allDisplayedResults: state.allMatchResults,
@@ -153,7 +144,6 @@ export default (state = initialState, action) => {
       };
       break;
     case FETCH_ALL_PROJECTS:
-      console.log('FETCH_ALL_PROJECTS dispatched');
       return {
         ...state,
         allDisplayedResults: state.allOrganizationsResults,

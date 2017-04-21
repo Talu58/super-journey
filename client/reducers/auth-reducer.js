@@ -21,7 +21,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case USER_SIGN_UP_REQUEST:
-      console.log('USER_SIGN_UP_REQUEST dispatched');
       return {
         ...state,
         isAuth: true,
@@ -32,7 +31,6 @@ export default (state = initialState, action) => {
       };
       break;
     case USER_COMPLETED_SIGN_UP_REQUEST:
-      console.log('USER_COMPLETED_SIGN_UP_REQUEST dispatched');
       const { role, industry, organization} = action.data;
       const newState = {
         ...state,
@@ -44,13 +42,11 @@ export default (state = initialState, action) => {
       return newState;
       break;
     case USER_UPLOADED_IMAGE:
-      console.log('USER_UPLOADED_IMAGE dispatched');
       return {
         ...state
       };
       break;
     case USER_LOGIN_REQUEST:
-      console.log('USER_LOGIN_REQUEST dispatched');
       const newLoginState = {
         ...state,
         completedProfile: action.data.completedProfile,
@@ -64,7 +60,6 @@ export default (state = initialState, action) => {
       return newLoginState;
       break;
     case USER_AUTHENTICATED:
-      console.log('USER_AUTHENTICATED dispatched');
       return {
         ...state,
         isAuth: true,
@@ -72,7 +67,6 @@ export default (state = initialState, action) => {
       };
       break;
     case USER_LOGOUT:
-      console.log('USER_LOGOUT dispatched');
       return {
         ...state,
         isAuth: false,
@@ -80,7 +74,6 @@ export default (state = initialState, action) => {
       };
       break;
     case USER_GET_INFO_REQUEST:
-      console.log('USER_GET_INFO_REQUEST dispatched');
       return {
         ...state,
         homeIsLoading: false,
@@ -94,7 +87,6 @@ export default (state = initialState, action) => {
       };
       break;
     case EDIT_ORGANIZATION_INFORMATION:
-      console.log('EDIT_ORGANIZATION_INFORMATION dispatched');
       return {
         ...state,
         organization: action.data
