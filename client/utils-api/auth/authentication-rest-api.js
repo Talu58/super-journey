@@ -9,7 +9,6 @@ export function completedSignUpRequest(userData) {
 };
 
 export function uploadImage(file) {
-    console.log('uploadImage file', file);
     return axios.post('/user/organization/image/upload', file);
 };
 

@@ -47,5 +47,6 @@ export default class OrganizationForm extends Component {
 OrganizationForm.propTypes = {
   changeHandler: PropTypes.func.isRequired,
   uploadFileHandler: PropTypes.func.isRequired,
-  values: PropTypes.object.isRequired
+  values: PropTypes.object.isRequired,
+  header: PropTypes.string.isRequired
 };

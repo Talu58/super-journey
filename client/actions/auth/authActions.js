@@ -50,7 +50,6 @@ export function userUploadedImage(file) {
   return dispatch => {
     return authentication.uploadImage(file)
       .then( message => {
-        console.log('userUploadedImage message', message);
         dispatch({
           type: USER_UPLOADED_IMAGE,
           data: file

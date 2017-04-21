@@ -1,11 +1,62 @@
 import React, { Component, PropTypes } from 'react';
 import './_non-profit.sass';
 import Button from '../../../components/button/button';
+import Modal from '../../../components/modal/modal';
+import ModalEditOrganization from '../../modal-edit-organization/modal-edit-organization';
 
+export default class NonProfit extends Component {
+  constructor(props) {
+    super(props);
+    const { organization } = props;
+    this.state = {
+      editOrganizationDataOpen: false,
+      inputFieldsValues: {name: organization.name, description: organization.description},
+    }
+    this.organizationFormChangeHandler = this.organizationFormChangeHandler.bind(this);
+    this.editOrganizationClicked = this.editOrganizationClicked.bind(this);
+    this.closeEditOrganizationModal = this.closeEditOrganizationModal.bind(this);
+    this.saveEditedOrganizationClicked = this.saveEditedOrganizationClicked.bind(this);
+  }
 
-class NonProfit extends Component {
+  organizationFormChangeHandler(e) {
+    const { inputFieldsValues } = this.state;
+    const newState = {
+      ...inputFieldsValues,
+      [e.target.name]: e.target.value
+    };
+    this.setState({
+      inputFieldsValues: newState,
+    });
+  }
+
+  saveEditedOrganizationClicked() {
+    console.log('saveEditedOrganizationClicked clicked');
+    this.setState({
+      editOrganizationDataOpen: false
+    });
+  }
+
+  editOrganizationClicked() {
+    this.setState({
+      editOrganizationDataOpen: true
+    });
+  }
+
+  closeEditOrganizationModal() {
+    this.setState({
+      editOrganizationDataOpen: false
+    });
+  }
+
   render() {
     const { organization } = this.props;
+    const organizationFormProps = {
+      shouldShowUploadFileHandler: false,
+      changeHandler: this.organizationFormChangeHandler,
+      header: 'Edit your Organization\'s Information',
+      values: this.state.inputFieldsValues,
+      clickHandler: this.saveEditedOrganizationClicked
+    }
     return (
       <div className="organization-profile-view">
         <div className="organization-profile-container">
@@ -19,6 +70,13 @@ class NonProfit extends Component {
           <Button
             value="Edit"
             styleClassName="organization-profile-edit-button"
+            clickHandler={this.editOrganizationClicked}
+          />
+          <Modal
+            isOpen={this.state.editOrganizationDataOpen}
+            closeModalHandler={this.closeEditOrganizationModal}
+            ChildComponent={ModalEditOrganization}
+            childComponentsProps={organizationFormProps}
           />
         </div>
       </div>
@@ -27,7 +85,6 @@ class NonProfit extends Component {
 }
 
 NonProfit.propTypes = {
-
+  organization: PropTypes.object.isRequired
 };
 
-export default NonProfit;
