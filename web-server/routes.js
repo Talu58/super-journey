@@ -4,7 +4,8 @@ const {
   loginRequest,
   getUserInformationRequest,
   imageUploadRequest,
-  changePasswordRequest
+  changePasswordRequest,
+  updateOrganizationInformation
 } = require('./controllers/auth-controller');
 const {
   getIndustryMatchesRequest,
@@ -24,6 +25,7 @@ module.exports = function(app, express) {
   app.post('/user/signup', signUpRequest);
   app.post('/user/signup/completed', signUpCompletedRequest);
   app.post('/user/organization/image/upload', imageUploadRequest);
+  app.post('/user/organization/update', updateOrganizationInformation);
   app.post('/user/login', loginRequest);
   app.post('/user/password/change', changePasswordRequest);
 

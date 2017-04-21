@@ -69,7 +69,7 @@ module.exports.signUpRequest = (req, res) => {
           }
         })
       }).catch(err => {
-        throw err;
+        console.log('signUpRequest err:', err);
       });  
     }
   })
@@ -102,7 +102,7 @@ module.exports.signUpCompletedRequest = (req, res) => {
       });
     }
   }).catch(err => {
-    throw err;
+    console.log('signUpCompletedRequest err:', err);
   });
 };
 
@@ -112,8 +112,8 @@ module.exports.imageUploadRequest = (req, res) => {
       return res.send({'imageUploadRequest err': err});
     }
     return res.send('File uploaded sucessfully');
-  })
-}
+  });
+};
 
 module.exports.loginRequest = (req, res) => {
   const { email, password} = req.body;
@@ -147,7 +147,7 @@ module.exports.loginRequest = (req, res) => {
       return res.status(401).send('User not found');
     }
   }).catch(err => {
-    throw err;
+    console.log('loginRequest err:', err);
   });
 };
 
@@ -159,7 +159,7 @@ module.exports.getUserInformationRequest = (req, res) => {
       return res.send(user);
     }
   }).catch(err => {
-    throw err;
+    console.log('getUserInformationRequest err:', err);
   });
 };
 
@@ -186,6 +186,24 @@ module.exports.changePasswordRequest = (req, res) => {
         }
       });
   }).catch(err => {
-    throw err;
+    console.log('changePasswordRequest err:', err);
   });
+};
+
+module.exports.updateOrganizationInformation = (req, res) => {
+  const { userEmail, organizationName, organizationDescription } = req.body;
+  User.findOne({email: userEmail}, (err, user) => {
+    if (err) throw err;
+    console.log(user);
+    user.organization.name = organizationName;
+    user.organization.description = organizationDescription;
+    return user.save((err, user) => {
+      if (err) throw err;
+      res.send(user.organization);
+    });
+  }).catch(err => {
+    console.log('updateOrganizationInformation err:', err);
+  })
 }
+
+

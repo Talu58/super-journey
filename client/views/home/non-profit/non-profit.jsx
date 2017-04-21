@@ -67,8 +67,8 @@ export default class NonProfit extends Component {
         organizationName: this.state.inputFieldsValues.name,
         organizationDescription: this.state.inputFieldsValues.description,
         userEmail
-      }
-      editOrganizationInformation()
+      };
+      editOrganizationInformation(information);
     }
   }
 
