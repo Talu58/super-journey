@@ -84,7 +84,8 @@ export default class NonProfit extends Component {
       changeHandler: this.organizationFormChangeHandler,
       header: 'Edit your Organization\'s Information',
       values: this.state.inputFieldsValues,
-      clickHandler: this.saveEditedOrganizationClicked
+      clickHandler: this.saveEditedOrganizationClicked,
+      errors: this.state.errors
     }
     return (
       <div className="organization-profile-view">

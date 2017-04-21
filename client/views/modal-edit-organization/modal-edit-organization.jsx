@@ -6,7 +6,7 @@ import TextAreaField from '../../components/text-area-field/text-area-field';
 
 export default class ModalEditOrganization extends Component {
   render() {
-    const { props: { clickHandler, changeHandler, values, header } } = this.props;
+    const { props: { clickHandler, changeHandler, values, header, errors } } = this.props;
     return (
       <div>
         <h1 className="edit-oganization-header">{header}</h1>
@@ -20,6 +20,10 @@ export default class ModalEditOrganization extends Component {
             value={values.name}
             type="text"
           />
+          {errors.name ?
+            <p className="edit-organization-error-message">{errors.name}</p>
+            : <p className="edit-organization-error-message"></p>
+          }
           <TextAreaField
             changeHandler={changeHandler}
             placeholderText="Enter your Organization Description"
@@ -29,6 +33,10 @@ export default class ModalEditOrganization extends Component {
             name="description"
             value={values.description}
           />
+          {errors.description ?
+            <p className="edit-organization-error-message">{errors.description}</p>
+            : <p className="edit-organization-error-message"></p>
+          }
         </form>
         <Button
           value="Save"
