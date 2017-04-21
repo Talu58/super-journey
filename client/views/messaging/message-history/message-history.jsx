@@ -22,6 +22,7 @@ export default class MessageHistory extends Component {
          <div  className="messaging-history-header-container">
           <h1 className="messaging-history-header">Message History</h1>
         </div>
+        <section className="message-history-list-container">
         { allMessageThreads ? 
           allMessageThreads.map(messageThread => {
             const isActive = messageThread.threadName === currentMessageThreadName ? true: false;
@@ -38,6 +39,7 @@ export default class MessageHistory extends Component {
           })
           : <p>loading</p>
         }
+        </section>
       </div>
     );
   }

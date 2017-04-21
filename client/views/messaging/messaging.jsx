@@ -72,12 +72,12 @@ class Messaging extends Component {
 }
 
 Messaging.propTypes = {
-    currentMessageThreadUserName: PropTypes.string.isRequired,
-    currentMessageThreadName: PropTypes.string.isRequired,
-    currentMessageThread: PropTypes.array.isRequired,
-    allMessageThreads: PropTypes.array.isRequired,
+    currentMessageThreadUserName: PropTypes.string,
+    currentMessageThreadName: PropTypes.string,
+    currentMessageThread: PropTypes.array,
+    allMessageThreads: PropTypes.array,
     messagesNotification: PropTypes.object,
-    firstname: PropTypes.string.isRequired,
+    firstname: PropTypes.string,
     role: PropTypes.object,
     newMessageSent: PropTypes.func.isRequired,
     getUserInformation: PropTypes.func.isRequired,
