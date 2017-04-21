@@ -7,14 +7,6 @@
 .landing-page-login-form-block
   flex-direction: column
 
-@media screen and (max-width: 480px) 
-  .navbar-login-form-block
-    display: none
-
-@media screen and (min-width: 480px) 
-  .landing-page-login-form-block
-    display: none
-    
 .login-form-field-container
   display:flex
   flex-direction: column
@@ -35,3 +27,13 @@
 .navbar-login-button
   font-size: 13px
   padding: 4px 12px
+
+@media screen and (max-width: 480px) 
+  .navbar-login-form-block
+    display: none
+  .login-error-message
+    margin-bottom: 8px
+
+@media screen and (min-width: 480px) 
+  .landing-page-login-form-block
+    display: none

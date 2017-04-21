@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
+import './_login-form.sass';
 import InputField from '../../components/input-field/input-field';
 import Button from '../../components/button/button';
 import { userLoginRequest } from '../../actions/auth/authActions';
-import './_login-form.sass';
+
 
 class LoginForm extends Component {
   constructor(props) {
