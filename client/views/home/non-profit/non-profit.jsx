@@ -10,9 +10,17 @@ export default class NonProfit extends Component {
     const { organization } = props;
     this.state = {
       editOrganizationDataOpen: false,
-      inputFieldsValues: {name: organization.name, description: organization.description},
+      inputFieldsValues: {
+        name: organization.name,
+        description: organization.description
+      },
+      errors: {
+        name: '',
+        description: ''
+      }
     }
-    this.organizationFormChangeHandler = this.organizationFormChangeHandler.bind(this);
+    this.organizationFormChangeHandler = this.organizationFormChangeHandler.bind(this)
+    this.isFormValid = this.isFormValid.bind(this);
     this.editOrganizationClicked = this.editOrganizationClicked.bind(this);
     this.closeEditOrganizationModal = this.closeEditOrganizationModal.bind(this);
     this.saveEditedOrganizationClicked = this.saveEditedOrganizationClicked.bind(this);
@@ -29,11 +37,32 @@ export default class NonProfit extends Component {
     });
   }
 
-  saveEditedOrganizationClicked() {
-    console.log('saveEditedOrganizationClicked clicked');
+  isFormValid() {
+    let isValid = true;
+    let newErrors = {
+      ...this.state.errors
+    }
+    for (let key in this.state.inputFieldsValues) {
+      if (this.state.inputFieldsValues[key] === '') {
+        newErrors[key] = '* This field is required';
+        isValid = false;
+      } else {
+        newErrors[key] = '';
+      }
+    }
     this.setState({
-      editOrganizationDataOpen: false
+      errors: newErrors
     });
+    return isValid;
+  }
+
+  saveEditedOrganizationClicked() {
+    const isValid = this.isFormValid();
+    if (isValid) {
+      this.setState({
+        editOrganizationDataOpen: false
+      });
+    }
   }
 
   editOrganizationClicked() {
