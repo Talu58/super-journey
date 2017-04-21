@@ -11,7 +11,6 @@ module.exports.createDummyNonProfitUsers = (req, res) => {
   const dummyData = generateDummyNonProfitData();
   const dummyDataPromisified = dummyData.map(user => {
     const { email, password, industry, role, organization, firstname, lastname } = user;
-    console.log('email', email);
     const newUser = new User;
     newUser.email = email;
     newUser.firstname = firstname;
@@ -85,7 +84,6 @@ module.exports.createDummyDonorUser = (req,res) => {
   }).catch(err => {
     throw err;
   });
-
 };
 
 module.exports.createDummyMessages = (req, res) => {
@@ -102,7 +100,6 @@ module.exports.createDummyMessages = (req, res) => {
       if (err) {
         throw err;
       }
-        console.log('cannot find user1', user)
       user.messageThreadsNames.push(threadName);
       return user.save((err) => {
         if (err) throw err;
@@ -112,7 +109,6 @@ module.exports.createDummyMessages = (req, res) => {
         if (err) {
           throw err;
         }
-          console.log('cannot find johnDoe', user);
         user.messageThreadsNames.push(threadName);
         return user.save((err) => {
           if (err) throw err;

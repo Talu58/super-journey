@@ -22,10 +22,7 @@ class TryDemo extends Component {
         });
       })
       .then(() => {
-        return axios.get('/user/dummy/messages')
-        .then(messages =>{
-          console.log('messages', messages);
-        })
+        return axios.get('/user/dummy/messages');
       });
   }
 
