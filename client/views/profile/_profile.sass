@@ -24,6 +24,7 @@
 
 .profile-details-title
   width: 30%
+  margin: 5px 0
 
 .profile-details
   background-color: #f1f1f1
@@ -31,6 +32,7 @@
   width: 70%
   text-align: center
   padding: 5px 10px
+  margin: 5px 0
 
 .profile-change-password-button-container
   display: flex
@@ -93,3 +95,8 @@
 
 .password-change-message-error
   background-color: #fc6e51
+
+@media screen and (max-width: 460px)
+  .profile-information-sub-container
+    flex-direction: column
+    align-items: center
