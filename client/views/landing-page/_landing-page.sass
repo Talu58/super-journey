@@ -1,11 +1,28 @@
-.landing-page-container
+.landing-page-view-container
+  padding: 60px
+  background-image: url(http://localhost:3000/assets/background-landing-page.jpg)
+  background-position: center center
+  background-size: cover
+  background-repeat: no-repeat
+
+@media screen and (min-width: 1070px) 
+  .landing-page-view-container
+    height: calc(100vh - 120px - 60px)
+
+.landing-page-header-container
+  padding: 40px
+  background-color: #f1f1f1
+
+.landing-page-header
+  text-align: center
+
+.landing-page-header-description
+  text-align: center
+
+.landing-page-content-container
   display: flex
   flex-wrap: wrap
   flex-direction: row
   justify-content: space-around
   align-items: center
-  height: 93vh
-  background-image: url(http://localhost:3000/assets/background-landing-page.jpg)
-  background-position: center center
-  background-size: cover
-  background-repeat: none
+  
