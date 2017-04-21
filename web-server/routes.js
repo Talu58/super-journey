@@ -13,7 +13,8 @@ const {
 }= require('./controllers/search-controller');
 const {
   createDummyNonProfitUsers,
-  createDummyDonorUser
+  createDummyDonorUser,
+  createDummyMessages
 } = require('./controllers/dummy-data-controller');
 const {
   userSentFirstMessage,
@@ -32,6 +33,7 @@ module.exports = function(app, express) {
   app.get('/user/information/:userEmail', getUserInformationRequest);
   app.get('/user/dummy/non-profit', createDummyNonProfitUsers);
   app.get('/user/dummy/donor', createDummyDonorUser);
+  app.get('/user/dummy/messages', createDummyMessages);
   app.get('/user/messages/:userEmail', getUserMessagesRequest);
   
   app.get('/organizations/match/:industryName', getIndustryMatchesRequest);
@@ -39,4 +41,5 @@ module.exports = function(app, express) {
 
   app.post('/message/first', userSentFirstMessage);
   app.post('/message/new', userSentNewMessage);
+
 };

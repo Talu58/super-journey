@@ -26,13 +26,9 @@ module.exports.userSentFirstMessage = (req, res) => {
           messages: [newMessage]
         });
         newMessageThread.save((err, messageThread) => {
-          if (err) {
-            return console.error(err);
-          }
+          if (err) throw err;
           User.findOne({ 'email': recipientEmail }, (err, user) => {
-            if (err) {
-              throw err;
-            }
+            if (err) throw err;
             user.messageThreadsNames.push(messageThreadName);
             return user.save((err) => {
               if (err) throw err;

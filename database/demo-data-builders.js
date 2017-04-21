@@ -1,3 +1,5 @@
+const { createMessage } = require('../web-server/utils/utils-messaging');
+
 const generateDummyNonProfitData = () => {
   let dummyData = [];
   let counter = 1;
@@ -61,8 +63,70 @@ const generateDummyDonorData = () => {
   return newUser;
 };
 
+const generateNewThread = () => {
+  const donor = {
+    firstname: 'John',
+    email: 'johndoe@gmail.com',
+  };
+
+  const user = {
+    firstname: 'user10',
+    email: 'user10@gmail.com',
+  };
+
+  const messages = [
+      {
+        from: donor.firstname,
+        to: user.firstname,
+        message: "Hi, I am interested in your Organization, could we set up a call?",
+        time: new Date()
+      },
+      {
+        from: user.firstname,
+        to: donor.firstname,
+        message: "Sure, how about tomorrow at 3pm?",
+        time: new Date()
+      },
+      {
+        from: donor.firstname,
+        to: user.firstname,
+        message: "Perfect! you can call me at 760-557-9837",
+        time: new Date()
+      },
+      {
+        from: user.firstname,
+        to: donor.firstname,
+        message: "Great, looking forward to speaking with you! You have a great day.",
+        time: new Date()
+      },
+      {
+        from: donor.firstname,
+        to: user.firstname,
+        message: "Thanks, you too!!",
+        time: new Date()
+      },
+    ];
+
+  const newThread = {
+    threadName: user.email + '-' + donor.email,
+    nameUserOne: user.firstname,
+    nameUserTwo: donor.firstname,
+    messages: [],
+    recipientEmail: user.email,
+    senderEmail: donor.email
+  };
+
+  messages.forEach(message => {
+    const newMessage = createMessage(message);
+    newThread.messages.push(newMessage);
+  });
+
+  return newThread;
+};
+
 module.exports = {
   generateDummyNonProfitData,
-  generateDummyDonorData
+  generateDummyDonorData,
+  generateNewThread
 };
 
