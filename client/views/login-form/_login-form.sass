@@ -4,6 +4,17 @@
   align-items: center
   height: 100%
 
+.landing-page-login-form-block
+  flex-direction: column
+
+@media screen and (max-width: 480px) 
+  .navbar-login-form-block
+    display: none
+
+@media screen and (min-width: 480px) 
+  .landing-page-login-form-block
+    display: none
+    
 .login-form-field-container
   display:flex
   flex-direction: column

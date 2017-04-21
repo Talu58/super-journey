@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Button from '../../components/button/button';
-import LoginForm from './login-form/login-form';
+import LoginForm from '../login-form/login-form';
 import { NavLink } from 'react-router-dom';
 import './_navbar.sass';
 
@@ -55,7 +55,7 @@ export default class NavBar extends Component {
                 styleClassName="nav-button"
               />
             </div>
-            : <LoginForm/>
+            : <LoginForm styleClassName="navbar-login-form-block"/>
           }
         </div>
       </header>

@@ -15,10 +15,14 @@
 .signup-inputfields-container
   padding: 10px
   display: flex
-  flex-direction: row
   justify-content: center
   flex-wrap: wrap
   width: 350px
+
+@media screen and (max-width: 400px) 
+  .signup-inputfields-container
+    flex-direction: column
+    width: 300px
 
 .signup-input-field-container
   margin: 0 10px

@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import InputField from '../../../components/input-field/input-field';
-import Button from '../../../components/button/button';
-import { userLoginRequest } from '../../../actions/auth/authActions';
+import InputField from '../../components/input-field/input-field';
+import Button from '../../components/button/button';
+import { userLoginRequest } from '../../actions/auth/authActions';
 import './_login-form.sass';
 
 class LoginForm extends Component {
@@ -66,14 +66,14 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { isAuth, completedProfile } = this.props;
+    const { isAuth, completedProfile, styleClassName } = this.props;
     return (
       <div>
       {isAuth && completedProfile ? 
         <Redirect to="/home"/> 
         : ( isAuth ?
         <Redirect to="/signup"/>
-        : <div className="login-form-container">
+        : <div className={`${styleClassName} login-form-container`}>
             <div className="login-form-field-container">
               <InputField
                 placeholderText="Email address"
