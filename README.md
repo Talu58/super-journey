@@ -16,3 +16,5 @@ To start the application:
   - run "npm run build:watch"
 
 Use the try our Demo button to get automatically logged in!
+
+![alt text](./public/assets/readme-landing.jpg "Title")
