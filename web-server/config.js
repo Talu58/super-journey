@@ -1,2 +1,2 @@
 // Json web token secret setup
-module.exports.jwtSecret = 'superJourney58';
+module.exports.jwtSecret = process.env.JWT_SECRET;
