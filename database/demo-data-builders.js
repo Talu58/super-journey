@@ -2,7 +2,7 @@ const { createMessage } = require('../web-server/utils/utils-messaging');
 let num;
 
 const generateDummyNonProfitData = () => {
-  num = Math.floor(Math.random() * 1000);
+  num = Math.floor(Math.random() * 10000);
   let dummyData = [];
   let counter = 1;
   let industries = {Healthcare: false, Tech: false, Climate: false, Inclusion: false, 'Global Change': false};
