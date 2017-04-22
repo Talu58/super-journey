@@ -15,6 +15,7 @@ module.exports.createDummyNonProfitUsers = (req, res) => {
     newUser.email = email;
     newUser.firstname = firstname;
     newUser.lastname = lastname;
+  console.log('email', email);
 
     let newRole = createRole(role);
     let newIndustry = createIndustry(industry);
@@ -45,6 +46,7 @@ module.exports.createDummyNonProfitUsers = (req, res) => {
 module.exports.createDummyDonorUser = (req,res) => {
   const { email, password, industry, role, firstname, lastname } = generateDummyDonorData();
   const newUser = new User;
+  console.log('email', email);
   newUser.email = email;
   newUser.firstname = firstname;
   newUser.lastname = lastname;

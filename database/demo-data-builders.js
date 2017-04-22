@@ -1,6 +1,8 @@
 const { createMessage } = require('../web-server/utils/utils-messaging');
+let num;
 
 const generateDummyNonProfitData = () => {
+  num = Math.floor(Math.random() * 1000);
   let dummyData = [];
   let counter = 1;
   let industries = {Healthcare: false, Tech: false, Climate: false, Inclusion: false, 'Global Change': false};
@@ -10,7 +12,7 @@ const generateDummyNonProfitData = () => {
     let newUser = {
       firstname: `user${counter}`,
       lastname: `user${counter}`,
-      email: `user${counter}@gmail.com`,
+      email: `user${counter}${num}@gmail.com`,
       password: `passwordUser${counter}`,
       role: { Donor: false, 'Non-Profit Organisation': true },
       industry: {Healthcare: false, Tech: false, Climate: false, Inclusion: false, 'Global Change': false},
@@ -46,7 +48,7 @@ const generateDummyDonorData = () => {
   const newUser = {
     firstname: 'John',
     lastname: 'Doe',
-    email: 'johndoe@gmail.com',
+    email: `johndoe${num}@gmail.com`,
     password: 'johndoepassword',
     role: { Donor: true, 'Non-Profit Organisation': false },
     industry: {Healthcare: false, Tech: false, Climate: false, Inclusion: false, 'Global Change': false},
@@ -66,12 +68,12 @@ const generateDummyDonorData = () => {
 const generateNewThread = () => {
   const donor = {
     firstname: 'John',
-    email: 'johndoe@gmail.com',
+    email: `johndoe${num}@gmail.com`,
   };
 
   const user = {
     firstname: 'user10',
-    email: 'user10@gmail.com',
+    email: `user10${num}@gmail.com`,
   };
 
   const messages = [
