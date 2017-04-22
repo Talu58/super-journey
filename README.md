@@ -12,10 +12,10 @@ This project is intended to create a matching platform between donors and non-pr
   - mLab
 
 ## To start the application:
-  - run "npm install"
-  - run "mongod" - Install MongoDB first -
-  - run "npm start"
-  - run "npm run build:watch"
+  -Run "npm install"
+  - The DB is connected to mLab, you'll need your own credentials and set them in  a .env file copied from the .env.example. If you want to run the app on a local host, go to /database/db-config and follow comments instructions. Then once MongoDB is installed on your computer, run "mongod"
+  - Run "npm start"
+  - Run "npm run build:watch"
 
 Use the try our Demo button to get automatically logged in!
 
