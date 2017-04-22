@@ -8,6 +8,8 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const db = require('../database/db-config.js');
 
+require('dotenv-safe').load();
+
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());

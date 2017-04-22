@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   devtool: 'source-map',
@@ -25,6 +26,12 @@ module.exports = {
     }
     ],
   },
+  plugins: [
+    new Dotenv({
+      path: './.env', 
+      safe: true // lets load the .env.example file as well 
+    })
+  ],
   resolve: {
     extensions: ['.jsx', '.js'],
   },
