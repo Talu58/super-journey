@@ -10,7 +10,6 @@ This project is intended to create a matching platform between donors and non-pr
   - MongoDB + Mongoose
   - Webpack + Babel
 
-
 ## To start the application:
   - run "npm install"
   - run "mongod" - Install MongoDB first -
