@@ -17,4 +17,4 @@ To start the application:
 
 Use the try our Demo button to get automatically logged in!
 
-![alt text](public/assets/readme-landing.jpg "Title")
+![alt text](/public/assets/readme-landing.jpg "Title")
