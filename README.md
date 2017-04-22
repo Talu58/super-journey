@@ -9,6 +9,7 @@ This project is intended to create a matching platform between donors and non-pr
   - NodeJS server with Express
   - MongoDB + Mongoose
   - Webpack + Babel
+  - mLab
 
 ## To start the application:
   - run "npm install"
