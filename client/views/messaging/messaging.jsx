@@ -37,7 +37,7 @@ class Messaging extends Component {
         MessagingHeaderMessage = role.Donor ? 'Get in touch with Organizations on your home page' : 'No one has contacted you yet, improve your Organization\'s page to be contacted';
       }
     } else {
-      MessagingHeaderMessage = 'Check how everybody has been doing';
+      MessagingHeaderMessage = 'To start new conversations find matches and send them a message';
     }
 
     return (
